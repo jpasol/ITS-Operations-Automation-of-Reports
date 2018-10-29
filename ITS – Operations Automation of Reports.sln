@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ITS – Operations Automation of Reports", "ITS – Operations Automation of Reports\ITS – Operations Automation of Reports.vbproj", "{275803AA-5823-4127-8488-F8B00A0AFFD1}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Vessel Movement Report Creator", "..\Vessel Movement Report Creator\Vessel Movement Report Creator\Vessel Movement Report Creator.vbproj", "{A809E32F-7E30-4C8A-AC05-6DEB714EA586}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Crane Logs Report Creator", "..\Crane Logs Report Creator\Crane Logs Report Creator\Crane Logs Report Creator.vbproj", "{422C491A-19DE-47CC-8F27-CB945C1B5733}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Budgeted Volume Creator", "..\Budgeted Volume Creator\Budgeted Volume Creator\Budgeted Volume Creator.vbproj", "{01249BCB-5C20-45F3-BB88-B8BDDB9A75E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{275803AA-5823-4127-8488-F8B00A0AFFD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{275803AA-5823-4127-8488-F8B00A0AFFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{275803AA-5823-4127-8488-F8B00A0AFFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{275803AA-5823-4127-8488-F8B00A0AFFD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A809E32F-7E30-4C8A-AC05-6DEB714EA586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A809E32F-7E30-4C8A-AC05-6DEB714EA586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A809E32F-7E30-4C8A-AC05-6DEB714EA586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A809E32F-7E30-4C8A-AC05-6DEB714EA586}.Release|Any CPU.Build.0 = Release|Any CPU
+		{422C491A-19DE-47CC-8F27-CB945C1B5733}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{422C491A-19DE-47CC-8F27-CB945C1B5733}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{422C491A-19DE-47CC-8F27-CB945C1B5733}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{422C491A-19DE-47CC-8F27-CB945C1B5733}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01249BCB-5C20-45F3-BB88-B8BDDB9A75E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01249BCB-5C20-45F3-BB88-B8BDDB9A75E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01249BCB-5C20-45F3-BB88-B8BDDB9A75E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01249BCB-5C20-45F3-BB88-B8BDDB9A75E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {02518864-F6BF-4CFE-ACFB-07FCF0B47683}
+	EndGlobalSection
+EndGlobal

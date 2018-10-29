@@ -1,0 +1,201 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class MainUI
+    Inherits System.Windows.Forms.Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExitToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.lblReports = New System.Windows.Forms.Label()
+        Me.crvPreview = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.lblParameter = New System.Windows.Forms.Label()
+        Me.mskParameter = New System.Windows.Forms.MaskedTextBox()
+        Me.cmdGenerate = New System.Windows.Forms.Button()
+        Me.cmdSave = New System.Windows.Forms.Button()
+        Me.lblVersion = New System.Windows.Forms.Label()
+        Me.MenuStrip1.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ExitToolStripMenuItem, Me.ExitToolStripMenuItem1})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1584, 24)
+        Me.MenuStrip1.TabIndex = 0
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.ExitToolStripMenuItem.Text = "Options"
+        '
+        'ExitToolStripMenuItem1
+        '
+        Me.ExitToolStripMenuItem1.Name = "ExitToolStripMenuItem1"
+        Me.ExitToolStripMenuItem1.Size = New System.Drawing.Size(37, 20)
+        Me.ExitToolStripMenuItem1.Text = "Exit"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(12, 180)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(208, 28)
+        Me.ComboBox1.TabIndex = 1
+        '
+        'lblReports
+        '
+        Me.lblReports.AutoSize = True
+        Me.lblReports.Font = New System.Drawing.Font("Arial", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblReports.Location = New System.Drawing.Point(12, 161)
+        Me.lblReports.Name = "lblReports"
+        Me.lblReports.Size = New System.Drawing.Size(62, 16)
+        Me.lblReports.TabIndex = 2
+        Me.lblReports.Text = "Reports:"
+        '
+        'crvPreview
+        '
+        Me.crvPreview.ActiveViewIndex = -1
+        Me.crvPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.crvPreview.Cursor = System.Windows.Forms.Cursors.Default
+        Me.crvPreview.Location = New System.Drawing.Point(226, 27)
+        Me.crvPreview.Name = "crvPreview"
+        Me.crvPreview.Size = New System.Drawing.Size(1346, 822)
+        Me.crvPreview.TabIndex = 3
+        '
+        'lblTitle
+        '
+        Me.lblTitle.Font = New System.Drawing.Font("Calibri", 13.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitle.Location = New System.Drawing.Point(8, 27)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(212, 134)
+        Me.lblTitle.TabIndex = 4
+        Me.lblTitle.Text = "ITS - Operations Automation of Reports"
+        Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblParameter
+        '
+        Me.lblParameter.AutoSize = True
+        Me.lblParameter.Font = New System.Drawing.Font("Arial", 10.0!)
+        Me.lblParameter.Location = New System.Drawing.Point(12, 242)
+        Me.lblParameter.Name = "lblParameter"
+        Me.lblParameter.Size = New System.Drawing.Size(51, 16)
+        Me.lblParameter.TabIndex = 5
+        Me.lblParameter.Text = "Label1"
+        '
+        'mskParameter
+        '
+        Me.mskParameter.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
+        Me.mskParameter.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mskParameter.Location = New System.Drawing.Point(12, 261)
+        Me.mskParameter.Mask = "&&&0000-00"
+        Me.mskParameter.Name = "mskParameter"
+        Me.mskParameter.Size = New System.Drawing.Size(208, 26)
+        Me.mskParameter.SkipLiterals = False
+        Me.mskParameter.TabIndex = 6
+        Me.mskParameter.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
+        Me.mskParameter.ValidatingType = GetType(Date)
+        '
+        'cmdGenerate
+        '
+        Me.cmdGenerate.Font = New System.Drawing.Font("Arial", 10.0!)
+        Me.cmdGenerate.Location = New System.Drawing.Point(12, 569)
+        Me.cmdGenerate.Name = "cmdGenerate"
+        Me.cmdGenerate.Size = New System.Drawing.Size(208, 69)
+        Me.cmdGenerate.TabIndex = 7
+        Me.cmdGenerate.Text = "Generate"
+        Me.cmdGenerate.UseVisualStyleBackColor = True
+        '
+        'cmdSave
+        '
+        Me.cmdSave.Font = New System.Drawing.Font("Arial", 10.0!)
+        Me.cmdSave.Location = New System.Drawing.Point(12, 644)
+        Me.cmdSave.Name = "cmdSave"
+        Me.cmdSave.Size = New System.Drawing.Size(208, 69)
+        Me.cmdSave.TabIndex = 8
+        Me.cmdSave.Text = "Save"
+        Me.cmdSave.UseVisualStyleBackColor = True
+        '
+        'lblVersion
+        '
+        Me.lblVersion.AutoSize = True
+        Me.lblVersion.Location = New System.Drawing.Point(9, 839)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Size = New System.Drawing.Size(39, 13)
+        Me.lblVersion.TabIndex = 9
+        Me.lblVersion.Text = "Label1"
+        '
+        'MainUI
+        '
+        Me.AcceptButton = Me.cmdGenerate
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(1584, 861)
+        Me.Controls.Add(Me.lblVersion)
+        Me.Controls.Add(Me.cmdSave)
+        Me.Controls.Add(Me.cmdGenerate)
+        Me.Controls.Add(Me.mskParameter)
+        Me.Controls.Add(Me.lblParameter)
+        Me.Controls.Add(Me.lblTitle)
+        Me.Controls.Add(Me.crvPreview)
+        Me.Controls.Add(Me.lblReports)
+        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.MainMenuStrip = Me.MenuStrip1
+        Me.MaximizeBox = False
+        Me.Name = "MainUI"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "ITS - Operations Automation of Reports"
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents lblReports As Label
+    Friend WithEvents crvPreview As CrystalDecisions.Windows.Forms.CrystalReportViewer
+    Friend WithEvents lblTitle As Label
+    Friend WithEvents lblParameter As Label
+    Friend WithEvents mskParameter As MaskedTextBox
+    Friend WithEvents cmdGenerate As Button
+    Friend WithEvents cmdSave As Button
+    Friend WithEvents lblVersion As Label
+    Friend WithEvents ExitToolStripMenuItem1 As ToolStripMenuItem
+End Class
