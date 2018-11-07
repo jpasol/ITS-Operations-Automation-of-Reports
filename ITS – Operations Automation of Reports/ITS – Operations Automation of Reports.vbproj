@@ -55,6 +55,9 @@
     <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="ReportsInterface">
+      <HintPath>..\Project1\bin\Debug\ReportsInterface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -138,9 +141,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Project1\Reports Interface.vbproj">
-      <Project>{19315380-b270-43b7-83b7-ac163b6f79cd}</Project>
-      <Name>Reports Interface</Name>
+    <ProjectReference Include="..\..\Vessel-Movement-Report-Creator\Vessel Movement Report Creator.vbproj">
+      <Project>{2c9a0224-82e5-4759-8230-b09eb8cfdfb6}</Project>
+      <Name>Vessel Movement Report Creator</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

@@ -1,9 +1,8 @@
 ﻿Imports ADODB
-Imports 
-
+Imports System.Configuration
+Imports Vessel_Movement_Report_Creator
 
 Public Class MainUI
-    Implements 
 
     Private arrReports() = New String() {
         "Vessel Movement Report",
@@ -24,54 +23,27 @@ Public Class MainUI
         "Service Route Analysis",
         "Operation Productivity Report"
         }
+    Dim CnnN4 As New ADODB.Connection
+    Dim CnnDB As New ADODB.Connection
 
-    Public Property cnnN4 As Connection Implements IReports.IReports.cnnN4
-        Get
-            Return cnnN4
-        End Get
-        Set(value As Connection)
-            cnnN4 = value
-        End Set
-    End Property
-
-    Public Property cnnDB As Connection Implements IReports.IReports.cnnDB
-        Get
-            Return cnnDB
-        End Get
-        Set(value As Connection)
-            cnnDB = value
-        End Set
-    End Property
-
-    Public Sub ConnectDB() Implements IReports.IReports.ConnectDB
-        cnnN4.Open()
-        cnnDB.Open()
+    Public Sub ConnectDB()
+        With My.Settings
+            CnnN4.Open("Provider=SQLOLEDB;
+                        Data Source=" & .N4Server & ";
+                        Initial Catalog=" & .N4Database & ";
+                        Integrated Security=SSPI;")
+            CnnDB.Open("Provider=SQLOLEDB;
+                        Data Source=" & .OPServer & ";
+                        Initial Catalog=" & .OPDatabase & ";
+                        Integrated Security=SSPI;")
+        End With
     End Sub
 
-    Public Sub Initialize() Implements IReports.IReports.Initialize
+    Public Sub Initialize()
         cmbReports.Items.AddRange(arrReports)
+        cmbReports.SelectedIndex = 0
         ConnectDB()
     End Sub
-
-    Public Sub Format(ReportData() As Object, crReport As Object) Implements IReports.IReports.Format
-        Throw New NotImplementedException()
-    End Sub
-
-    Public Sub Preview(crReport As Object, crViewer As Object) Implements IReports.IReports.Preview
-        Throw New NotImplementedException()
-    End Sub
-
-    Public Sub Save(ReportData() As Object) Implements IReports.IReports.Save
-        Throw New NotImplementedException()
-    End Sub
-
-    Public Function RetrieveDate(paramDate As Object) As DataTable Implements IReports.IReports.RetrieveDate
-        Throw New NotImplementedException()
-    End Function
-
-    Public Function CalculateInfo(RetrievedData As Object) As Object() Implements IReports.IReports.CalculateInfo
-        Throw New NotImplementedException()
-    End Function
 
     Private Sub MainUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Initialize()
@@ -80,22 +52,24 @@ Public Class MainUI
     Private Sub cmbReports_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbReports.SelectedIndexChanged
         Select Case cmbReports.SelectedIndex
             Case 0, 1
+                lblParameter.Text = "Registry:"
                 mskParameter.Mask = "&&&0000-00"
             Case Else
+                lblParameter.Text = "Date:"
                 mskParameter.Mask = "00/00/0000"
         End Select
     End Sub
-
-    Private Sub FileToolStripMenuItem_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub DasdToolStripMenuItem_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
+    Private Function FindVMR(strRegistry As String) As Boolean
+        'Find VMR
+    End Function
     Private Sub cmdGenerate_Click(sender As Object, e As EventArgs) Handles cmdGenerate.Click
+        Select Case cmbReports.Text
+            Case "Vessel Movement Report"
+                Dim createVMR As New frmVMR(paramID:=mskParameter.Text, paramN4:=CnnN4, paramDB:=CnnDB)
+                createVMR.ShowDialog()
+            Case Else
 
+        End Select
     End Sub
 
 End Class
