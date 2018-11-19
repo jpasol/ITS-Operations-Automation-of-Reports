@@ -17,7 +17,18 @@ Public Class Units
     Private strRegistry As String
     Private dsContainers As DataSet
     Private untConnection As Connection
-
+    Public Enum UnitDetails
+        ContNum
+        NomLength
+        IsoGrp
+        FreightKnd
+        LineOP
+        ReqPowers
+        Hazard
+        IMDG
+        IsoCode
+        ctrTyp
+    End Enum
     Public ReadOnly Property Registry As String Implements IReports.Units.Registry
         Get
             Registry = strRegistry
@@ -42,28 +53,6 @@ Public Class Units
         dteDate = Convert.ToDateTime(strLDate)
         getMilTime = dteDate.ToString("HHmm\H MM/dd/yyyy")
     End Function
-
-    Private Sub addContainers(dtContainer As DataTable, ByRef xsdContainer As DataTable)
-        For Each row As DataRow In dtContainer.Rows
-            Dim drContainers As DataRow
-            drContainers = xsdContainer.NewRow
-
-            With drContainers
-                .Item("ctnnum") = row("id")
-                .Item("ctnsze") = row("nominal_length").ToString.Substring(3, 2)
-                .Item("freight") = row("freight_kind")
-                .Item("line_op") = row("line_op")
-                .Item("hazardous") = row("hazardous")
-                .Item("imdg_types") = row("imdg_types")
-                .Item("ctrtyp") = row("ctrTyp")
-                .Item("iso_code") = row("iso_code")
-
-                xsdContainer.Rows.Add(drContainers)
-            End With
-
-        Next
-
-    End Sub
 
     Private Sub tagCtrTyp(ByRef dtContr As DataTable)
         Dim colCtrTyp As New DataColumn
@@ -135,7 +124,7 @@ inner join
 on [actual_ib_cv] = acv.gkey
 
 
-where acv.id = '" & Registry & "' and pod1_gkey = 1"
+where acv.id = '" & Vessel & "' and pod1_gkey = 1"
 
         'Get O/B Containers
         strSQl(1) = "Select unit.[id]
@@ -173,7 +162,7 @@ inner join
 on [actual_ob_cv] = acv.gkey
 
 
-where acv.id = '" & Registry & "' and category <> 'THRGH'"
+where acv.id = '" & Vessel & "' and category <> 'THRGH'"
 
         For count As Integer = 0 To 1
             rsUnits.Open(strSQl(count), Connection)

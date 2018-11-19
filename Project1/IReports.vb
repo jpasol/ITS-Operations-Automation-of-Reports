@@ -13,8 +13,8 @@
         ReadOnly Property N4Connection As ADODB.Connection
         ReadOnly Property OPConnection As ADODB.Connection
         Sub CalculateInfo()
-        Sub Format(ReportData As Object(), crReport As Object)
-        Sub Preview(crReport As Object, crViewer As Object)
+        Sub Format(ByRef crReport As CrystalDecisions.CrystalReports.Engine.ReportClass)
+        Sub Preview(ByRef crReport As CrystalDecisions.CrystalReports.Engine.ReportClass, crViewer As CrystalDecisions.Windows.Forms.CrystalReportViewer)
         Sub Save(ReportData As Object())
         Sub RetrieveData(Parameter As Object)
     End Interface
