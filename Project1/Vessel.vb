@@ -16,6 +16,7 @@ Public Class Vessel
     Private dtVessel As DataTable
     Private dtContainers As DataTable
     Private vslUnits As Units
+    Private dtCMU As DataTable
     Enum Vessel
         Name
         LineOP

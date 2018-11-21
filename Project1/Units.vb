@@ -60,7 +60,7 @@ Public Class Units
 
         dtContr.Columns.Add(colCtrTyp)
         For Each row As DataRow In dtContr.Rows
-            If row("requires_power") = 1 Then
+            If row("requires_power") = True Then
                 row("ctrTyp") = "Rfr"
             Else
                 Select Case row("iso_group").ToString.Substring(0, 1)
