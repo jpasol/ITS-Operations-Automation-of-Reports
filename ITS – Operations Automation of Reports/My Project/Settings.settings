@@ -9,7 +9,7 @@
       <Value Profile="(Default)">apex</Value>
     </Setting>
     <Setting Name="OPServer" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">sbitc-dbase07</Value>
+      <Value Profile="(Default)">sbitc-dev</Value>
     </Setting>
     <Setting Name="OPDatabase" Type="System.String" Scope="Application">
       <Value Profile="(Default)">opreports</Value>

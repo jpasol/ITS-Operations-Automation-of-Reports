@@ -15,8 +15,8 @@
         Sub CalculateInfo()
         Sub Format(ByRef crReport As CrystalDecisions.CrystalReports.Engine.ReportClass)
         Sub Preview(ByRef crReport As CrystalDecisions.CrystalReports.Engine.ReportClass, crViewer As CrystalDecisions.Windows.Forms.CrystalReportViewer)
-        Sub Save(ReportData As Object())
-        Sub RetrieveData(Parameter As Object)
+        Sub Save()
+        Sub RetrieveData()
     End Interface
     Public Interface IReportfromN4 'Used by VMR / CLR
         Property CnnN4 As ADODB.Connection

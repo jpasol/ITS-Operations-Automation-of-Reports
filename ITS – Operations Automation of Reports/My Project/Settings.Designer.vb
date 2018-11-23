@@ -74,7 +74,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("sbitc-dbase07")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("sbitc-dev")>  _
         Public ReadOnly Property OPServer() As String
             Get
                 Return CType(Me("OPServer"),String)
