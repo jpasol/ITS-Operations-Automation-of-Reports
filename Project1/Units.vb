@@ -3,7 +3,7 @@ Imports ADODB
 Imports Reports
 
 Public Class Units
-    Implements IReports.Units
+    Implements IReports.IUnits
 
     Sub New(Registry As String, ByRef Connection As Connection)
 
@@ -29,19 +29,19 @@ Public Class Units
         IsoCode
         ctrTyp
     End Enum
-    Public ReadOnly Property Registry As String Implements IReports.Units.Registry
+    Public ReadOnly Property Registry As String Implements IReports.IUnits.Registry
         Get
             Registry = strRegistry
         End Get
     End Property
 
-    Public ReadOnly Property Connection As Connection Implements IReports.Units.Connection
+    Public ReadOnly Property Connection As Connection Implements IReports.IUnits.Connection
         Get
             Connection = untConnection
         End Get
     End Property
 
-    Public ReadOnly Property Containers As DataSet Implements IReports.Units.Containers
+    Public ReadOnly Property Containers As DataSet Implements IReports.IUnits.Containers
         Get
             Containers = dsContainers
         End Get
@@ -77,7 +77,7 @@ Public Class Units
         Next
     End Sub
 
-    Public Sub Retrieve(Vessel As String, Connection As ADODB.Connection) Implements IReports.Units.Retrieve
+    Public Sub Retrieve(Vessel As String, Connection As ADODB.Connection) Implements IReports.IUnits.Retrieve
         Dim strSQl(1) As String '0 = Inbound | 1 = Outbound
         Dim datAdapt As New OleDb.OleDbDataAdapter
         Dim rsUnits As New ADODB.Recordset
@@ -174,7 +174,7 @@ where acv.id = '" & Vessel & "' and category <> 'THRGH'"
 
     End Sub
 
-    Public Function Count(Containers As DataTable, Condition As String) As Double Implements IReports.Units.Count
+    Public Function Count(Containers As DataTable, Condition As String) As Double Implements IReports.IUnits.Count
         Dim dvContainers As New DataView
         dvContainers.Table = Containers
         dvContainers.RowFilter = Condition

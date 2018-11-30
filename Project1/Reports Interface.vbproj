@@ -56,6 +56,24 @@
     <Import Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crane.vb" />
+    <Compile Include="CraneDelays.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CraneDelays.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CraneDelays.vb">
+      <DependentUpon>CraneDelays.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CraneMoves.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CraneMoves.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CraneMoves.vb">
+      <DependentUpon>CraneMoves.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFunctions.vb" />
     <Compile Include="Units.vb" />
     <Compile Include="IReports.vb" />
     <Compile Include="My Project\Settings.Designer.vb">
@@ -75,6 +93,8 @@
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +145,28 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CraneDelays.xsc">
+      <DependentUpon>CraneDelays.xsd</DependentUpon>
+    </None>
+    <None Include="CraneDelays.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CraneDelays.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="CraneDelays.xss">
+      <DependentUpon>CraneDelays.xsd</DependentUpon>
+    </None>
+    <None Include="CraneMoves.xsc">
+      <DependentUpon>CraneMoves.xsd</DependentUpon>
+    </None>
+    <None Include="CraneMoves.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CraneMoves.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="CraneMoves.xss">
+      <DependentUpon>CraneMoves.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>

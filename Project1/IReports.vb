@@ -12,7 +12,7 @@
     Public Interface IReportswSave 'Used by VMR / CLR / TSR
         ReadOnly Property N4Connection As ADODB.Connection
         ReadOnly Property OPConnection As ADODB.Connection
-        Sub CalculateInfo()
+        Function CalculateInfo(strFunction As String, Inputs() As String) As Object
         Sub Format(ByRef crReport As CrystalDecisions.CrystalReports.Engine.ReportClass)
         Sub Preview(ByRef crReport As CrystalDecisions.CrystalReports.Engine.ReportClass, crViewer As CrystalDecisions.Windows.Forms.CrystalReportViewer)
         Sub Save()
@@ -36,14 +36,14 @@
         Sub Connect(ConnectionString As String)
         Sub Disconnect()
     End Interface
-    Public Interface Units
+    Public Interface IUnits
         ReadOnly Property Registry As String
         ReadOnly Property Containers As Data.DataSet
         ReadOnly Property Connection As ADODB.Connection
         Sub Retrieve(Vessel As String, Connection As ADODB.Connection)
         Function Count(Containers As Data.DataTable, Condition As String) As Double
     End Interface
-    Public Interface Vessel
+    Public Interface IVessel
         ReadOnly Property Name As String
         ReadOnly Property Registry As String
         ReadOnly Property InboundVoyage As String
@@ -66,6 +66,19 @@
         Sub Retrieve(Registry As String, Connection As ADODB.Connection)
         Function TEU(Optional Condition As String = "") As Double
         Function Boxes(Optional Condition As String = "") As Long
+    End Interface
+
+    Public Interface ICrane
+        ReadOnly Property CraneName As String
+        ReadOnly Property Registry As String
+        ReadOnly Property GrossWorkingHours As Double
+        ReadOnly Property GrossProductivity As Double
+        ReadOnly Property NetWorkingHours As Double
+        ReadOnly Property NetProductivity As Double
+        Property Moves As CraneMoves
+        Property Delays As CraneDelays
+        Property FirstMove As Date
+        Property LastMove As Date
 
     End Interface
 End Module

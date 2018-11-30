@@ -1,6 +1,7 @@
 ﻿Imports ADODB
 Imports System.Configuration
 Imports Vessel_Movement_Report_Creator
+Imports Crane_Logs_Report_Creator
 
 Public Class MainUI
 
@@ -67,6 +68,9 @@ Public Class MainUI
             Case "Vessel Movement Report"
                 Dim createVMR As New VMRForm(mskParameter.Text, CnnN4, CnnDB)
                 createVMR.ShowDialog()
+            Case "Crane Logs Report"
+                Dim createCLR As New CLRForm(mskParameter.Text, CnnN4, CnnDB)
+                createCLR.ShowDialog()
             Case Else
 
         End Select

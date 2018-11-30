@@ -141,6 +141,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Crane Logs Report Creator\Crane Logs Report Creator\Crane Logs Report Creator.vbproj">
+      <Project>{422c491a-19de-47cc-8f27-cb945c1b5733}</Project>
+      <Name>Crane Logs Report Creator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Vessel-Movement-Report-Creator\Vessel Movement Report Creator.vbproj">
       <Project>{2c9a0224-82e5-4759-8230-b09eb8cfdfb6}</Project>
       <Name>Vessel Movement Report Creator</Name>
