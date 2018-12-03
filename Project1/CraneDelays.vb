@@ -30,9 +30,6 @@ Partial Class CraneDelays
             Return hours
         End Function
 
-        Private Sub BreakDataTable_BreakRowChanging(sender As Object, e As BreakRowChangeEvent) Handles Me.BreakRowChanging
-
-        End Sub
 
     End Class
 End Class

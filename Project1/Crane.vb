@@ -5,7 +5,7 @@ Imports Reports
 Public Class Crane
     Implements ICrane
 
-    Public Sub New(Crane As String, Registry As String, Connection As ADODB.Connection)
+    Public Sub New(Crane As String, Registry As String, ByRef Connection As ADODB.Connection)
 
         ' This call is required by the designer.
         Me.Registry = Registry
@@ -20,24 +20,24 @@ Public Class Crane
     Private adoConnection As ADODB.Connection
     Public ReadOnly Property CraneName As String Implements ICrane.CraneName
     Public ReadOnly Property Registry As String Implements ICrane.Registry
-    Public Property Delays As CraneDelays Implements ICrane.Delays
-    Public Property Moves As CraneMoves Implements ICrane.Moves
     Public Property FirstMove As Date Implements ICrane.FirstMove
     Public Property LastMove As Date Implements ICrane.LastMove
+    Public Property Delays As New CraneDelays Implements ICrane.Delays
+    Public Property Moves As New CraneMoves Implements ICrane.Moves
 
     Public ReadOnly Property GrossWorkingHours As Double Implements ICrane.GrossWorkingHours
         Get
             Dim deductdelays As Double = Delays.Deductable.Totalhours
-            Dim span As TimeSpan = FirstMove.Subtract(LastMove)
+            Dim span As TimeSpan = LastMove.Subtract(FirstMove)
 
-            Return span.TotalHours - deductdelays
+            Return Format(span.TotalHours - deductdelays, "0.00")
 
         End Get
     End Property
 
     Public ReadOnly Property GrossProductivity As Double Implements ICrane.GrossProductivity
         Get
-            Return Moves.TotalMoves / GrossWorkingHours
+            Return Format(Moves.TotalMoves / GrossWorkingHours, "0.00")
         End Get
     End Property
 
@@ -45,21 +45,20 @@ Public Class Crane
         Get
             Dim deductdelays As Double = Delays.Deductable.Totalhours
             Dim breakdelays As Double = Delays.Break.Totalhours
-            Dim span As TimeSpan = FirstMove.Subtract(LastMove)
+            Dim span As TimeSpan = LastMove.Subtract(FirstMove)
 
-            Return span.TotalHours - deductdelays - breakdelays
+            Return Format(span.TotalHours - deductdelays - breakdelays, "0.00")
         End Get
     End Property
 
     Public ReadOnly Property NetProductivity As Double Implements ICrane.NetProductivity
         Get
-            Return Moves.TotalMoves / NetWorkingHours
+            Return Format(Moves.TotalMoves / NetWorkingHours, "0.00")
         End Get
     End Property
 
 
     Private Sub RetrieveMoves()
-        Dim adoConnection As New ADODB.Connection
         Dim rsMoves As New ADODB.Recordset
         Dim dataAdapter As New OleDb.OleDbDataAdapter 'adodb doesnt have dataadpter, used oledb instead since it works with adodb.recordset
         Dim strInbound As String
