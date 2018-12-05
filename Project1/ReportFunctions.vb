@@ -18,6 +18,15 @@
 
         End Try
 
+
     End Function
 
+    Shared Function getSpanHours(TimeStart As Date, TimeEnd As Date) As Double
+        Dim ata As Date = TimeStart
+        Dim atd As Date = TimeEnd
+        Dim span As TimeSpan = atd.Subtract(ata)
+
+        Return span.TotalHours
+
+    End Function
 End Class

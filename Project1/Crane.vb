@@ -27,10 +27,10 @@ Public Class Crane
 
     Public ReadOnly Property GrossWorkingHours As Double Implements ICrane.GrossWorkingHours
         Get
-            Dim deductdelays As Double = Delays.Deductable.Totalhours
+            Dim breakdelays As Double = Delays.Break.Totalhours
             Dim span As TimeSpan = LastMove.Subtract(FirstMove)
 
-            Return Format(span.TotalHours - deductdelays, "0.00")
+            Return Format(span.TotalHours - breakdelays, "0.00")
 
         End Get
     End Property
