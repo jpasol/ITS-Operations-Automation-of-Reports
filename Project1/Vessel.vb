@@ -153,7 +153,12 @@ Public Class Vessel
         dtVessel = New DataTable
 
         strSQLVessel =
-        "select 'MV '+ vsl.name as 'Vessel Name'
+        "Declare @Registry numeric(18,0)
+
+        select @Registry = gkey
+        from argo_carrier_visit where id = '" & Registry & "'
+
+        select 'MV '+ vsl.name as 'Vessel Name'
         ,biz.[id] as 'Line Operator'
         ,ib_vyg 'I/B Voyage Number' 
         ,ob_vyg 'O/B Voyage Number'
@@ -180,7 +185,7 @@ Public Class Vessel
         [ref_bizunit_scoped] biz
         on [operator_gkey] = biz.gkey
 
-        where acv.id = '" & Registry & "'"
+        where acv.gkey = @Registry"
         rsContainers.Open(strSQLVessel, Connection)
         DataAdapter.Fill(dtVessel, rsContainers)
         rsContainers.Close()

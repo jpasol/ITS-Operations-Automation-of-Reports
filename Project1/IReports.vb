@@ -84,10 +84,10 @@
 
     Public Interface ICraneLogsReport
         ReadOnly Property Vessel As Vessel
-        ReadOnly Property Crane(index) As Crane
+        ReadOnly Property Crane() As System.Collections.Generic.List(Of Crane)
         ReadOnly Property TotalMoves As Double
-        ReadOnly Property FirstMove As Double
-        ReadOnly Property LastMove As Double
+        ReadOnly Property FirstMove As Date
+        ReadOnly Property LastMove As Date
         ReadOnly Property CraneDensity As Double
         ReadOnly Property TotalBerthHours As Double
         ReadOnly Property NetBerthHours As Double

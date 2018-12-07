@@ -545,7 +545,7 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Overloads Function AddContainerRow(ByVal ctrmve As String, ByVal move_kind As String, ByVal cntsze20 As String, ByVal cntsze40 As String, ByVal cntsze45 As String) As ContainerRow
+        Public Overloads Function AddContainerRow(ByVal ctrmve As String, ByVal move_kind As String, ByVal cntsze20 As Long, ByVal cntsze40 As Long, ByVal cntsze45 As Long) As ContainerRow
             Dim rowContainerRow As ContainerRow = CType(Me.NewRow,ContainerRow)
             Dim columnValuesArray() As Object = New Object() {ctrmve, move_kind, cntsze20, cntsze40, cntsze45}
             rowContainerRow.ItemArray = columnValuesArray
@@ -584,12 +584,17 @@ Partial Public Class CraneMoves
             MyBase.Columns.Add(Me.columnctrmve)
             Me.columnmove_kind = New Global.System.Data.DataColumn("move_kind", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnmove_kind)
-            Me.columncntsze20 = New Global.System.Data.DataColumn("cntsze20", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columncntsze20 = New Global.System.Data.DataColumn("cntsze20", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columncntsze20)
-            Me.columncntsze40 = New Global.System.Data.DataColumn("cntsze40", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columncntsze40 = New Global.System.Data.DataColumn("cntsze40", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columncntsze40)
-            Me.columncntsze45 = New Global.System.Data.DataColumn("cntsze45", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columncntsze45 = New Global.System.Data.DataColumn("cntsze45", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columncntsze45)
+            Me.columnctrmve.AllowDBNull = false
+            Me.columnmove_kind.AllowDBNull = false
+            Me.columncntsze20.DefaultValue = CType(0,Long)
+            Me.columncntsze40.DefaultValue = CType(0,Long)
+            Me.columncntsze45.DefaultValue = CType(0,Long)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -839,7 +844,7 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Overloads Function AddHatchcoverRow(ByVal move_kind As String, ByVal baynum As String, ByVal cvrsze20 As String, ByVal cvrsze40 As String) As HatchcoverRow
+        Public Overloads Function AddHatchcoverRow(ByVal move_kind As String, ByVal baynum As Long, ByVal cvrsze20 As Long, ByVal cvrsze40 As Long) As HatchcoverRow
             Dim rowHatchcoverRow As HatchcoverRow = CType(Me.NewRow,HatchcoverRow)
             Dim columnValuesArray() As Object = New Object() {move_kind, baynum, cvrsze20, cvrsze40}
             rowHatchcoverRow.ItemArray = columnValuesArray
@@ -875,12 +880,16 @@ Partial Public Class CraneMoves
         Private Sub InitClass()
             Me.columnmove_kind = New Global.System.Data.DataColumn("move_kind", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnmove_kind)
-            Me.columnbaynum = New Global.System.Data.DataColumn("baynum", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnbaynum = New Global.System.Data.DataColumn("baynum", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnbaynum)
-            Me.columncvrsze20 = New Global.System.Data.DataColumn("cvrsze20", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columncvrsze20 = New Global.System.Data.DataColumn("cvrsze20", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columncvrsze20)
-            Me.columncvrsze40 = New Global.System.Data.DataColumn("cvrsze40", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columncvrsze40 = New Global.System.Data.DataColumn("cvrsze40", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columncvrsze40)
+            Me.columnmove_kind.AllowDBNull = false
+            Me.columnbaynum.DefaultValue = CType(0,Long)
+            Me.columncvrsze20.DefaultValue = CType(0,Long)
+            Me.columncvrsze40.DefaultValue = CType(0,Long)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1130,7 +1139,7 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Overloads Function AddGearboxRow(ByVal move_kind As String, ByVal baynum As String, ByVal gbxsze20 As String, ByVal gbxsze40 As String) As GearboxRow
+        Public Overloads Function AddGearboxRow(ByVal move_kind As String, ByVal baynum As Long, ByVal gbxsze20 As Long, ByVal gbxsze40 As Long) As GearboxRow
             Dim rowGearboxRow As GearboxRow = CType(Me.NewRow,GearboxRow)
             Dim columnValuesArray() As Object = New Object() {move_kind, baynum, gbxsze20, gbxsze40}
             rowGearboxRow.ItemArray = columnValuesArray
@@ -1166,12 +1175,16 @@ Partial Public Class CraneMoves
         Private Sub InitClass()
             Me.columnmove_kind = New Global.System.Data.DataColumn("move_kind", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnmove_kind)
-            Me.columnbaynum = New Global.System.Data.DataColumn("baynum", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnbaynum = New Global.System.Data.DataColumn("baynum", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnbaynum)
-            Me.columngbxsze20 = New Global.System.Data.DataColumn("gbxsze20", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columngbxsze20 = New Global.System.Data.DataColumn("gbxsze20", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columngbxsze20)
-            Me.columngbxsze40 = New Global.System.Data.DataColumn("gbxsze40", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            Me.columngbxsze40 = New Global.System.Data.DataColumn("gbxsze40", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columngbxsze40)
+            Me.columnmove_kind.AllowDBNull = false
+            Me.columnbaynum.DefaultValue = CType(0,Long)
+            Me.columngbxsze20.DefaultValue = CType(0,Long)
+            Me.columngbxsze40.DefaultValue = CType(0,Long)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1798,11 +1811,7 @@ Partial Public Class CraneMoves
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Property ctrmve() As String
             Get
-                Try 
-                    Return CType(Me(Me.tableContainer.ctrmveColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ctrmve' in table 'Container' is DBNull.", e)
-                End Try
+                Return CType(Me(Me.tableContainer.ctrmveColumn),String)
             End Get
             Set
                 Me(Me.tableContainer.ctrmveColumn) = value
@@ -1813,11 +1822,7 @@ Partial Public Class CraneMoves
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Property move_kind() As String
             Get
-                Try 
-                    Return CType(Me(Me.tableContainer.move_kindColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'move_kind' in table 'Container' is DBNull.", e)
-                End Try
+                Return CType(Me(Me.tableContainer.move_kindColumn),String)
             End Get
             Set
                 Me(Me.tableContainer.move_kindColumn) = value
@@ -1826,10 +1831,10 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property cntsze20() As String
+        Public Property cntsze20() As Long
             Get
                 Try 
-                    Return CType(Me(Me.tableContainer.cntsze20Column),String)
+                    Return CType(Me(Me.tableContainer.cntsze20Column),Long)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'cntsze20' in table 'Container' is DBNull.", e)
                 End Try
@@ -1841,10 +1846,10 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property cntsze40() As String
+        Public Property cntsze40() As Long
             Get
                 Try 
-                    Return CType(Me(Me.tableContainer.cntsze40Column),String)
+                    Return CType(Me(Me.tableContainer.cntsze40Column),Long)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'cntsze40' in table 'Container' is DBNull.", e)
                 End Try
@@ -1856,10 +1861,10 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property cntsze45() As String
+        Public Property cntsze45() As Long
             Get
                 Try 
-                    Return CType(Me(Me.tableContainer.cntsze45Column),String)
+                    Return CType(Me(Me.tableContainer.cntsze45Column),Long)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'cntsze45' in table 'Container' is DBNull.", e)
                 End Try
@@ -1868,30 +1873,6 @@ Partial Public Class CraneMoves
                 Me(Me.tableContainer.cntsze45Column) = value
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Function IsctrmveNull() As Boolean
-            Return Me.IsNull(Me.tableContainer.ctrmveColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Sub SetctrmveNull()
-            Me(Me.tableContainer.ctrmveColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Function Ismove_kindNull() As Boolean
-            Return Me.IsNull(Me.tableContainer.move_kindColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Sub Setmove_kindNull()
-            Me(Me.tableContainer.move_kindColumn) = Global.System.Convert.DBNull
-        End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
@@ -1949,11 +1930,7 @@ Partial Public Class CraneMoves
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Property move_kind() As String
             Get
-                Try 
-                    Return CType(Me(Me.tableHatchcover.move_kindColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'move_kind' in table 'Hatchcover' is DBNull.", e)
-                End Try
+                Return CType(Me(Me.tableHatchcover.move_kindColumn),String)
             End Get
             Set
                 Me(Me.tableHatchcover.move_kindColumn) = value
@@ -1962,10 +1939,10 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property baynum() As String
+        Public Property baynum() As Long
             Get
                 Try 
-                    Return CType(Me(Me.tableHatchcover.baynumColumn),String)
+                    Return CType(Me(Me.tableHatchcover.baynumColumn),Long)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'baynum' in table 'Hatchcover' is DBNull.", e)
                 End Try
@@ -1977,10 +1954,10 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property cvrsze20() As String
+        Public Property cvrsze20() As Long
             Get
                 Try 
-                    Return CType(Me(Me.tableHatchcover.cvrsze20Column),String)
+                    Return CType(Me(Me.tableHatchcover.cvrsze20Column),Long)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'cvrsze20' in table 'Hatchcover' is DBNull.", e)
                 End Try
@@ -1992,10 +1969,10 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property cvrsze40() As String
+        Public Property cvrsze40() As Long
             Get
                 Try 
-                    Return CType(Me(Me.tableHatchcover.cvrsze40Column),String)
+                    Return CType(Me(Me.tableHatchcover.cvrsze40Column),Long)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'cvrsze40' in table 'Hatchcover' is DBNull.", e)
                 End Try
@@ -2004,18 +1981,6 @@ Partial Public Class CraneMoves
                 Me(Me.tableHatchcover.cvrsze40Column) = value
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Function Ismove_kindNull() As Boolean
-            Return Me.IsNull(Me.tableHatchcover.move_kindColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Sub Setmove_kindNull()
-            Me(Me.tableHatchcover.move_kindColumn) = Global.System.Convert.DBNull
-        End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
@@ -2073,11 +2038,7 @@ Partial Public Class CraneMoves
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Property move_kind() As String
             Get
-                Try 
-                    Return CType(Me(Me.tableGearbox.move_kindColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'move_kind' in table 'Gearbox' is DBNull.", e)
-                End Try
+                Return CType(Me(Me.tableGearbox.move_kindColumn),String)
             End Get
             Set
                 Me(Me.tableGearbox.move_kindColumn) = value
@@ -2086,10 +2047,10 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property baynum() As String
+        Public Property baynum() As Long
             Get
                 Try 
-                    Return CType(Me(Me.tableGearbox.baynumColumn),String)
+                    Return CType(Me(Me.tableGearbox.baynumColumn),Long)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'baynum' in table 'Gearbox' is DBNull.", e)
                 End Try
@@ -2101,10 +2062,10 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property gbxsze20() As String
+        Public Property gbxsze20() As Long
             Get
                 Try 
-                    Return CType(Me(Me.tableGearbox.gbxsze20Column),String)
+                    Return CType(Me(Me.tableGearbox.gbxsze20Column),Long)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'gbxsze20' in table 'Gearbox' is DBNull.", e)
                 End Try
@@ -2116,10 +2077,10 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property gbxsze40() As String
+        Public Property gbxsze40() As Long
             Get
                 Try 
-                    Return CType(Me(Me.tableGearbox.gbxsze40Column),String)
+                    Return CType(Me(Me.tableGearbox.gbxsze40Column),Long)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'gbxsze40' in table 'Gearbox' is DBNull.", e)
                 End Try
@@ -2128,18 +2089,6 @@ Partial Public Class CraneMoves
                 Me(Me.tableGearbox.gbxsze40Column) = value
             End Set
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Function Ismove_kindNull() As Boolean
-            Return Me.IsNull(Me.tableGearbox.move_kindColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Sub Setmove_kindNull()
-            Me(Me.tableGearbox.move_kindColumn) = Global.System.Convert.DBNull
-        End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _

@@ -89,7 +89,12 @@ Public Class Units
         dsContainers.Tables.Add(obTable)
 
         'Get I/B Containers
-        strSQl(0) = "Select unit.[id]
+        strSQl(0) = "Declare @Registry numeric(18,0)
+
+select @Registry = gkey
+from argo_carrier_visit where id = '" & Vessel & "'
+
+Select unit.[id]
 ,[nominal_length]
 ,reqt.[iso_group]
 ,[freight_kind]
@@ -119,15 +124,17 @@ on reqp.eqtyp_gkey = reqt.gkey
 inner join 
 [inv_unit_fcy_visit] ufv 
 on unit.gkey = ufv.unit_gkey
-inner join
-[argo_carrier_visit] acv
-on [actual_ib_cv] = acv.gkey
 
 
-where acv.id = '" & Vessel & "' and pod1_gkey = 1"
+where [actual_ib_cv] = @Registry and pod1_gkey = 1"
 
         'Get O/B Containers
-        strSQl(1) = "Select unit.[id]
+        strSQl(1) = "Declare @Registry numeric(18,0)
+
+select @Registry = gkey
+from argo_carrier_visit where id = '" & Vessel & "'
+
+Select unit.[id]
 ,[nominal_length]
 ,reqt.[iso_group]
 ,[freight_kind]
@@ -157,12 +164,9 @@ on reqp.eqtyp_gkey = reqt.gkey
 inner join 
 [inv_unit_fcy_visit] ufv 
 on unit.gkey = ufv.unit_gkey
-inner join
-[argo_carrier_visit] acv
-on [actual_ob_cv] = acv.gkey
 
 
-where acv.id = '" & Vessel & "' and category <> 'THRGH'"
+where [actual_ob_cv] = @Registry and category <> 'THRGH'"
 
         For count As Integer = 0 To 1
             rsUnits.Open(strSQl(count), Connection)
