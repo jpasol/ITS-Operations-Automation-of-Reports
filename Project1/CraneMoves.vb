@@ -1,6 +1,10 @@
 ﻿Imports System.Linq
 
 Partial Class CraneMoves
+    Partial Public Class InboundDataTable
+
+    End Class
+
     Partial Public Class GearboxDataTable
         Public Function Total20() As Double
 

@@ -24,6 +24,8 @@ Public Class MainUI
         "Service Route Analysis",
         "Operation Productivity Report"
         }
+
+    Shared User As String = UCase(System.Environment.UserName.ToString) 'Uppercased for uniformity, opdox though only has one username, only vmr has tagging
     Dim CnnN4 As New ADODB.Connection
     Dim CnnDB As New ADODB.Connection
 
@@ -44,6 +46,7 @@ Public Class MainUI
         cmbReports.Items.AddRange(arrReports)
         cmbReports.SelectedIndex = 0
         ConnectDB()
+        lblUser.Text = $"Logged in as: {User}"
     End Sub
 
     Private Sub MainUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -69,7 +72,7 @@ Public Class MainUI
                 Dim createVMR As New VMRForm(mskParameter.Text, CnnN4, CnnDB)
                 createVMR.ShowDialog()
             Case "Crane Logs Report"
-                Dim createCLR As New CLRForm(mskParameter.Text, CnnN4, CnnDB)
+                Dim createCLR As New CLRForm(mskParameter.Text, CnnN4, CnnDB, User)
                 createCLR.ShowDialog()
             Case Else
 

@@ -33,6 +33,7 @@ Partial Class MainUI
         Me.cmdGenerate = New System.Windows.Forms.Button()
         Me.cmdSave = New System.Windows.Forms.Button()
         Me.lblVersion = New System.Windows.Forms.Label()
+        Me.lblUser = New System.Windows.Forms.Label()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -141,12 +142,22 @@ Partial Class MainUI
         Me.lblVersion.TabIndex = 9
         Me.lblVersion.Text = "Label1"
         '
+        'lblUser
+        '
+        Me.lblUser.AutoSize = True
+        Me.lblUser.Location = New System.Drawing.Point(9, 804)
+        Me.lblUser.Name = "lblUser"
+        Me.lblUser.Size = New System.Drawing.Size(39, 13)
+        Me.lblUser.TabIndex = 10
+        Me.lblUser.Text = "Label1"
+        '
         'MainUI
         '
         Me.AcceptButton = Me.cmdGenerate
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1584, 861)
+        Me.Controls.Add(Me.lblUser)
         Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.cmdSave)
         Me.Controls.Add(Me.cmdGenerate)
@@ -181,4 +192,5 @@ Partial Class MainUI
     Friend WithEvents cmdSave As Button
     Friend WithEvents lblVersion As Label
     Friend WithEvents ExitToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents lblUser As Label
 End Class
