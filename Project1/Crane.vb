@@ -1,6 +1,5 @@
 ﻿Imports System.Data
 Imports ADODB
-Imports Reports
 
 Public Class Crane
     Implements ICrane

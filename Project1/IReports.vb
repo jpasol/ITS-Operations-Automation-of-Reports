@@ -13,11 +13,11 @@
         ReadOnly Property N4Connection As ADODB.Connection
         ReadOnly Property OPConnection As ADODB.Connection
         Function CalculateInfo(strFunction As String, Inputs() As String) As Object
-        Function Exists(Registry As String) As Boolean
+        Function Exists() As Boolean
         Sub Format(ByRef crReport As CrystalDecisions.CrystalReports.Engine.ReportClass)
         Sub Preview(ByRef crReport As CrystalDecisions.CrystalReports.Engine.ReportClass, crViewer As CrystalDecisions.Windows.Forms.CrystalReportViewer)
-        Sub Save()
         Sub RetrieveData()
+        Sub Save()
     End Interface
     Public Interface IReportfromN4 'Used by VMR / CLR
         Property CnnN4 As ADODB.Connection
