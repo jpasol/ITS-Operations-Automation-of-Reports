@@ -73,6 +73,7 @@ Public Class MainUI
                 createVMR.ShowDialog()
             Case "Crane Logs Report"
                 Dim createCLR As New CLRForm(mskParameter.Text, CnnN4, CnnDB, User)
+
                 createCLR.ShowDialog()
             Case Else
 
