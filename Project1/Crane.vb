@@ -1,5 +1,7 @@
 ﻿Imports System.Data
 Imports ADODB
+Imports System.Linq
+Imports Reports
 
 Public Class Crane
     Implements ICrane
@@ -58,14 +60,7 @@ Public Class Crane
 
 
     Private Sub RetrieveMoves()
-        Dim rsMoves As New ADODB.Recordset
-        Dim dataAdapter As New OleDb.OleDbDataAdapter 'adodb doesnt have dataadpter, used oledb instead since it works with adodb.recordset
-        Dim strInbound As String
-        Dim strOutbound As String
-
-        Moves = New CraneMoves
-
-        strInbound = "
+        Dim strInbound As String = "
 Declare @Registry numeric(18,0)
 Declare @GC numeric(8,0)
 
@@ -98,7 +93,7 @@ inner join
 
 where che_qc = @GC and ufv.actual_ib_cv = @Registry and category <> 'THRGH'"
 
-        strOutbound = "
+        Dim strOutbound As String = "
 Declare @Registry numeric(18,0)
 Declare @GC numeric(8,0)
 
@@ -131,16 +126,75 @@ inner join
 
 where che_qc = @GC and ufv.actual_ob_cv = @Registry and category <> 'THRGH'"
 
-        'add Inbound moves
-        rsMoves.Open(strInbound, adoConnection, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic, CommandTypeEnum.adCmdText)
-        dataAdapter.Fill(Moves.Tables("Inbound"), rsMoves)
-        rsMoves.Close()
 
         'add Outbound moves
+        FillInbound(strInbound)
+        FillOutbound(strOutbound)
+
+    End Sub
+
+    Private Sub FillOutbound(strOutbound As String)
+        Dim rsMoves As New ADODB.Recordset
+        Dim dataAdapter As New OleDb.OleDbDataAdapter 'adodb doesnt have dataadpter, used oledb instead since it works with adodb.recordset
         rsMoves.Open(strOutbound, adoConnection, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic, CommandTypeEnum.adCmdText)
         dataAdapter.Fill(Moves.Tables("Outbound"), rsMoves)
         rsMoves.Close()
 
+        CountOutboundMoves(Moves.Outbound)
+    End Sub
 
+    Private Sub CountOutboundMoves(outbound As CraneMoves.OutboundDataTable)
+        Dim freightkinds As String() = {"FCL", "MTY"}
+
+        For Each freight In freightkinds
+
+            Dim count20 As Object = CountMoves(outbound, freight, 20)
+            Dim count40 As Object = CountMoves(outbound, freight, 20)
+            Dim count45 As Object = CountMoves(outbound, freight, 20)
+
+            Moves.Container.Rows.Add("",
+                                     Registry,
+                                     Nothing,
+                                     freightkinds,
+                                     count20,
+                                     count40,
+                                     count45)
+        Next
+    End Sub
+
+    Private Function CountMoves(outbound As DataTable, freight As String, v As Integer) As Object
+        Return (From units In outbound.AsEnumerable
+                Where units("freight_kind") = freight And
+                                     units("nominal_length") = $"NOM{v}"
+                Select units).Count
+    End Function
+
+    Private Sub FillInbound(strInbound As String)
+        Dim rsMoves As New ADODB.Recordset
+        Dim dataAdapter As New OleDb.OleDbDataAdapter 'adodb doesnt have dataadpter, used oledb instead since it works with adodb.recordset
+        rsMoves.Open(strInbound, adoConnection, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic, CommandTypeEnum.adCmdText)
+        dataAdapter.Fill(Moves.Tables("Inbound"), rsMoves)
+        rsMoves.Close()
+
+        CountInboundMoves(Moves.Inbound)
+    End Sub
+
+    Private Sub CountInboundMoves(inbound As CraneMoves.InboundDataTable)
+        Dim freightkinds As String() = {"FCL", "MTY"}
+
+        For Each freight In freightkinds
+
+            Dim count20 As Object = CountMoves(inbound, freight, 20)
+            Dim count40 As Object = CountMoves(inbound, freight, 20)
+            Dim count45 As Object = CountMoves(inbound, freight, 20)
+
+            Moves.Container.Rows.Add("",
+                                     Nothing,
+                                     Registry,
+                                     freightkinds,
+                                     count20,
+                                     count40,
+                                     count45)
+        Next
     End Sub
 End Class

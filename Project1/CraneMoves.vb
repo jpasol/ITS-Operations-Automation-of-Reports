@@ -6,122 +6,64 @@ Partial Class CraneMoves
     End Class
 
     Partial Public Class GearboxDataTable
-        Public Function Total20() As Double
 
-            Dim boxes As Double = 0
-            For Each row In Me.Rows
-                boxes += row("gbxsze20").ToString
-            Next
-            Return boxes
-
-        End Function
-
-        Public Function Total40() As Double
-            Dim boxes As Double = 0
-            For Each row In Me.Rows
-                boxes += row("gbxsze40").ToString
-            Next
-            Return boxes
-        End Function
-
+        Friend ReadOnly Property TotalMoves(v As Integer) As Integer
+            Get
+                Dim boxes As Double = 0
+                For Each row In Me.Rows
+                    boxes += row($"gbxsze{v}").ToString
+                Next
+                Return boxes
+            End Get
+        End Property
     End Class
 
     Partial Public Class HatchcoverDataTable
 
-        Public Function Total20() As Double
-            Dim boxes As Double = 0
-            For Each row In Me.Rows
-                boxes += row("cvrsze20").ToString
-            Next
-            Return boxes
-        End Function
-
-        Public Function Total40() As Double
-            Dim boxes As Double = 0
-            For Each row In Me.Rows
-                boxes += row("cvrsze40").ToString
-            Next
-            Return boxes
-        End Function
-
+        Friend ReadOnly Property TotalMoves(v As Integer) As Integer
+            Get
+                Dim boxes As Double = 0
+                For Each row In Me.Rows
+                    boxes += row($"cvrsze{40}").ToString
+                Next
+                Return boxes
+            End Get
+        End Property
     End Class
 
     Partial Public Class ContainerDataTable
-        Public Function Total20(Optional CraneMove As String = "", Optional Movekind As String = "") As Double
-            Dim boxes As Double = 0
-            Dim wherecol As Collections.Generic.IEnumerable(Of System.Data.DataRow)
 
-            With Me.AsEnumerable
-                If CraneMove = "" And Movekind = "" Then
-                    wherecol = Me.AsEnumerable
-                ElseIf CraneMove <> "" And Movekind = "" Then
-                    wherecol = .Where(Function(row) row("ctrmve") = Movekind)
-                ElseIf CraneMove = "" And Movekind <> "" Then
-                    wherecol = .Where(Function(row) row("move_kind") = CraneMove)
-                Else
-                    wherecol = .Where(Function(row) row("ctrmve") = Movekind And row("move_kind") = CraneMove)
+        Public ReadOnly Property TotalMoves(v As Integer, Optional freight As String = "", Optional movekind As String = "") As Integer
+            Get
+                If movekind = "Discharge" Then
+
                 End If
-            End With
-            boxes = wherecol.Sum(Function(row) row("cntsze20"))
-            Return boxes
-            'For Each row In Me.Rows
-            '    boxes += row("cntsze20").ToString
-            'Next
-            'Return boxes
-        End Function
 
-        Public Function Total40(Optional CraneMove As String = "", Optional Movekind As String = "") As Double
-            Dim boxes As Double = 0
-            Dim wherecol As Collections.Generic.IEnumerable(Of System.Data.DataRow)
+                Dim boxes As Double = 0
+                Dim wherecol As Collections.Generic.IEnumerable(Of System.Data.DataRow)
 
-            With Me.AsEnumerable
-                If CraneMove = "" And Movekind = "" Then
-                    wherecol = Me.AsEnumerable
-                ElseIf CraneMove <> "" And Movekind = "" Then
-                    wherecol = .Where(Function(row) row("ctrmve") = Movekind)
-                ElseIf CraneMove = "" And Movekind <> "" Then
-                    wherecol = .Where(Function(row) row("move_kind") = CraneMove)
-                Else
-                    wherecol = .Where(Function(row) row("ctrmve") = Movekind And row("move_kind") = CraneMove)
-                End If
-            End With
-            boxes = wherecol.Sum(Function(row) row("cntsze40"))
-            Return boxes
-            'For Each row In Me.Rows
-            '    boxes += row("cntsze40").ToString
-            'Next
-            'Return boxes
-        End Function
+                With Me.AsEnumerable
+                    If freight = "" And movekind = "" Then
+                        wherecol = Me.AsEnumerable
+                    ElseIf freight <> "" And movekind = "" Then
+                        wherecol = .Where(Function(row) row("move_kind") = movekind)
+                    ElseIf freight = "" And movekind <> "" Then
+                        wherecol = .Where(Function(row) row("freight_kind") = freight)
+                    Else
+                        wherecol = .Where(Function(row) row("move_kind") = movekind And row("freight_kind") = freight)
+                    End If
+                End With
 
-        Public Function Total45(Optional CraneMove As String = "", Optional Movekind As String = "") As Double
-            Dim boxes As Double = 0
-            Dim wherecol As Collections.Generic.IEnumerable(Of System.Data.DataRow)
-
-            With Me.AsEnumerable
-                If CraneMove = "" And Movekind = "" Then
-                    wherecol = Me.AsEnumerable
-                ElseIf CraneMove <> "" And Movekind = "" Then
-                    wherecol = .Where(Function(row) row("ctrmve") = Movekind)
-                ElseIf CraneMove = "" And Movekind <> "" Then
-                    wherecol = .Where(Function(row) row("move_kind") = CraneMove)
-                Else
-                    wherecol = .Where(Function(row) row("ctrmve") = Movekind And row("move_kind") = CraneMove)
-                End If
-            End With
-            boxes = wherecol.Sum(Function(row) row("cntsze45"))
-            Return boxes
-            'For Each row In Me.Rows
-            '    boxes += row("cntsze45").ToString
-            'Next
-            'Return boxes
-        End Function
-
+                boxes = wherecol.Sum(Function(row) row($"cntsze{v}"))
+                Return boxes
+            End Get
+        End Property
     End Class
 
     Public Function TotalMoves() As Double
-        Return Container.Total20 + Container.Total40 + Container.Total45 +
-            Hatchcover.Total20 + Hatchcover.Total40 +
-            Gearbox.Total20 + Gearbox.Total40
+        Return Container.TotalMoves(20) + Container.TotalMoves(40) + Container.TotalMoves(45) +
+            Hatchcover.TotalMoves(20) + Hatchcover.TotalMoves(40) +
+            Gearbox.TotalMoves(20) + Gearbox.TotalMoves(40)
 
     End Function
 End Class
