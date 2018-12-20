@@ -629,7 +629,6 @@ Partial Public Class CraneMoves
             MyBase.Columns.Add(Me.columncntsze40)
             Me.columncntsze45 = New Global.System.Data.DataColumn("cntsze45", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columncntsze45)
-            Me.columnmove_kind.AllowDBNull = false
             Me.columnactual_ob.Caption = "DataColumn1"
             Me.columncntsze20.DefaultValue = CType(0,Long)
             Me.columncntsze40.DefaultValue = CType(0,Long)
@@ -771,8 +770,6 @@ Partial Public Class CraneMoves
     Partial Public Class HatchcoverDataTable
         Inherits Global.System.Data.TypedTableBase(Of HatchcoverRow)
         
-        Private columnmove_kind As Global.System.Data.DataColumn
-        
         Private columnactual_ob As Global.System.Data.DataColumn
         
         Private columnactual_ib As Global.System.Data.DataColumn
@@ -817,14 +814,6 @@ Partial Public Class CraneMoves
             MyBase.New(info, context)
             Me.InitVars
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public ReadOnly Property move_kindColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnmove_kind
-            End Get
-        End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
@@ -903,9 +892,9 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Overloads Function AddHatchcoverRow(ByVal move_kind As String, ByVal actual_ob As String, ByVal actual_ib As String, ByVal baynum As Long, ByVal cvrsze20 As Long, ByVal cvrsze40 As Long) As HatchcoverRow
+        Public Overloads Function AddHatchcoverRow(ByVal actual_ob As String, ByVal actual_ib As String, ByVal baynum As Long, ByVal cvrsze20 As Long, ByVal cvrsze40 As Long) As HatchcoverRow
             Dim rowHatchcoverRow As HatchcoverRow = CType(Me.NewRow,HatchcoverRow)
-            Dim columnValuesArray() As Object = New Object() {move_kind, actual_ob, actual_ib, baynum, cvrsze20, cvrsze40}
+            Dim columnValuesArray() As Object = New Object() {actual_ob, actual_ib, baynum, cvrsze20, cvrsze40}
             rowHatchcoverRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowHatchcoverRow)
             Return rowHatchcoverRow
@@ -928,7 +917,6 @@ Partial Public Class CraneMoves
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Friend Sub InitVars()
-            Me.columnmove_kind = MyBase.Columns("move_kind")
             Me.columnactual_ob = MyBase.Columns("actual_ob")
             Me.columnactual_ib = MyBase.Columns("actual_ib")
             Me.columnbaynum = MyBase.Columns("baynum")
@@ -939,8 +927,6 @@ Partial Public Class CraneMoves
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Private Sub InitClass()
-            Me.columnmove_kind = New Global.System.Data.DataColumn("move_kind", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnmove_kind)
             Me.columnactual_ob = New Global.System.Data.DataColumn("actual_ob", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnactual_ob)
             Me.columnactual_ib = New Global.System.Data.DataColumn("actual_ib", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -951,7 +937,6 @@ Partial Public Class CraneMoves
             MyBase.Columns.Add(Me.columncvrsze20)
             Me.columncvrsze40 = New Global.System.Data.DataColumn("cvrsze40", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columncvrsze40)
-            Me.columnmove_kind.AllowDBNull = false
             Me.columnactual_ob.Caption = "DataColumn1"
             Me.columnbaynum.DefaultValue = CType(0,Long)
             Me.columncvrsze20.DefaultValue = CType(0,Long)
@@ -1093,8 +1078,6 @@ Partial Public Class CraneMoves
     Partial Public Class GearboxDataTable
         Inherits Global.System.Data.TypedTableBase(Of GearboxRow)
         
-        Private columnmove_kind As Global.System.Data.DataColumn
-        
         Private columnactual_ob As Global.System.Data.DataColumn
         
         Private columnactual_ib As Global.System.Data.DataColumn
@@ -1139,14 +1122,6 @@ Partial Public Class CraneMoves
             MyBase.New(info, context)
             Me.InitVars
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public ReadOnly Property move_kindColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnmove_kind
-            End Get
-        End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
@@ -1225,9 +1200,9 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Overloads Function AddGearboxRow(ByVal move_kind As String, ByVal actual_ob As String, ByVal actual_ib As String, ByVal baynum As Long, ByVal gbxsze20 As Long, ByVal gbxsze40 As Long) As GearboxRow
+        Public Overloads Function AddGearboxRow(ByVal actual_ob As String, ByVal actual_ib As String, ByVal baynum As Long, ByVal gbxsze20 As Long, ByVal gbxsze40 As Long) As GearboxRow
             Dim rowGearboxRow As GearboxRow = CType(Me.NewRow,GearboxRow)
-            Dim columnValuesArray() As Object = New Object() {move_kind, actual_ob, actual_ib, baynum, gbxsze20, gbxsze40}
+            Dim columnValuesArray() As Object = New Object() {actual_ob, actual_ib, baynum, gbxsze20, gbxsze40}
             rowGearboxRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowGearboxRow)
             Return rowGearboxRow
@@ -1250,7 +1225,6 @@ Partial Public Class CraneMoves
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Friend Sub InitVars()
-            Me.columnmove_kind = MyBase.Columns("move_kind")
             Me.columnactual_ob = MyBase.Columns("actual_ob")
             Me.columnactual_ib = MyBase.Columns("actual_ib")
             Me.columnbaynum = MyBase.Columns("baynum")
@@ -1261,8 +1235,6 @@ Partial Public Class CraneMoves
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Private Sub InitClass()
-            Me.columnmove_kind = New Global.System.Data.DataColumn("move_kind", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnmove_kind)
             Me.columnactual_ob = New Global.System.Data.DataColumn("actual_ob", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnactual_ob)
             Me.columnactual_ib = New Global.System.Data.DataColumn("actual_ib", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -1273,7 +1245,6 @@ Partial Public Class CraneMoves
             MyBase.Columns.Add(Me.columngbxsze20)
             Me.columngbxsze40 = New Global.System.Data.DataColumn("gbxsze40", GetType(Long), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columngbxsze40)
-            Me.columnmove_kind.AllowDBNull = false
             Me.columnactual_ob.Caption = "DataColumn1"
             Me.columnbaynum.DefaultValue = CType(0,Long)
             Me.columngbxsze20.DefaultValue = CType(0,Long)
@@ -1904,7 +1875,11 @@ Partial Public Class CraneMoves
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Property move_kind() As String
             Get
-                Return CType(Me(Me.tableContainer.move_kindColumn),String)
+                Try 
+                    Return CType(Me(Me.tableContainer.move_kindColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'move_kind' in table 'Container' is DBNull.", e)
+                End Try
             End Get
             Set
                 Me(Me.tableContainer.move_kindColumn) = value
@@ -2018,6 +1993,18 @@ Partial Public Class CraneMoves
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function Ismove_kindNull() As Boolean
+            Return Me.IsNull(Me.tableContainer.move_kindColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub Setmove_kindNull()
+            Me(Me.tableContainer.move_kindColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Function Isactual_obNull() As Boolean
             Return Me.IsNull(Me.tableContainer.actual_obColumn)
         End Function
@@ -2115,17 +2102,6 @@ Partial Public Class CraneMoves
             MyBase.New(rb)
             Me.tableHatchcover = CType(Me.Table,HatchcoverDataTable)
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property move_kind() As String
-            Get
-                Return CType(Me(Me.tableHatchcover.move_kindColumn),String)
-            End Get
-            Set
-                Me(Me.tableHatchcover.move_kindColumn) = value
-            End Set
-        End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
@@ -2277,17 +2253,6 @@ Partial Public Class CraneMoves
             MyBase.New(rb)
             Me.tableGearbox = CType(Me.Table,GearboxDataTable)
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property move_kind() As String
-            Get
-                Return CType(Me(Me.tableGearbox.move_kindColumn),String)
-            End Get
-            Set
-                Me(Me.tableGearbox.move_kindColumn) = value
-            End Set
-        End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _

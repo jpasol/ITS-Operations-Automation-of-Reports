@@ -149,13 +149,14 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry and category <> 'THRGH'"
         For Each freight In freightkinds
 
             Dim count20 As Object = CountMoves(outbound, freight, 20)
-            Dim count40 As Object = CountMoves(outbound, freight, 20)
-            Dim count45 As Object = CountMoves(outbound, freight, 20)
+            Dim count40 As Object = CountMoves(outbound, freight, 40)
+            Dim count45 As Object = CountMoves(outbound, freight, 45)
 
-            Moves.Container.Rows.Add("",
+            Moves.Container.Rows.Add("LOAD",
                                      Registry,
                                      Nothing,
-                                     freightkinds,
+                                     freight,
+                                     Nothing,
                                      count20,
                                      count40,
                                      count45)
@@ -185,13 +186,14 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry and category <> 'THRGH'"
         For Each freight In freightkinds
 
             Dim count20 As Object = CountMoves(inbound, freight, 20)
-            Dim count40 As Object = CountMoves(inbound, freight, 20)
-            Dim count45 As Object = CountMoves(inbound, freight, 20)
+            Dim count40 As Object = CountMoves(inbound, freight, 40)
+            Dim count45 As Object = CountMoves(inbound, freight, 45)
 
-            Moves.Container.Rows.Add("",
+            Moves.Container.Rows.Add("DSCH",
                                      Nothing,
                                      Registry,
-                                     freightkinds,
+                                     freight,
+                                     Nothing,
                                      count20,
                                      count40,
                                      count45)

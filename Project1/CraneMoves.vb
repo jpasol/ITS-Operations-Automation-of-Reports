@@ -33,24 +33,32 @@ Partial Class CraneMoves
 
     Partial Public Class ContainerDataTable
 
-        Public ReadOnly Property TotalMoves(v As Integer, Optional freight As String = "", Optional movekind As String = "") As Integer
+        Public ReadOnly Property TotalMoves(v As Integer, Optional freight As String = "", Optional bound As String = "") As Integer
             Get
-                If movekind = "Discharge" Then
-
-                End If
-
                 Dim boxes As Double = 0
                 Dim wherecol As Collections.Generic.IEnumerable(Of System.Data.DataRow)
 
                 With Me.AsEnumerable
-                    If freight = "" And movekind = "" Then
+                    If freight = "" And bound = "" Then
                         wherecol = Me.AsEnumerable
-                    ElseIf freight <> "" And movekind = "" Then
-                        wherecol = .Where(Function(row) row("move_kind") = movekind)
-                    ElseIf freight = "" And movekind <> "" Then
+                    ElseIf freight <> "" And bound = "" Then
+                        Select Case bound
+                            Case "Discharge"
+                                wherecol = .Where(Function(row) row("actual_ib") IsNot Nothing)
+                            Case "Loading"
+                                wherecol = .Where(Function(row) row("actual_ob") IsNot Nothing)
+                        End Select
+                        'wherecol = .Where(Function(row) row("move_kind") = bound)
+                    ElseIf freight = "" And bound <> "" Then
                         wherecol = .Where(Function(row) row("freight_kind") = freight)
                     Else
-                        wherecol = .Where(Function(row) row("move_kind") = movekind And row("freight_kind") = freight)
+                        Select Case bound
+                            Case "Discharge"
+                                wherecol = .Where(Function(row) row("actual_ib") IsNot Nothing And row("freight_kind") = freight)
+                            Case "Loading"
+                                wherecol = .Where(Function(row) row("actual_ob") IsNot Nothing And row("freight_kind") = freight)
+                        End Select
+                        'wherecol = .Where(Function(row) row("move_kind") = bound And row("freight_kind") = freight)
                     End If
                 End With
 
