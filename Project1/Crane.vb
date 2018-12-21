@@ -31,14 +31,14 @@ Public Class Crane
             Dim breakdelays As Double = Delays.Break.Totalhours
             Dim span As TimeSpan = LastMove.Subtract(FirstMove)
 
-            Return Format(span.TotalHours - breakdelays, "0.00")
+            Return span.TotalHours - breakdelays
 
         End Get
     End Property
 
     Public ReadOnly Property GrossProductivity As Double Implements ICrane.GrossProductivity
         Get
-            Return Format(Moves.TotalMoves / GrossWorkingHours, "0.00")
+            Return Moves.TotalMoves / GrossWorkingHours
         End Get
     End Property
 
@@ -48,13 +48,13 @@ Public Class Crane
             Dim breakdelays As Double = Delays.Break.Totalhours
             Dim span As TimeSpan = LastMove.Subtract(FirstMove)
 
-            Return Format(span.TotalHours - deductdelays - breakdelays, "0.00")
+            Return span.TotalHours - deductdelays - breakdelays
         End Get
     End Property
 
     Public ReadOnly Property NetProductivity As Double Implements ICrane.NetProductivity
         Get
-            Return Format(Moves.TotalMoves / NetWorkingHours, "0.00")
+            Return Moves.TotalMoves / NetWorkingHours
         End Get
     End Property
 

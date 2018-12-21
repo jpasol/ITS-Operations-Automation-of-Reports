@@ -24,7 +24,7 @@ Partial Class CraneMoves
             Get
                 Dim boxes As Double = 0
                 For Each row In Me.Rows
-                    boxes += row($"cvrsze{40}").ToString
+                    boxes += row($"cvrsze{v}").ToString
                 Next
                 Return boxes
             End Get
@@ -44,9 +44,9 @@ Partial Class CraneMoves
                     ElseIf freight <> "" And bound = "" Then
                         Select Case bound
                             Case "Discharge"
-                                wherecol = .Where(Function(row) row("actual_ib") IsNot Nothing)
+                                wherecol = .Where(Function(row) row("actual_ib") IsNot DBNull.Value)
                             Case "Loading"
-                                wherecol = .Where(Function(row) row("actual_ob") IsNot Nothing)
+                                wherecol = .Where(Function(row) row("actual_ob") IsNot DBNull.Value)
                         End Select
                         'wherecol = .Where(Function(row) row("move_kind") = bound)
                     ElseIf freight = "" And bound <> "" Then
@@ -54,9 +54,9 @@ Partial Class CraneMoves
                     Else
                         Select Case bound
                             Case "Discharge"
-                                wherecol = .Where(Function(row) row("actual_ib") IsNot Nothing And row("freight_kind") = freight)
+                                wherecol = .Where(Function(row) row("actual_ib") IsNot DBNull.Value And row("freight_kind") = freight)
                             Case "Loading"
-                                wherecol = .Where(Function(row) row("actual_ob") IsNot Nothing And row("freight_kind") = freight)
+                                wherecol = .Where(Function(row) row("actual_ob") IsNot DBNull.Value And row("freight_kind") = freight)
                         End Select
                         'wherecol = .Where(Function(row) row("move_kind") = bound And row("freight_kind") = freight)
                     End If
