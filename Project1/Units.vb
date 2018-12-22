@@ -9,8 +9,10 @@ Public Class Units
 
         ' This call is required by the designer.
         Retrieve(Registry, Connection)
+
         strRegistry = Registry
         untConnection = Connection
+
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
@@ -169,10 +171,14 @@ on unit.gkey = ufv.unit_gkey
 where [actual_ob_cv] = @Registry and category <> 'THRGH'"
 
         For count As Integer = 0 To 1
+            Connection.Open()
+
             rsUnits.Open(strSQl(count), Connection)
             datAdapt.Fill(dsContainers.Tables(count), rsUnits)
             tagCtrTyp(dsContainers.Tables(count))
             rsUnits.Close()
+
+            Connection.Close()
         Next
 
 

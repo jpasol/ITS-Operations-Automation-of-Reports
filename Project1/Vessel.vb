@@ -5,11 +5,14 @@ Public Class Vessel
     Implements IReports.IVessel
 
     Sub New(Registry As String, Connection As Connection)
+
         vslUnits = New Units(Registry, Connection)
 
         Retrieve(Registry, Connection)
+
         strRegistry = Registry
         vslConnection = Connection
+
     End Sub
     Private strRegistry As String
     Private vslConnection As Connection
@@ -186,9 +189,14 @@ Public Class Vessel
         on [operator_gkey] = biz.gkey
 
         where acv.gkey = @Registry"
+
+        Connection.Open()
+
         rsContainers.Open(strSQLVessel, Connection)
         DataAdapter.Fill(dtVessel, rsContainers)
         rsContainers.Close()
+
+        Connection.Close()
     End Sub
 
     Public Function TEU(Optional Condition As String = "") As Double Implements IReports.IVessel.TEU

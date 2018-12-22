@@ -58,7 +58,6 @@ Public Class Crane
         End Get
     End Property
 
-
     Private Sub RetrieveMoves()
         Dim strInbound As String = "
 Declare @Registry numeric(18,0)
@@ -128,8 +127,10 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry and category <> 'THRGH'"
 
 
         'add Outbound moves
+        adoConnection.Open()
         FillInbound(strInbound)
         FillOutbound(strOutbound)
+        adoConnection.Close()
 
     End Sub
 

@@ -31,14 +31,27 @@ Public Class MainUI
 
     Public Sub ConnectDB()
         With My.Settings
-            CnnN4.Open("Provider=SQLOLEDB;
+            CnnN4.ConnectionString = "Provider=SQLOLEDB;
                         Data Source=" & .N4Server & ";
                         Initial Catalog=" & .N4Database & ";
-                        Integrated Security=SSPI;")
-            CnnDB.Open("Provider=SQLOLEDB;
+                        Integrated Security=SSPI;"
+
+            CnnDB.ConnectionString = "Provider=SQLOLEDB;
                         Data Source=" & .OPServer & ";
                         Initial Catalog=" & .OPDatabase & ";
-                        Integrated Security=SSPI;")
+                        Integrated Security=SSPI;"
+
+            Try
+                CnnN4.Open()
+                CnnDB.Open()
+
+                CnnDB.Close()
+                CnnN4.Close()
+            Catch ex As Exception
+                MsgBox("Cannot Connect to Database" & vbNewLine &
+                       Err.Number & vbNewLine &
+                       Err.Description)
+            End Try
         End With
     End Sub
 
