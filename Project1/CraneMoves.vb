@@ -1,4 +1,5 @@
 ﻿Imports System.Linq
+Imports Reports.ReportFunctions
 
 Partial Class CraneMoves
     Partial Public Class InboundDataTable
@@ -44,9 +45,9 @@ Partial Class CraneMoves
                     ElseIf freight <> "" And bound = "" Then
                         Select Case bound
                             Case "Discharge"
-                                wherecol = .Where(Function(row) row("actual_ib") IsNot DBNull.Value)
+                                wherecol = .Where(Function(row) ParseDBNulltoString(row("actual_ib")) <> "")
                             Case "Loading"
-                                wherecol = .Where(Function(row) row("actual_ob") IsNot DBNull.Value)
+                                wherecol = .Where(Function(row) ParseDBNulltoString(row("actual_ob")) <> "")
                         End Select
                         'wherecol = .Where(Function(row) row("move_kind") = bound)
                     ElseIf freight = "" And bound <> "" Then
@@ -54,9 +55,9 @@ Partial Class CraneMoves
                     Else
                         Select Case bound
                             Case "Discharge"
-                                wherecol = .Where(Function(row) row("actual_ib") IsNot DBNull.Value And row("freight_kind") = freight)
+                                wherecol = .Where(Function(row) ParseDBNulltoString(row("actual_ib")) <> "" And row("freight_kind") = freight)
                             Case "Loading"
-                                wherecol = .Where(Function(row) row("actual_ob") IsNot DBNull.Value And row("freight_kind") = freight)
+                                wherecol = .Where(Function(row) ParseDBNulltoString(row("actual_ob")) <> "" And row("freight_kind") = freight)
                         End Select
                         'wherecol = .Where(Function(row) row("move_kind") = bound And row("freight_kind") = freight)
                     End If

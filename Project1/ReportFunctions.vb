@@ -94,4 +94,23 @@
 
         Return refkey
     End Function
+
+    Shared Function ParseDBNulltoString(v As Object) As String
+        If v Is DBNull.Value Then
+            Return ""
+        Else
+            Return Trim(v.ToString())
+        End If
+    End Function
+
+    Shared Function ConvertDelayKindtoTableName(value As Object) As String
+        Select Case value
+            Case "DEDUC"
+                Return "Deductable"
+            Case "BREAK"
+                Return "Break"
+            Case "NONDE"
+                Return "NonDeductable"
+        End Select
+    End Function
 End Class
