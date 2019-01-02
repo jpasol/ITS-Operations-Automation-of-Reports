@@ -108,7 +108,10 @@ Public Class Vessel
 
     Public ReadOnly Property LastContainerDischarged As Date Implements IReports.IVessel.LastContainerDischarged
         Get
-            LastContainerDischarged = dtVessel.Rows(0)(Vessel.LastContrDisch).ToString()
+            Try
+                LastContainerDischarged = dtVessel.Rows(0)(Vessel.LastContrDisch).ToString()
+            Catch
+            End Try
         End Get
     End Property
 

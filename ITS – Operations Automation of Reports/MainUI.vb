@@ -82,7 +82,7 @@ Public Class MainUI
     Private Sub cmdGenerate_Click(sender As Object, e As EventArgs) Handles cmdGenerate.Click
         Select Case cmbReports.Text
             Case "Vessel Movement Report"
-                Dim createVMR As New VMRForm(mskParameter.Text, CnnN4, CnnDB)
+                Dim createVMR As New VMRForm(mskParameter.Text, CnnN4, CnnDB, User)
                 createVMR.ShowDialog()
             Case "Crane Logs Report"
                 Dim createCLR As New CLRForm(mskParameter.Text, CnnN4, CnnDB, User)
