@@ -1,4 +1,5 @@
 ﻿Imports System.Linq
+Imports Reports
 Imports Reports.ReportFunctions
 
 Partial Class CraneMoves
@@ -75,4 +76,5 @@ Partial Class CraneMoves
             Gearbox.TotalMoves(20) + Gearbox.TotalMoves(40)
 
     End Function
+
 End Class
