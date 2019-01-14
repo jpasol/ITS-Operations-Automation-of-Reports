@@ -153,7 +153,8 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry and category <> 'THRGH'"
             Dim count40 As Object = CountMoves(outbound, freight, 40)
             Dim count45 As Object = CountMoves(outbound, freight, 45)
 
-            Moves.Container.Rows.Add("LOAD",
+            If (count20 + count40 + count45) > 0 Then
+                Moves.Container.Rows.Add("LOAD",
                                      Registry,
                                      Nothing,
                                      freight,
@@ -161,6 +162,7 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry and category <> 'THRGH'"
                                      count20,
                                      count40,
                                      count45)
+            End If
         Next
     End Sub
 
@@ -190,7 +192,8 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry and category <> 'THRGH'"
             Dim count40 As Object = CountMoves(inbound, freight, 40)
             Dim count45 As Object = CountMoves(inbound, freight, 45)
 
-            Moves.Container.Rows.Add("DSCH",
+            If (count20 + count40 + count45) > 0 Then
+                Moves.Container.Rows.Add("DSCH",
                                      Nothing,
                                      Registry,
                                      freight,
@@ -198,6 +201,7 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry and category <> 'THRGH'"
                                      count20,
                                      count40,
                                      count45)
+            End If
         Next
     End Sub
 End Class

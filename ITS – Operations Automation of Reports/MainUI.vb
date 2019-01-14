@@ -34,12 +34,12 @@ Public Class MainUI
             CnnN4.ConnectionString = "Provider=SQLOLEDB;
                         Data Source=" & .N4Server & ";
                         Initial Catalog=" & .N4Database & ";
-                        Integrated Security=SSPI;"
+                        User ID=tosadmin;Password=tosadmin;"
 
             CnnDB.ConnectionString = "Provider=SQLOLEDB;
                         Data Source=" & .OPServer & ";
                         Initial Catalog=" & .OPDatabase & ";
-                        Integrated Security=SSPI;"
+                        User ID=sa_ictsi;Password=Ictsi123;"
 
             Try
                 CnnN4.Open()
@@ -59,18 +59,18 @@ Public Class MainUI
         cmbReports.Items.AddRange(arrReports)
         cmbReports.SelectedIndex = 0
         ConnectDB()
-        lblUser.Text = $"Logged in as: {User}"
     End Sub
 
     Private Sub MainUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Initialize()
+        lblVersion.Text = $"v{Application.ProductVersion}"
     End Sub
 
     Private Sub cmbReports_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbReports.SelectedIndexChanged
         Select Case cmbReports.SelectedIndex
             Case 0, 1
                 lblParameter.Text = "Registry:"
-                mskParameter.Mask = "&&&0000-00"
+                mskParameter.Mask = ">&&&0000-00"
             Case Else
                 lblParameter.Text = "Date:"
                 mskParameter.Mask = "00/00/0000"
@@ -91,9 +91,17 @@ Public Class MainUI
                 Case Else
 
             End Select
-        Catch
-            MsgBox("Error In Retrieving Registry")
+        Catch ex As Exception
+            MsgBox("Error in Displaying Report." & vbNewLine &
+                   "Error Description: " & ex.Message)
+
+            If CnnDB.State = ConnectionState.Open Then CnnDB.Close()
+            If CnnN4.State = ConnectionState.Open Then CnnN4.Close()
         End Try
+
     End Sub
 
+    Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem1.Click
+        Me.Dispose()
+    End Sub
 End Class
