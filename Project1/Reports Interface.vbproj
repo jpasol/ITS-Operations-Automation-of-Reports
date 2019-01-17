@@ -94,6 +94,7 @@
     <Compile Include="CraneMoves.vb">
       <DependentUpon>CraneMoves.xsd</DependentUpon>
     </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="ReportFunctions.vb" />
     <Compile Include="Units.vb" />
     <Compile Include="IReports.vb" />

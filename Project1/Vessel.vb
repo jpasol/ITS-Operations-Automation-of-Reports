@@ -159,16 +159,16 @@ Public Class Vessel
         dtVessel = New DataTable
 
         strSQLVessel =
-        "Declare @Registry numeric(18,0)
+        $"Declare @Registry numeric(18,0)
 
         select @Registry = gkey
-        from argo_carrier_visit where id = '" & Registry & "'
+        from argo_carrier_visit where id = '{Registry}'
 
         select 'MV '+ vsl.name as 'Vessel Name'
         ,biz.[id] as 'Line Operator'
         ,ib_vyg 'I/B Voyage Number' 
         ,ob_vyg 'O/B Voyage Number'
-        ,flex_string01 as 'Registry Number'
+        ,acv.id as 'Registry Number'
         ,flex_string02 as 'Pier Berth (NCT)'
         ,ata as 'Actual Time of Arrival (ATA)'
         ,atd as 'Actual Time of Departure (ATD)'

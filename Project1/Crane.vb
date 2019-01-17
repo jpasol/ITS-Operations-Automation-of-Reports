@@ -6,14 +6,19 @@ Imports Reports
 Public Class Crane
     Implements ICrane
 
-    Public Sub New(Crane As String, Registry As String, ByRef Connection As ADODB.Connection)
+    Public Sub New(Crane As String, Registry As String, ByRef Connection As ADODB.Connection, Existing As Boolean)
 
         ' This call is required by the designer.
         Me.Registry = Registry
         Me.CraneName = Crane
         adoConnection = Connection
 
-        RetrieveMoves()
+        If Existing Then
+            'Do Nothing 
+        Else
+            RetrieveMoves()
+        End If
+
 
         ' Add any initialization after the InitializeComponent() call.
 

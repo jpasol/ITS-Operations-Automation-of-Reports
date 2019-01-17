@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Terminal_Status_Report</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ReferencePath>C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\</ReferencePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Crane Logs Report Creator\Crane Logs Report Creator\Crane Logs Report Creator.vbproj" />
+    <ProjectReference Include="..\Project1\Reports Interface.vbproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TSR.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TSR.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{c0c07587-41a7-46c8-8fbd-3f9c8ebe2ddc}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="TSR.vb">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TSR.rpt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

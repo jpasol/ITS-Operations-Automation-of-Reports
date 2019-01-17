@@ -93,7 +93,7 @@ Public Class MainUI
             End Select
         Catch ex As Exception
             MsgBox("Error in Displaying Report." & vbNewLine &
-                   "Error Description: " & ex.Message)
+                       "Error Description: " & ex.Message)
 
             If CnnDB.State = ConnectionState.Open Then CnnDB.Close()
             If CnnN4.State = ConnectionState.Open Then CnnN4.Close()
