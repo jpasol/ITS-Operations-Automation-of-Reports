@@ -64,87 +64,64 @@ Public Class Crane
     End Property
 
     Private Sub RetrieveMoves()
-        Dim strInbound As String = "
-Declare @Registry numeric(18,0)
-Declare @GC numeric(8,0)
-
-select @Registry = gkey
-from argo_carrier_visit where id = '" & Registry & "'
-
-Select @GC = gkey
-from xps_che where short_name = '" & CraneName & "'
-
-SELECT [mve_gkey]
-      ,[move_kind]
-	  ,[category]
-	  ,[freight_kind]
-      ,[short_name]
-      ,[nominal_length]
-
-  FROM [apex].[dbo].[inv_move_event] mve
-inner join
-[xps_che] che on mve.che_qc = che.gkey
-inner join
-[inv_unit_fcy_visit] ufv on mve.ufv_gkey = ufv.gkey
-inner join
-[inv_unit] unit on ufv.unit_gkey = unit.gkey
-inner join 
-[inv_unit_equip] ueq on ueq.unit_gkey = unit.gkey
-inner join
-[ref_equipment] eqp on ueq.eq_gkey = eqp.gkey
-inner join
-[ref_equip_type] eqt on eqp.eqtyp_gkey = eqt.gkey
-
-where che_qc = @GC and ufv.actual_ib_cv = @Registry and category <> 'THRGH'"
-
-        Dim strOutbound As String = "
-Declare @Registry numeric(18,0)
-Declare @GC numeric(8,0)
-
-select @Registry = gkey
-from argo_carrier_visit where id = '" & Registry & "'
-
-Select @GC = gkey
-from xps_che where short_name = '" & CraneName & "'
-
-SELECT [mve_gkey]
-      ,[move_kind]
-	  ,[category]
-	  ,[freight_kind]
-      ,[short_name]
-      ,[nominal_length]
-
-  FROM [apex].[dbo].[inv_move_event] mve
-inner join
-[xps_che] che on mve.che_qc = che.gkey
-inner join
-[inv_unit_fcy_visit] ufv on mve.ufv_gkey = ufv.gkey
-inner join
-[inv_unit] unit on ufv.unit_gkey = unit.gkey
-inner join 
-[inv_unit_equip] ueq on ueq.unit_gkey = unit.gkey
-inner join
-[ref_equipment] eqp on ueq.eq_gkey = eqp.gkey
-inner join
-[ref_equip_type] eqt on eqp.eqtyp_gkey = eqt.gkey
-
-where che_qc = @GC and ufv.actual_ob_cv = @Registry and category <> 'THRGH'"
-
-
-        'add Outbound moves
         adoConnection.Open()
-        FillInbound(strInbound)
-        FillOutbound(strOutbound)
+        FillInbound()
+        FillOutbound()
         adoConnection.Close()
 
     End Sub
 
-    Private Sub FillOutbound(strOutbound As String)
+    Private Sub FillOutbound()
         Dim rsMoves As New ADODB.Recordset
         Dim dataAdapter As New OleDb.OleDbDataAdapter 'adodb doesnt have dataadpter, used oledb instead since it works with adodb.recordset
+        Dim strOutbound As String = $"
+Declare @Registry numeric(18,0)
+Declare @GC numeric(8,0)
+
+select @Registry = gkey
+from argo_carrier_visit where id = '{Registry}'
+
+Select @GC = gkey
+from xps_che where short_name = '{CraneName}'
+
+SELECT DISTINCT unit.gkey
+	  ,mve.[move_kind]
+	  ,[category]
+	  ,[freight_kind]
+      ,[short_name]
+      ,[length_mm]
+      ,[time_load] as 'time_move'
+	  ,svnt.[id] as 'event'
+
+  FROM [apex].[dbo].[inv_unit] unit
+inner join
+[inv_unit_fcy_visit] ufv on unit.gkey = ufv.unit_gkey
+inner join
+[inv_move_event] mve on ufv.gkey = mve.ufv_gkey
+inner join
+[xps_che] che on mve.che_qc = che.gkey
+inner join
+[inv_unit_equip] ueq on ueq.unit_gkey = unit.gkey
+inner join
+[ref_equipment] eqp on ueq.eq_gkey = eqp.gkey
+left join
+( SELECT [gkey]
+      ,[event_type_gkey]
+      ,[applied_to_class]
+      ,[applied_to_gkey]
+      ,[applied_to_natural_key]
+  FROM [apex].[dbo].[srv_event] where event_type_gkey = 141 ) evnt on evnt.[applied_to_gkey] = unit.gkey
+left join 
+[srv_event_types] svnt on evnt.event_type_gkey = svnt.gkey
+
+
+
+where che_qc = @GC and ufv.actual_ob_cv = @Registry "
+
         rsMoves.Open(strOutbound, adoConnection, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic, CommandTypeEnum.adCmdText)
         dataAdapter.Fill(Moves.Tables("Outbound"), rsMoves)
         rsMoves.Close()
+
 
         CountOutboundMoves(Moves.Outbound)
     End Sub
@@ -174,13 +151,58 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry and category <> 'THRGH'"
     Private Function CountMoves(outbound As DataTable, freight As String, v As Integer) As Object
         Return (From units In outbound.AsEnumerable
                 Where units("freight_kind") = freight And
-                                     units("nominal_length") = $"NOM{v}"
+                                     Math.Round(units("length_mm") / 304.8, 0) = v
                 Select units).Count
     End Function
 
-    Private Sub FillInbound(strInbound As String)
+    Private Sub FillInbound()
         Dim rsMoves As New ADODB.Recordset
         Dim dataAdapter As New OleDb.OleDbDataAdapter 'adodb doesnt have dataadpter, used oledb instead since it works with adodb.recordset
+
+        Dim strInbound As String = $"
+Declare @Registry numeric(18,0)
+Declare @GC numeric(8,0)
+
+select @Registry = gkey
+from argo_carrier_visit where id = '{Registry}'
+
+Select @GC = gkey
+from xps_che where short_name = '{CraneName}'
+
+SELECT DISTINCT unit.gkey
+	  ,mve.[move_kind]
+	  ,[category]
+	  ,[freight_kind]
+      ,[short_name]
+      ,[length_mm]
+      ,[time_in] as 'time_move'
+	  ,svnt.[id] as 'event'
+
+
+  FROM [apex].[dbo].[inv_unit] unit
+inner join
+[inv_unit_fcy_visit] ufv on unit.gkey = ufv.unit_gkey
+inner join
+[inv_move_event] mve on ufv.gkey = mve.ufv_gkey
+inner join
+[xps_che] che on mve.che_qc = che.gkey
+inner join
+[inv_unit_equip] ueq on ueq.unit_gkey = unit.gkey
+inner join
+[ref_equipment] eqp on ueq.eq_gkey = eqp.gkey 
+left join
+( SELECT [gkey]
+      ,[event_type_gkey]
+      ,[applied_to_class]
+      ,[applied_to_gkey]
+      ,[applied_to_natural_key]
+  FROM [apex].[dbo].[srv_event] where event_type_gkey = 141 ) evnt on evnt.[applied_to_gkey] = unit.gkey
+left join 
+[srv_event_types] svnt on evnt.event_type_gkey = svnt.gkey
+
+
+where che_qc = @GC and ufv.actual_ib_cv = @Registry"
+
         rsMoves.Open(strInbound, adoConnection, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic, CommandTypeEnum.adCmdText)
         dataAdapter.Fill(Moves.Tables("Inbound"), rsMoves)
         rsMoves.Close()
@@ -209,4 +231,12 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry and category <> 'THRGH'"
             End If
         Next
     End Sub
+    Public Function TotalInboundMoves(datatable As CraneMoves.InboundDataTable) As Double
+        Return CountMoves(datatable, "FCL", 20) + CountMoves(datatable, "FCL", 40) + CountMoves(datatable, "FCL", 45) +
+            CountMoves(datatable, "MTY", 20) + CountMoves(datatable, "MTY", 40) + CountMoves(datatable, "MTY", 45)
+    End Function
+    Public Function TotalOutboundMoves(datatable As CraneMoves.OutboundDataTable) As Double
+        Return CountMoves(datatable, "FCL", 20) + CountMoves(datatable, "FCL", 40) + CountMoves(datatable, "FCL", 45) +
+            CountMoves(datatable, "MTY", 20) + CountMoves(datatable, "MTY", 40) + CountMoves(datatable, "MTY", 45)
+    End Function
 End Class

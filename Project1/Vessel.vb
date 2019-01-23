@@ -4,9 +4,11 @@ Imports Reports
 Public Class Vessel
     Implements IReports.IVessel
 
-    Sub New(Registry As String, Connection As Connection)
+    Sub New(Registry As String, Connection As Connection, Optional WithoutUnits As Boolean = False)
 
-        vslUnits = New Units(Registry, Connection)
+        If WithoutUnits = False Then
+            vslUnits = New Units(Registry, Connection)
+        End If
 
         Retrieve(Registry, Connection)
 
@@ -33,6 +35,9 @@ Public Class Vessel
         StartWork
         EndWork
         LastContrDisch
+        Phase
+        LaborOnBoard
+        LaborOffBoard
     End Enum
     Public ReadOnly Property Name As String Implements IReports.IVessel.Name
         Get
@@ -151,6 +156,24 @@ Public Class Vessel
         End Get
     End Property
 
+    Public ReadOnly Property Phase As String Implements IVessel.Phase
+        Get
+            Return dtVessel.Rows(0)(Vessel.Phase).ToString()
+        End Get
+    End Property
+
+    Public ReadOnly Property LaborOnBoard As Date Implements IVessel.LaborOnBoard
+        Get
+            Return dtVessel.Rows(0)(Vessel.LaborOnBoard).ToString()
+        End Get
+    End Property
+
+    Public ReadOnly Property LaborOffBoard As Date Implements IVessel.LaborOffBoard
+        Get
+            Return dtVessel.Rows(0)(Vessel.LaborOffBoard).ToString()
+        End Get
+    End Property
+
     Public Sub Retrieve(Registry As String, Connection As ADODB.Connection) Implements IReports.IVessel.Retrieve
         Dim rsContainers As New ADODB.Recordset
         Dim DataAdapter As New OleDb.OleDbDataAdapter
@@ -176,6 +199,9 @@ Public Class Vessel
         ,[start_work] as 'Time Operation Commenced'
         ,[end_work] as 'Time of Completion'
         ,[time_discharge_complete] as 'Time of Last Contr. Discharged'
+		,[phase]
+		,[labor_on_board]
+		,[labor_off_board]
 
         FROM [apex].[dbo].[vsl_vessel_visit_details] vvd
         inner join 

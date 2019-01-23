@@ -316,12 +316,6 @@
         "Entry"
         {
         "MsmKey" = "8:_22FBFCCE9D8C3C1EACC98E0D944D4C4E"
-        "OwnerKey" = "8:_CFE934EF9B7A378BA41B15C08059D207"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_22FBFCCE9D8C3C1EACC98E0D944D4C4E"
         "OwnerKey" = "8:_B028DCAE0D4E4397ADEEEFB85A40B210"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -340,7 +334,7 @@
         "Entry"
         {
         "MsmKey" = "8:_22FBFCCE9D8C3C1EACC98E0D944D4C4E"
-        "OwnerKey" = "8:_4C48EA4E5A685E67DEB167E7A193872C"
+        "OwnerKey" = "8:_CFE934EF9B7A378BA41B15C08059D207"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -449,24 +443,6 @@
         {
         "MsmKey" = "8:_3742D17865D718C09095D44E2C190E35"
         "OwnerKey" = "8:_8F46F993A1F2BAF7C31F436F81FCDB76"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4C48EA4E5A685E67DEB167E7A193872C"
-        "OwnerKey" = "8:_34B664072E8C8B8CE845B77011F9AF73"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4C48EA4E5A685E67DEB167E7A193872C"
-        "OwnerKey" = "8:_AA622A58ABCC741649C1A510D28C4C48"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4C48EA4E5A685E67DEB167E7A193872C"
-        "OwnerKey" = "8:_760C495B6D524B37AA085A98181DA5B0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -670,12 +646,6 @@
         "Entry"
         {
         "MsmKey" = "8:_8F46F993A1F2BAF7C31F436F81FCDB76"
-        "OwnerKey" = "8:_CFE934EF9B7A378BA41B15C08059D207"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8F46F993A1F2BAF7C31F436F81FCDB76"
         "OwnerKey" = "8:_B028DCAE0D4E4397ADEEEFB85A40B210"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -694,7 +664,7 @@
         "Entry"
         {
         "MsmKey" = "8:_8F46F993A1F2BAF7C31F436F81FCDB76"
-        "OwnerKey" = "8:_4C48EA4E5A685E67DEB167E7A193872C"
+        "OwnerKey" = "8:_CFE934EF9B7A378BA41B15C08059D207"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -802,13 +772,19 @@
         "Entry"
         {
         "MsmKey" = "8:_C211D16DE88E63D4192AF57BE62241B5"
-        "OwnerKey" = "8:_760C495B6D524B37AA085A98181DA5B0"
+        "OwnerKey" = "8:_0041A3C6C4E186347FC3282060D26A6B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_C211D16DE88E63D4192AF57BE62241B5"
-        "OwnerKey" = "8:_0041A3C6C4E186347FC3282060D26A6B"
+        "OwnerKey" = "8:_BCD56F3B2CD64FBE8F11D9200DE91CAC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C211D16DE88E63D4192AF57BE62241B5"
+        "OwnerKey" = "8:_B028DCAE0D4E4397ADEEEFB85A40B210"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -820,12 +796,18 @@
         "Entry"
         {
         "MsmKey" = "8:_C211D16DE88E63D4192AF57BE62241B5"
-        "OwnerKey" = "8:_B028DCAE0D4E4397ADEEEFB85A40B210"
+        "OwnerKey" = "8:_760C495B6D524B37AA085A98181DA5B0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C211D16DE88E63D4192AF57BE62241B5"
+        "MsmKey" = "8:_CFE934EF9B7A378BA41B15C08059D207"
+        "OwnerKey" = "8:_34B664072E8C8B8CE845B77011F9AF73"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CFE934EF9B7A378BA41B15C08059D207"
         "OwnerKey" = "8:_BCD56F3B2CD64FBE8F11D9200DE91CAC"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -838,7 +820,13 @@
         "Entry"
         {
         "MsmKey" = "8:_CFE934EF9B7A378BA41B15C08059D207"
-        "OwnerKey" = "8:_BCD56F3B2CD64FBE8F11D9200DE91CAC"
+        "OwnerKey" = "8:_AA622A58ABCC741649C1A510D28C4C48"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CFE934EF9B7A378BA41B15C08059D207"
+        "OwnerKey" = "8:_760C495B6D524B37AA085A98181DA5B0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1138,7 +1126,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C211D16DE88E63D4192AF57BE62241B5"
+        "OwnerKey" = "8:_760C495B6D524B37AA085A98181DA5B0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1151,12 +1139,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B028DCAE0D4E4397ADEEEFB85A40B210"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CFE934EF9B7A378BA41B15C08059D207"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1216,12 +1198,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_760C495B6D524B37AA085A98181DA5B0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_AA622A58ABCC741649C1A510D28C4C48"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1234,7 +1210,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4C48EA4E5A685E67DEB167E7A193872C"
+        "OwnerKey" = "8:_CFE934EF9B7A378BA41B15C08059D207"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1283,6 +1259,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_0041A3C6C4E186347FC3282060D26A6B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C211D16DE88E63D4192AF57BE62241B5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1392,12 +1374,76 @@
                 }
             }
         }
+        "Debug 64"
+        {
+        "DisplayName" = "8:Debug 64"
+        "IsDebugOnly" = "11:FALSE"
+        "IsReleaseOnly" = "11:FALSE"
+        "OutputFilename" = "8:Debug 64\\Setup1.msi"
+        "PackageFilesAs" = "3:2"
+        "PackageFileSize" = "3:-2147483648"
+        "CabType" = "3:1"
+        "Compression" = "3:2"
+        "SignOutput" = "11:FALSE"
+        "CertificateFile" = "8:"
+        "PrivateKeyFile" = "8:"
+        "TimeStampServer" = "8:"
+        "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
+        }
         "Release"
         {
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
         "OutputFilename" = "8:Release\\Setup1.msi"
+        "PackageFilesAs" = "3:2"
+        "PackageFileSize" = "3:-2147483648"
+        "CabType" = "3:1"
+        "Compression" = "3:2"
+        "SignOutput" = "11:FALSE"
+        "CertificateFile" = "8:"
+        "PrivateKeyFile" = "8:"
+        "TimeStampServer" = "8:"
+        "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
+            }
+        }
+        "Release 64"
+        {
+        "DisplayName" = "8:Release 64"
+        "IsDebugOnly" = "11:FALSE"
+        "IsReleaseOnly" = "11:FALSE"
+        "OutputFilename" = "8:Release 64\\Setup1.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -1778,6 +1824,11 @@
             "AssemblyAsmDisplayName" = "8:Crane Logs Report Creator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_34B664072E8C8B8CE845B77011F9AF73"
+                    {
+                    "Name" = "8:Crane Logs Report Creator.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Crane Logs Report Creator.dll"
             "TargetName" = "8:"
@@ -1842,32 +1893,6 @@
                     }
                 }
             "SourcePath" = "8:CrystalDecisions.ReportAppServer.ObjectFactory.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_6B81747D00A947C986D0DBFD3C311F04"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4C48EA4E5A685E67DEB167E7A193872C"
-            {
-            "AssemblyRegister" = "3:3"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ReportsInterface, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:ReportsInterface.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6B81747D00A947C986D0DBFD3C311F04"
@@ -2098,6 +2123,11 @@
             "AssemblyAsmDisplayName" = "8:Vessel Movement Report Creator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_AA622A58ABCC741649C1A510D28C4C48"
+                    {
+                    "Name" = "8:Vessel Movement Report Creator.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Vessel Movement Report Creator.dll"
             "TargetName" = "8:"
@@ -2243,11 +2273,16 @@
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CFE934EF9B7A378BA41B15C08059D207"
             {
-            "AssemblyRegister" = "3:3"
+            "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ReportsInterface, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ReportsInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_CFE934EF9B7A378BA41B15C08059D207"
+                    {
+                    "Name" = "8:ReportsInterface.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:ReportsInterface.dll"
             "TargetName" = "8:"

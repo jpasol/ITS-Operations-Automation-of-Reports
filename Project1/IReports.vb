@@ -62,6 +62,9 @@
         ReadOnly Property LastContainerLoaded As DateTime
         ReadOnly Property LineOperator() As String
         ReadOnly Property Owner As String
+        ReadOnly Property Phase As String
+        ReadOnly Property LaborOnBoard As Date
+        ReadOnly Property LaborOffBoard As Date
         ReadOnly Property Units As Reports.Units
         ReadOnly Property Connection As ADODB.Connection
         Sub Retrieve(Registry As String, Connection As ADODB.Connection)

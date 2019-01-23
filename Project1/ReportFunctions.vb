@@ -47,6 +47,16 @@
 
     End Function
 
+
+    Shared Function GetSpanDays(TimeStart As Date, TimeEnd As Date) As Double
+        Dim ata As Date = TimeStart
+        Dim atd As Date = TimeEnd
+        Dim span As TimeSpan = atd.Subtract(ata)
+
+        Return span.TotalDays
+
+    End Function
+
     Public Function GetRefkey(keyName As KeyType, keyValue As String) As Integer
         Dim refkeyCommand As New ADODB.Command
         Dim insertRefkey As String

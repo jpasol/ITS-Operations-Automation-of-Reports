@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="N4Server" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sbitc-db</Value>
+    </Setting>
+    <Setting Name="N4Database" Type="System.String" Scope="User">
+      <Value Profile="(Default)">apex</Value>
+    </Setting>
+    <Setting Name="OPServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sbitc-dev</Value>
+    </Setting>
+    <Setting Name="OPDatabase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">opreports</Value>
+    </Setting>
+    <Setting Name="TotalGroundSlot" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5640</Value>
+    </Setting>
+    <Setting Name="StaticCapacity" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">16572</Value>
+    </Setting>
+    <Setting Name="TotalYardCapacity" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">559615</Value>
+    </Setting>
+    <Setting Name="Interval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

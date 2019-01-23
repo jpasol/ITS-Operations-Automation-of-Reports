@@ -80,8 +80,8 @@ Public Class MainUI
         'Find VMR
     End Function
     Private Sub cmdGenerate_Click(sender As Object, e As EventArgs) Handles cmdGenerate.Click
-        Try
-            Select Case cmbReports.Text
+        'Try
+        Select Case cmbReports.Text
                 Case "Vessel Movement Report"
                     Dim createVMR As New VMRForm(mskParameter.Text, CnnN4, CnnDB, User)
                     createVMR.ShowDialog()
@@ -91,13 +91,13 @@ Public Class MainUI
                 Case Else
 
             End Select
-        Catch ex As Exception
-            MsgBox("Error in Displaying Report." & vbNewLine &
-                       "Error Description: " & ex.Message)
+        'Catch ex As Exception
+        '    MsgBox("Error in Displaying Report." & vbNewLine &
+        '               "Error Description: " & ex.Message)
 
-            If CnnDB.State = ConnectionState.Open Then CnnDB.Close()
-            If CnnN4.State = ConnectionState.Open Then CnnN4.Close()
-        End Try
+        '    If CnnDB.State = ConnectionState.Open Then CnnDB.Close()
+        '    If CnnN4.State = ConnectionState.Open Then CnnN4.Close()
+        'End Try
 
     End Sub
 
