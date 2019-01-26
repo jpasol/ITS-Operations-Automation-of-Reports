@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EC826867-4BA3-4BA8-A8EE-9BA6FC81E984}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>WindowsApp1.My.MyApplication</StartupObject>
-    <RootNamespace>WindowsApp1</RootNamespace>
-    <AssemblyName>WindowsApp1</AssemblyName>
+    <StartupObject>AutomatedTerminalStatusReport.My.MyApplication</StartupObject>
+    <RootNamespace>AutomatedTerminalStatusReport</RootNamespace>
+    <AssemblyName>AutomatedTerminalStatusReport</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -21,7 +21,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>WindowsApp1.xml</DocumentationFile>
+    <DocumentationFile>AutomatedTerminalStatusReport.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -31,7 +31,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>WindowsApp1.xml</DocumentationFile>
+    <DocumentationFile>AutomatedTerminalStatusReport.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>

@@ -33,6 +33,8 @@ Partial Class MainUI
         Me.cmdGenerate = New System.Windows.Forms.Button()
         Me.cmdSave = New System.Windows.Forms.Button()
         Me.lblVersion = New System.Windows.Forms.Label()
+        Me.lblMode = New System.Windows.Forms.Label()
+        Me.cmbMode = New System.Windows.Forms.ComboBox()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -94,7 +96,7 @@ Partial Class MainUI
         '
         Me.lblParameter.AutoSize = True
         Me.lblParameter.Font = New System.Drawing.Font("Arial", 10.0!)
-        Me.lblParameter.Location = New System.Drawing.Point(12, 242)
+        Me.lblParameter.Location = New System.Drawing.Point(12, 315)
         Me.lblParameter.Name = "lblParameter"
         Me.lblParameter.Size = New System.Drawing.Size(51, 16)
         Me.lblParameter.TabIndex = 5
@@ -104,7 +106,7 @@ Partial Class MainUI
         '
         Me.mskParameter.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.mskParameter.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mskParameter.Location = New System.Drawing.Point(12, 261)
+        Me.mskParameter.Location = New System.Drawing.Point(12, 334)
         Me.mskParameter.Name = "mskParameter"
         Me.mskParameter.Size = New System.Drawing.Size(208, 26)
         Me.mskParameter.SkipLiterals = False
@@ -141,12 +143,34 @@ Partial Class MainUI
         Me.lblVersion.TabIndex = 9
         Me.lblVersion.Text = "Label1"
         '
+        'lblMode
+        '
+        Me.lblMode.AutoSize = True
+        Me.lblMode.Font = New System.Drawing.Font("Arial", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMode.Location = New System.Drawing.Point(12, 238)
+        Me.lblMode.Name = "lblMode"
+        Me.lblMode.Size = New System.Drawing.Size(51, 16)
+        Me.lblMode.TabIndex = 11
+        Me.lblMode.Text = "Mode: "
+        '
+        'cmbMode
+        '
+        Me.cmbMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbMode.FormattingEnabled = True
+        Me.cmbMode.Items.AddRange(New Object() {"Daily", "Monthly", "Annually"})
+        Me.cmbMode.Location = New System.Drawing.Point(12, 257)
+        Me.cmbMode.Name = "cmbMode"
+        Me.cmbMode.Size = New System.Drawing.Size(208, 28)
+        Me.cmbMode.TabIndex = 10
+        '
         'MainUI
         '
         Me.AcceptButton = Me.cmdGenerate
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1584, 861)
+        Me.Controls.Add(Me.lblMode)
+        Me.Controls.Add(Me.cmbMode)
         Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.cmdSave)
         Me.Controls.Add(Me.cmdGenerate)
@@ -181,4 +205,6 @@ Partial Class MainUI
     Friend WithEvents cmdSave As Button
     Friend WithEvents lblVersion As Label
     Friend WithEvents ExitToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents lblMode As Label
+    Friend WithEvents cmbMode As ComboBox
 End Class

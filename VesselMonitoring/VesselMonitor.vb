@@ -12,7 +12,8 @@ Public Class VesselMonitor
 
     Private Sub GenerateMonitoring(Registry)
 
-        Vessel = New Vessel(Registry, N4Connection, True)
+        Vessel = New Vessel(Registry, N4Connection)
+        If Not Vessel.Phase.Contains("WORKING") Then MsgBox("Vessel has finished 'WORKING' Phase.") : Exit Sub
         GC1 = New Crane("GC01", Registry, N4Connection, False)
         GC2 = New Crane("GC02", Registry, N4Connection, False)
         GC3 = New Crane("GC03", Registry, N4Connection, False)
@@ -20,6 +21,8 @@ Public Class VesselMonitor
 
         txtVessel.Text = Vessel.Name
         txtVoyage.Text = $"{Vessel.InboundVoyage} - {Vessel.OutboundVoyage}"
+        txtBerthWindow.Text = Vessel.BerthWindow
+
 
         Dim consolidatedMoves1 As New DataTable
         Dim consolidatedMoves2 As New DataTable
@@ -78,8 +81,10 @@ Public Class VesselMonitor
         txtMPH3.Text = txtMoves3.Text / TimeElapsed3
         txtMPH4.Text = txtMoves4.Text / TimeElapsed4
 
-        txtTotalDsc.Text = CDbl(0 & txtDsc1.Text) + CDbl(0 & txtDsc2.Text) + CDbl(0 & txtDSC3.Text) + CDbl(0 & txtDsc4.Text)
-        txtTotalLoad.Text = CDbl(0 & txtLoad1.Text) + CDbl(0 & txtLoad2.Text) + CDbl(0 & txtLoad3.Text) + CDbl(0 & txtLoad4.Text)
+        txtTotalDsc.Text = Vessel.Units.Containers.Tables(0).AsEnumerable.Count()
+        txtTotalLoad.Text = Vessel.Units.Containers.Tables(1).AsEnumerable.Count()
+        txtBalanceDSC.Text = CDbl(txtTotalDsc.Text) - (CDbl(0 & txtDsc1.Text) + CDbl(0 & txtDsc2.Text) + CDbl(0 & txtDSC3.Text) + CDbl(0 & txtDsc4.Text))
+        txtBalanceLoad.Text = CDbl(txtTotalLoad.Text) - (CDbl(0 & txtLoad1.Text) + CDbl(0 & txtLoad2.Text) + CDbl(0 & txtLoad3.Text) + CDbl(0 & txtLoad4.Text))
         txtTotalSVD.Text = CDbl(0 & txtSVD1.Text) + CDbl(0 & txtSVD2.Text) + CDbl(0 & txtSVD3.Text) + CDbl(0 & txtSVD4.Text)
     End Sub
 
@@ -90,16 +95,24 @@ Public Class VesselMonitor
                         User ID=tosadmin;Password=tosadmin;"
     End Sub
 
-    Private Sub txtRegistry_TextChanged(sender As Object, e As EventArgs) Handles txtRegistry.TextChanged
-
-
-    End Sub
-
-    Private Sub txtRegistry_KeyDown(sender As Object, e As KeyEventArgs) Handles txtRegistry.KeyDown
+    Private Sub mskRegistry_KeyDown(sender As Object, e As KeyEventArgs) Handles mskRegistry.KeyDown
         If e.KeyCode = Keys.Enter Then
             DateNow = Date.Now
             ConnectToDatabase()
-            GenerateMonitoring(txtRegistry.Text)
+            GenerateMonitoring(mskRegistry.Text)
+
+            For Each ctl As Control In Me.Controls
+                If ctl.GetType Is GetType(TextBox) Then
+                    Try
+                        Dim convert As Double = ctl.Text
+                        ctl.Text = Math.Round(convert, 1)
+
+                    Catch ex As Exception
+
+                    End Try
+                End If
+            Next
         End If
     End Sub
+
 End Class

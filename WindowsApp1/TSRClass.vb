@@ -16,24 +16,9 @@ Public Class TSRClass
     Private ReadOnly StartofYear As DateTime = New DateTime(year, 1, 1)
 
     Public ReadOnly Property TerminalStatusDate As Date Implements ITerminalStatusReport.TerminalStatusDate
-
-    Public ReadOnly Property TotalGroundSlotTEU As Integer Implements ITerminalStatusReport.TotalGroundSlotTEU
-        Get
-            Return My.Settings.TotalGroundSlot
-        End Get
-    End Property
-
-    Public ReadOnly Property StaticCapacityTEU As Integer Implements ITerminalStatusReport.StaticCapacityTEU
-        Get
-            Return My.Settings.StaticCapacity
-        End Get
-    End Property
-
-    Public ReadOnly Property TotalYardCapacityTEU As Integer Implements ITerminalStatusReport.TotalYardCapacityTEU
-        Get
-            Return My.Settings.TotalYardCapacity
-        End Get
-    End Property
+    Public Property TotalGroundSlotTEU As Integer Implements ITerminalStatusReport.TotalGroundSlotTEU
+    Public Property StaticCapacityTEU As Integer Implements ITerminalStatusReport.StaticCapacityTEU
+    Public Property TotalYardCapacityTEU As Integer Implements ITerminalStatusReport.TotalYardCapacityTEU
     Public Property MTDAverageGrossCraneProductivity As Double Implements ITerminalStatusReport.MTDAverageGrossCraneProductivity
     Public Property MTDAverageGrossBerthProductivity As Double Implements ITerminalStatusReport.MTDAverageGrossBerthProductivity
     Public Property MTDAverageGrossVesselProductivity As Double Implements ITerminalStatusReport.MTDAverageGrossVesselProductivity
@@ -58,7 +43,6 @@ Public Class TSRClass
     Public Property ExportFullTEU As Double Implements ITerminalStatusReport.ExportFullTEU
     Public Property ExportEmptyTEU As Double Implements ITerminalStatusReport.ExportEmptyTEU
     Public Property StorageEmptyTEU As Double Implements ITerminalStatusReport.StorageEmptyTEU
-    Public Property EmptyContainerInventoryTEU As Double Implements ITerminalStatusReport.EmptyContainerInventoryTEU
     Public Property TotalInYardTEU As Double Implements ITerminalStatusReport.TotalInYardTEU
     Public Property YardUtilization As Double Implements ITerminalStatusReport.YardUtilization
     Public ReadOnly Property CraneLogReports As List(Of CLRClass) Implements ITerminalStatusReport.CraneLogReports
@@ -96,7 +80,76 @@ Public Class TSRClass
     End Sub
 
     Public Sub RetrieveTerminalStatusReport() Implements ITerminalStatusReport.RetrieveTerminalStatusReport
-        'Get TSR from Database
+        Dim retrieveTerminalStatus As New ADODB.Command
+        retrieveTerminalStatus.ActiveConnection = OPConnection
+        retrieveTerminalStatus.CommandText = $"
+SELECT [groundslot]
+    ,[staticcapacity]
+    ,[totalcapacity]
+    ,[grosscrane]
+    ,[grossvessel]
+    ,[grossberth]
+    ,[netcrane]
+    ,[netvessel]
+    ,[netberth]
+    ,[ave_importdwell]
+    ,[mtd_importdwell]
+    ,[mtd_exportdwell]
+    ,[ytd_importdwell]
+    ,[ytd_exportdwell]
+    ,[daily_trucksin]
+    ,[daily_trucksout]
+    ,[mtd_trucksin]
+    ,[mtd_trucksout]
+    ,[ytd_trucksin]
+    ,[ytd_trucksout]
+    ,[mnl_overstaying]
+    ,[total_overstaying]
+    ,[importfull]
+    ,[importempty]
+    ,[exportfull]
+    ,[exportempty]
+    ,[storageempty]
+    ,[yard_total]
+    ,[yard_utilization]
+    ,[created]
+FROM [opreports].[dbo].[reports_tsr] WHERE [created] = '{TerminalStatusDate}'
+"
+        RetrieveProperties(retrieveTerminalStatus.Execute)
+    End Sub
+
+    Private Sub RetrieveProperties(execute As Recordset)
+        With execute
+            TotalGroundSlotTEU = .Fields("groundslot").Value
+            StaticCapacityTEU = .Fields("staticcapacity").Value
+            TotalYardCapacityTEU = .Fields("totalcapacity").Value
+            MTDAverageGrossCraneProductivity = .Fields("grosscrane").Value
+            MTDAverageGrossVesselProductivity = .Fields("grossvessel").Value
+            MTDAverageGrossBerthProductivity = .Fields("grossberth").Value
+            MTDAverageNetCraneProductivity = .Fields("netcrane").Value
+            MTDAverageNetVesselProductivity = .Fields("netvessel").Value
+            MTDAverageNetBerthProductivity = .Fields("netberth").Value
+            AverageImportDwellTime = .Fields("ave_importdwell").Value
+            MTDImportDwellTime = .Fields("mtd_importdwell").Value
+            YTDImportDwellTime = .Fields("mtd_exportdwell").Value
+            MTDExportDwellTime = .Fields("ytd_importdwell").Value
+            YTDExportDwellTime = .Fields("ytd_exportdwell").Value
+            DailyTEUInByTrucks = .Fields("daily_trucksin").Value
+            DailyTEUOutByTrucks = .Fields("daily_trucksout").Value
+            MTDTEUInByTrucks = .Fields("mtd_trucksin").Value
+            MTDTEUOutByTrucks = .Fields("mtd_trucksout").Value
+            YTDTEUInByTrucks = .Fields("ytd_trucksin").Value
+            YTDTEUOutByTrucks = .Fields("ytd_trucksout").Value
+            OverstayingManilaCargo = .Fields("mnl_overstaying").Value
+            TotalOverstayingCargo = .Fields("total_overstaying").Value
+            ImportFullTEU = .Fields("importfull").Value
+            ImportEmptyTEU = .Fields("importempty").Value
+            ExportFullTEU = .Fields("exportfull").Value
+            ExportEmptyTEU = .Fields("exportempty").Value
+            StorageEmptyTEU = .Fields("storageempty").Value
+            TotalInYardTEU = .Fields("yard_total").Value
+            YardUtilization = .Fields("yard_utilization").Value
+        End With
     End Sub
 
     Private Function CreateRegistryList() As List(Of String)
@@ -225,6 +278,10 @@ SELECT [sub_type]
     End Function
 
     Public Sub Calculate() Implements ITerminalStatusReport.Calculate
+        TotalGroundSlotTEU = My.Settings.TotalGroundSlot
+        StaticCapacityTEU = My.Settings.StaticCapacity
+        TotalYardCapacityTEU = My.Settings.TotalYardCapacity
+
         CalculateUsingCraneLogReports()
         CalculateUsingActiveUnits()
         CalculateUsingGateTransactions()
@@ -345,20 +402,34 @@ INSERT INTO [opreports].[dbo].[reports_tsr]
            ,{StorageEmptyTEU}
            ,{TotalInYardTEU}
            ,{YardUtilization}
-           ,{TerminalStatusDate}
+           ,'{TerminalStatusDate}'
+           )
 "
             saveCommand.Execute()
-
-        Catch ex As Exception
             OPConnection.CommitTrans()
         Catch ex As Exception
             OPConnection.RollbackTrans()
             Throw ex
         End Try
-
+        OPConnection.Close()
     End Sub
 
     Public Function Exists() As Boolean Implements ITerminalStatusReport.Exists
-        Return False
+        Dim existResult As New ADODB.Command
+        existResult.ActiveConnection = OPConnection
+        existResult.CommandText = $"
+SELECT case 
+
+when exists( 
+select created from reports_tsr where [created] = '{TerminalStatusDate}')
+then 
+cast(1 as bit)
+else 
+cast(0 as bit) 
+end
+"
+
+        Dim result As Boolean = existResult.Execute().Fields(0).Value
+        Return result
     End Function
 End Class

@@ -1,8 +1,8 @@
 ﻿Public Interface ITerminalStatusReport
     ReadOnly Property TerminalStatusDate As Date
-    ReadOnly Property TotalGroundSlotTEU As Integer
-    ReadOnly Property StaticCapacityTEU As Integer
-    ReadOnly Property TotalYardCapacityTEU As Integer
+    Property TotalGroundSlotTEU As Integer
+    Property StaticCapacityTEU As Integer
+    Property TotalYardCapacityTEU As Integer
     Property MTDAverageGrossCraneProductivity As Double
     Property MTDAverageGrossBerthProductivity As Double
     Property MTDAverageGrossVesselProductivity As Double
@@ -27,7 +27,6 @@
     Property ExportFullTEU As Double
     Property ExportEmptyTEU As Double
     Property StorageEmptyTEU As Double
-    Property EmptyContainerInventoryTEU As Double
     Property TotalInYardTEU As Double
     Property YardUtilization As Double
     ReadOnly Property CraneLogReports As List(Of Crane_Logs_Report_Creator.CLRClass)

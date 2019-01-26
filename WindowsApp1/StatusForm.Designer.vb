@@ -22,6 +22,7 @@ Partial Class StatusForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -87,6 +88,8 @@ Partial Class StatusForm
         Me.Label30 = New System.Windows.Forms.Label()
         Me.txtExportEmpty = New System.Windows.Forms.TextBox()
         Me.Label31 = New System.Windows.Forms.Label()
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.MenuStrip1.SuspendLayout()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -629,7 +632,7 @@ Partial Class StatusForm
         '
         'cmdRefresh
         '
-        Me.cmdRefresh.Image = Global.WindowsApp1.My.Resources.Resources.REFRESH
+        Me.cmdRefresh.Image = Global.AutomatedTerminalStatusReport.My.Resources.Resources.REFRESH
         Me.cmdRefresh.Location = New System.Drawing.Point(446, 135)
         Me.cmdRefresh.Name = "cmdRefresh"
         Me.cmdRefresh.Size = New System.Drawing.Size(30, 26)
@@ -638,7 +641,7 @@ Partial Class StatusForm
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.WindowsApp1.My.Resources.Resources.download
+        Me.PictureBox1.Image = Global.AutomatedTerminalStatusReport.My.Resources.Resources.download
         Me.PictureBox1.Location = New System.Drawing.Point(12, 27)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(464, 101)
@@ -787,11 +790,23 @@ Partial Class StatusForm
         Me.Label31.TabIndex = 62
         Me.Label31.Text = "Export Empty (TEU)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
+        'NotifyIcon1
+        '
+        Me.NotifyIcon1.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.NotifyIcon1.BalloonTipText = "Terminal Status Report"
+        Me.NotifyIcon1.Text = "Terminal Status Report"
+        Me.NotifyIcon1.Visible = True
+        '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 1000
+        '
         'StatusForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(488, 897)
+        Me.ClientSize = New System.Drawing.Size(488, 854)
         Me.Controls.Add(Me.txtExportEmpty)
         Me.Controls.Add(Me.Label31)
         Me.Controls.Add(Me.txtDailyTEUOut)
@@ -933,4 +948,6 @@ Partial Class StatusForm
     Friend WithEvents Label30 As Label
     Friend WithEvents txtExportEmpty As TextBox
     Friend WithEvents Label31 As Label
+    Friend WithEvents NotifyIcon1 As NotifyIcon
+    Friend WithEvents Timer1 As Timer
 End Class

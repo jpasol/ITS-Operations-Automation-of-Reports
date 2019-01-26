@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{23D3F881-BECE-4745-A8D9-D3747B342323}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>WindowsApp2.My.MyApplication</StartupObject>
-    <RootNamespace>WindowsApp2</RootNamespace>
-    <AssemblyName>WindowsApp2</AssemblyName>
+    <StartupObject>VesselMonitoring.My.MyApplication</StartupObject>
+    <RootNamespace>VesselMonitoring</RootNamespace>
+    <AssemblyName>VesselMonitoring</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -21,7 +21,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>WindowsApp2.xml</DocumentationFile>
+    <DocumentationFile>VesselMonitoring.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -31,7 +31,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>WindowsApp2.xml</DocumentationFile>
+    <DocumentationFile>VesselMonitoring.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -45,6 +45,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>vessel_gFN_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -123,6 +126,9 @@
       <Project>{19315380-b270-43b7-83b7-ac163b6f79cd}</Project>
       <Name>Reports Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="vessel_gFN_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

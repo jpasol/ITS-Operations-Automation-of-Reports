@@ -174,6 +174,12 @@ Public Class Vessel
         End Get
     End Property
 
+    Public ReadOnly Property Service As String Implements IVessel.Service
+        Get
+            Throw New NotImplementedException()
+        End Get
+    End Property
+
     Public Sub Retrieve(Registry As String, Connection As ADODB.Connection) Implements IReports.IVessel.Retrieve
         Dim rsContainers As New ADODB.Recordset
         Dim DataAdapter As New OleDb.OleDbDataAdapter

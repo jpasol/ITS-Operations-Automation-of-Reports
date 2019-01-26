@@ -2,6 +2,7 @@
 Imports System.Configuration
 Imports Vessel_Movement_Report_Creator
 Imports Crane_Logs_Report_Creator
+Imports Terminal_Status_Report
 
 Public Class MainUI
 
@@ -71,6 +72,7 @@ Public Class MainUI
             Case 0, 1
                 lblParameter.Text = "Registry:"
                 mskParameter.Mask = ">&&&0000-00"
+
             Case Else
                 lblParameter.Text = "Date:"
                 mskParameter.Mask = "00/00/0000"
@@ -87,8 +89,23 @@ Public Class MainUI
                     createVMR.ShowDialog()
                 Case "Crane Logs Report"
                     Dim createCLR As New CLRForm(mskParameter.Text, CnnN4, CnnDB, User)
-                    createCLR.ShowDialog()
-                Case Else
+                createCLR.ShowDialog()
+            Case "Terminal Status Report"
+                Select Case cmbMode.Text
+                    Case "Daily"
+                        Dim createDailyTSR As New DailyTerminalStatusReport(mskParameter.Text, CnnDB)
+                        createDailyTSR.FormatReport()
+                        crvPreview.ReportSource = createDailyTSR.Report
+                    Case "Monthly"
+                        Dim createMonthlyTSR As New MonthlyTerminalStatusReport(mskParameter.Text, CnnDB)
+                        createMonthlyTSR.formatreport()
+                        crvPreview.ReportSource = createMonthlyTSR.Report
+                    Case "Annually"
+                        Dim createYearlyTsr As New YearlyTerminalStatusReport(mskParameter.Text, CnnDB)
+                        createYearlyTsr.formatreport()
+                        crvPreview.ReportSource = createYearlyTsr.Report
+                End Select
+            Case Else
 
             End Select
         'Catch ex As Exception
@@ -104,4 +121,19 @@ Public Class MainUI
     Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem1.Click
         Me.Dispose()
     End Sub
+
+    Private Sub cmbMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMode.SelectedIndexChanged
+        If lblParameter.Text = "Date:" Then
+
+            Select Case cmbMode.Text
+                Case "Daily"
+                    mskParameter.Mask = "00/00/0000"
+                Case "Monthly"
+                    mskParameter.Mask = "00/0000"
+                Case "Annually"
+                    mskParameter.Mask = "0000"
+            End Select
+        End If
+    End Sub
+
 End Class

@@ -40,8 +40,13 @@
     Private OPConnection As New ADODB.Connection
 
     Private Sub CreateTerminalStatus(now As Date)
-        terminalStatus = New TSRClass(now, N4Connection, OPConnection)
-        terminalStatus.Save()
+        Try
+            OPConnection.Open()
+            terminalStatus = New TSRClass(now, N4Connection, OPConnection)
+            terminalStatus.Save()
+        Catch
+            OPConnection.Close()
+        End Try
 
 
         lblTsrDate.Text = now
@@ -89,4 +94,31 @@
         Dim settings As New Settings
         settings.ShowDialog()
     End Sub
+
+    Private Sub StatusForm_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        If Me.WindowState = FormWindowState.Minimized Then
+            NotifyIcon1.Visible = True
+            NotifyIcon1.Icon = Me.Icon
+            NotifyIcon1.BalloonTipIcon = ToolTipIcon.Info
+            NotifyIcon1.BalloonTipTitle = "Terminal Status Report"
+            NotifyIcon1.BalloonTipText = "Show Terminal Status Generator"
+            NotifyIcon1.ShowBalloonTip(50000)
+            ShowInTaskbar = False
+        End If
+    End Sub
+
+    Private Sub NotifyIcon1_DoubleClick(sender As Object, e As EventArgs) Handles NotifyIcon1.DoubleClick
+        ShowInTaskbar = True
+        Me.WindowState = FormWindowState.Normal
+        NotifyIcon1.Visible = False
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        If (Date.Now.Minute Mod My.Settings.Interval) = 0 Then
+            Timer1.Stop()
+            CreateTerminalStatus(Date.Now)
+            Timer1.Start()
+        End If
+    End Sub
+
 End Class
