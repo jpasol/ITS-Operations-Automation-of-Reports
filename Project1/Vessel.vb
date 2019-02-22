@@ -5,7 +5,7 @@ Public Class Vessel
     Implements IReports.IVessel
 
     Sub New(Registry As String, OPConnection As Connection, Connection As Connection, Optional WithoutUnits As Boolean = False)
-
+        On Error Resume Next
         Retrieve(Registry, Connection)
         If WithoutUnits = False Then
             vslUnits = New Units(Registry, OPConnection, Connection)

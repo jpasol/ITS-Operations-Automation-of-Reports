@@ -71,7 +71,7 @@ Public Class MainUI
         cmbMode.Items.Clear()
         cmbMode.Enabled = False
         Select Case cmbReports.SelectedIndex
-            Case 0
+            Case 0, 1
                 lblParameter.Text = "Registry:"
                 mskParameter.Mask = ">&&&0000-00"
             Case 2
@@ -142,7 +142,7 @@ Public Class MainUI
                     Case "Monthly Throughput Volume"
                         Dim month As Integer = mskParameter.Text.Substring(0, 2)
                         Dim year As Integer = mskParameter.Text.Substring(3)
-                        Dim MonthlyVolume As New MonthlyThroughputVolume(month, year)
+                        Dim MonthlyVolume As New MTDMonthlyThroughputVolume(month, year)
                         crvPreview.ReportSource = MonthlyVolume.Report
                 End Select
             Case Else
