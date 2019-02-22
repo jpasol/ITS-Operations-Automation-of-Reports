@@ -4,18 +4,53 @@ Imports Reports
 Public Class Vessel
     Implements IReports.IVessel
 
-    Sub New(Registry As String, Connection As Connection, Optional WithoutUnits As Boolean = False)
-
-        If WithoutUnits = False Then
-            vslUnits = New Units(Registry, Connection)
-        End If
+    Sub New(Registry As String, OPConnection As Connection, Connection As Connection, Optional WithoutUnits As Boolean = False)
 
         Retrieve(Registry, Connection)
+        If WithoutUnits = False Then
+            vslUnits = New Units(Registry, OPConnection, Connection)
+            If Not IsNothing(vslUnits.Containers) Then
+                Me.FirstContainerDischarged = GetFirstContainerDischarge()
+                Me.FirstContainerLoaded = GetFirstContainerLoaded()
+                Me.LastContainerLoaded = GetLastContainerLoaded()
+            End If
+        End If
 
-        strRegistry = Registry
+            strRegistry = Registry
         vslConnection = Connection
 
     End Sub
+
+    Private Function GetLastContainerLoaded() As Date
+        Dim descMove As New DataView
+        With descMove
+            .Table = vslUnits.Containers.Tables(1)
+            .Sort = "time_move desc"
+
+            Return Date.Parse(descMove.Item(0)("time_move").ToString)
+        End With
+    End Function
+
+    Private Function GetFirstContainerLoaded() As Date
+        Dim ascMove As New DataView
+        With ascMove
+            .Table = vslUnits.Containers.Tables(1)
+            .Sort = "time_move asc"
+
+            Return Date.Parse(.Item(0)("time_move").ToString)
+        End With
+    End Function
+
+    Private Function GetFirstContainerDischarge() As Date
+        Dim ascMove As New DataView
+        With ascMove
+            .Table = vslUnits.Containers.Tables(0)
+            .Sort = "time_move asc"
+
+            Return Date.Parse(.Item(0)("time_move").ToString)
+        End With
+    End Function
+
     Private strRegistry As String
     Private vslConnection As Connection
     Private dtVessel As DataTable
@@ -38,6 +73,8 @@ Public Class Vessel
         Phase
         LaborOnBoard
         LaborOffBoard
+        Service
+        LOA
     End Enum
     Public ReadOnly Property Name As String Implements IReports.IVessel.Name
         Get
@@ -106,10 +143,6 @@ Public Class Vessel
     End Property
 
     Public ReadOnly Property FirstContainerDischarged As Date Implements IReports.IVessel.FirstContainerDischarged
-        Get
-            Throw New NotImplementedException()
-        End Get
-    End Property
 
     Public ReadOnly Property LastContainerDischarged As Date Implements IReports.IVessel.LastContainerDischarged
         Get
@@ -121,16 +154,7 @@ Public Class Vessel
     End Property
 
     Public ReadOnly Property FirstContainerLoaded As Date Implements IReports.IVessel.FirstContainerLoaded
-        Get
-            Throw New NotImplementedException()
-        End Get
-    End Property
-
     Public ReadOnly Property LastContainerLoaded As Date Implements IReports.IVessel.LastContainerLoaded
-        Get
-            Throw New NotImplementedException()
-        End Get
-    End Property
 
     Public ReadOnly Property LineOperators() As String Implements IReports.IVessel.LineOperator
         Get
@@ -176,7 +200,30 @@ Public Class Vessel
 
     Public ReadOnly Property Service As String Implements IVessel.Service
         Get
-            Throw New NotImplementedException()
+            Return dtVessel.Rows(0)(Vessel.Service).ToString()
+        End Get
+    End Property
+
+    Public ReadOnly Property SLGangRequest As Date Implements IVessel.SLGangRequest
+        Get
+            Dim tempETA As Date = ETA
+            tempETA -= New TimeSpan(0, 30, 0)
+            If tempETA.Hour = 12 Or tempETA.Hour = 0 Then
+                tempETA -= New TimeSpan(1, 0, 0)
+            End If
+            Return tempETA
+        End Get
+    End Property
+
+    Public ReadOnly Property OvertimeRequired As Date Implements IVessel.OvertimeRequired
+        Get
+            Return SLGangRequest
+        End Get
+    End Property
+
+    Public ReadOnly Property LOA As Integer Implements IVessel.LOA
+        Get
+            Return dtVessel.Rows(0)(Vessel.LOA).ToString()
         End Get
     End Property
 
@@ -208,6 +255,9 @@ Public Class Vessel
 		,[phase]
 		,[labor_on_board]
 		,[labor_off_board]
+		,svce.[id] AS 'Service'
+		,round([loa_cm]/ 100 ,0) as 'LOA' 
+		
 
         FROM [apex].[dbo].[vsl_vessel_visit_details] vvd
         inner join 
@@ -221,7 +271,13 @@ Public Class Vessel
         on cvcvd_gkey = avd.gkey
         inner join
         [ref_bizunit_scoped] biz
-        on [operator_gkey] = biz.gkey
+        on owner_gkey = biz.gkey
+		inner join
+		[ref_carrier_service] svce
+		on avd.service = svce.gkey
+		inner join
+		[vsl_vessel_classes] vcl
+		on vsl.vesclass_gkey = vcl.gkey
 
         where acv.gkey = @Registry"
 

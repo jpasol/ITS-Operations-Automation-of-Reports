@@ -14,7 +14,7 @@ Option Explicit On
 
 
 <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
- Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0"),  _
+ Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0"),  _
  Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
 Partial Friend NotInheritable Class Settings
     Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -51,6 +51,54 @@ Partial Friend NotInheritable Class Settings
 #End If
             Return defaultInstance
         End Get
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("sbitc-db")>  _
+    Public Property N4Server() As String
+        Get
+            Return CType(Me("N4Server"),String)
+        End Get
+        Set
+            Me("N4Server") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("apex")>  _
+    Public Property N4Database() As String
+        Get
+            Return CType(Me("N4Database"),String)
+        End Get
+        Set
+            Me("N4Database") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("sbitc-dev")>  _
+    Public Property OPServer() As String
+        Get
+            Return CType(Me("OPServer"),String)
+        End Get
+        Set
+            Me("OPServer") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("opreports")>  _
+    Public Property OPDatabase() As String
+        Get
+            Return CType(Me("OPDatabase"),String)
+        End Get
+        Set
+            Me("OPDatabase") = value
+        End Set
     End Property
 End Class
 

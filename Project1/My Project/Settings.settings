@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="N4Server" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sbitc-db</Value>
+    </Setting>
+    <Setting Name="N4Database" Type="System.String" Scope="User">
+      <Value Profile="(Default)">apex</Value>
+    </Setting>
+    <Setting Name="OPServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sbitc-dev</Value>
+    </Setting>
+    <Setting Name="OPDatabase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">opreports</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -249,13 +249,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ITS – Operations Automation of Reports_TemporaryKey.pfx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
@@ -279,6 +278,10 @@
     <ProjectReference Include="..\..\Terminal-Status-Report\Terminal Status Report.vbproj">
       <Project>{92f5220f-51ba-4be6-ae3b-3259305544ae}</Project>
       <Name>Terminal Status Report</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Throughput-Volume-Update\Throughput Volume Update.vbproj">
+      <Project>{d3669981-7212-4ff2-9e98-b93d2de8bcf4}</Project>
+      <Name>Throughput Volume Update</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Vessel-Movement-Report-Creator\Vessel Movement Report Creator.vbproj">
       <Project>{2c9a0224-82e5-4759-8230-b09eb8cfdfb6}</Project>

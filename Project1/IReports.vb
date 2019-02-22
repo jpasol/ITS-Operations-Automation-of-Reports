@@ -51,6 +51,9 @@
         ReadOnly Property OutboundVoyage As String
         ReadOnly Property BerthWindow As String
         ReadOnly Property Service As String
+        ReadOnly Property LOA As Integer
+        ReadOnly Property SLGangRequest As Date
+        ReadOnly Property OvertimeRequired As Date
         ReadOnly Property ATA As DateTime
         ReadOnly Property ATD As DateTime
         ReadOnly Property ETA As DateTime

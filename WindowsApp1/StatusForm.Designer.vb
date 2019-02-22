@@ -384,6 +384,7 @@ Partial Class StatusForm
         Me.txtGroundSlot.Location = New System.Drawing.Point(333, 166)
         Me.txtGroundSlot.Multiline = True
         Me.txtGroundSlot.Name = "txtGroundSlot"
+        Me.txtGroundSlot.ReadOnly = True
         Me.txtGroundSlot.Size = New System.Drawing.Size(143, 23)
         Me.txtGroundSlot.TabIndex = 27
         Me.txtGroundSlot.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -395,6 +396,7 @@ Partial Class StatusForm
         Me.txtStaticCapacity.Location = New System.Drawing.Point(333, 189)
         Me.txtStaticCapacity.Multiline = True
         Me.txtStaticCapacity.Name = "txtStaticCapacity"
+        Me.txtStaticCapacity.ReadOnly = True
         Me.txtStaticCapacity.Size = New System.Drawing.Size(143, 23)
         Me.txtStaticCapacity.TabIndex = 28
         Me.txtStaticCapacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -406,6 +408,7 @@ Partial Class StatusForm
         Me.txtGrossCrane.Location = New System.Drawing.Point(333, 235)
         Me.txtGrossCrane.Multiline = True
         Me.txtGrossCrane.Name = "txtGrossCrane"
+        Me.txtGrossCrane.ReadOnly = True
         Me.txtGrossCrane.Size = New System.Drawing.Size(143, 23)
         Me.txtGrossCrane.TabIndex = 30
         Me.txtGrossCrane.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -417,6 +420,7 @@ Partial Class StatusForm
         Me.txtTotalYardCapacity.Location = New System.Drawing.Point(333, 212)
         Me.txtTotalYardCapacity.Multiline = True
         Me.txtTotalYardCapacity.Name = "txtTotalYardCapacity"
+        Me.txtTotalYardCapacity.ReadOnly = True
         Me.txtTotalYardCapacity.Size = New System.Drawing.Size(143, 23)
         Me.txtTotalYardCapacity.TabIndex = 29
         Me.txtTotalYardCapacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -428,6 +432,7 @@ Partial Class StatusForm
         Me.txtMTDImport.Location = New System.Drawing.Point(333, 396)
         Me.txtMTDImport.Multiline = True
         Me.txtMTDImport.Name = "txtMTDImport"
+        Me.txtMTDImport.ReadOnly = True
         Me.txtMTDImport.Size = New System.Drawing.Size(143, 23)
         Me.txtMTDImport.TabIndex = 34
         Me.txtMTDImport.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -439,6 +444,7 @@ Partial Class StatusForm
         Me.txtAverageImport.Location = New System.Drawing.Point(333, 373)
         Me.txtAverageImport.Multiline = True
         Me.txtAverageImport.Name = "txtAverageImport"
+        Me.txtAverageImport.ReadOnly = True
         Me.txtAverageImport.Size = New System.Drawing.Size(143, 23)
         Me.txtAverageImport.TabIndex = 33
         Me.txtAverageImport.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -450,6 +456,7 @@ Partial Class StatusForm
         Me.txtGrossBerth.Location = New System.Drawing.Point(333, 281)
         Me.txtGrossBerth.Multiline = True
         Me.txtGrossBerth.Name = "txtGrossBerth"
+        Me.txtGrossBerth.ReadOnly = True
         Me.txtGrossBerth.Size = New System.Drawing.Size(143, 23)
         Me.txtGrossBerth.TabIndex = 32
         Me.txtGrossBerth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -461,6 +468,7 @@ Partial Class StatusForm
         Me.txtGrossVessel.Location = New System.Drawing.Point(333, 258)
         Me.txtGrossVessel.Multiline = True
         Me.txtGrossVessel.Name = "txtGrossVessel"
+        Me.txtGrossVessel.ReadOnly = True
         Me.txtGrossVessel.Size = New System.Drawing.Size(143, 23)
         Me.txtGrossVessel.TabIndex = 31
         Me.txtGrossVessel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -472,6 +480,7 @@ Partial Class StatusForm
         Me.txtMTDTEUIn.Location = New System.Drawing.Point(333, 534)
         Me.txtMTDTEUIn.Multiline = True
         Me.txtMTDTEUIn.Name = "txtMTDTEUIn"
+        Me.txtMTDTEUIn.ReadOnly = True
         Me.txtMTDTEUIn.Size = New System.Drawing.Size(143, 23)
         Me.txtMTDTEUIn.TabIndex = 38
         Me.txtMTDTEUIn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -483,6 +492,7 @@ Partial Class StatusForm
         Me.txtYTDExport.Location = New System.Drawing.Point(333, 465)
         Me.txtYTDExport.Multiline = True
         Me.txtYTDExport.Name = "txtYTDExport"
+        Me.txtYTDExport.ReadOnly = True
         Me.txtYTDExport.Size = New System.Drawing.Size(143, 23)
         Me.txtYTDExport.TabIndex = 37
         Me.txtYTDExport.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -494,6 +504,7 @@ Partial Class StatusForm
         Me.txtMTDExport.Location = New System.Drawing.Point(333, 442)
         Me.txtMTDExport.Multiline = True
         Me.txtMTDExport.Name = "txtMTDExport"
+        Me.txtMTDExport.ReadOnly = True
         Me.txtMTDExport.Size = New System.Drawing.Size(143, 23)
         Me.txtMTDExport.TabIndex = 36
         Me.txtMTDExport.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -505,6 +516,7 @@ Partial Class StatusForm
         Me.txtYTDImport.Location = New System.Drawing.Point(333, 419)
         Me.txtYTDImport.Multiline = True
         Me.txtYTDImport.Name = "txtYTDImport"
+        Me.txtYTDImport.ReadOnly = True
         Me.txtYTDImport.Size = New System.Drawing.Size(143, 23)
         Me.txtYTDImport.TabIndex = 35
         Me.txtYTDImport.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -516,6 +528,7 @@ Partial Class StatusForm
         Me.txtYardUtilization.Location = New System.Drawing.Point(333, 810)
         Me.txtYardUtilization.Multiline = True
         Me.txtYardUtilization.Name = "txtYardUtilization"
+        Me.txtYardUtilization.ReadOnly = True
         Me.txtYardUtilization.Size = New System.Drawing.Size(143, 23)
         Me.txtYardUtilization.TabIndex = 49
         Me.txtYardUtilization.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -527,6 +540,7 @@ Partial Class StatusForm
         Me.txtYardTotal.Location = New System.Drawing.Point(333, 787)
         Me.txtYardTotal.Multiline = True
         Me.txtYardTotal.Name = "txtYardTotal"
+        Me.txtYardTotal.ReadOnly = True
         Me.txtYardTotal.Size = New System.Drawing.Size(143, 23)
         Me.txtYardTotal.TabIndex = 48
         Me.txtYardTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -538,6 +552,7 @@ Partial Class StatusForm
         Me.txtStorageEmpty.Location = New System.Drawing.Point(333, 764)
         Me.txtStorageEmpty.Multiline = True
         Me.txtStorageEmpty.Name = "txtStorageEmpty"
+        Me.txtStorageEmpty.ReadOnly = True
         Me.txtStorageEmpty.Size = New System.Drawing.Size(143, 23)
         Me.txtStorageEmpty.TabIndex = 47
         Me.txtStorageEmpty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -549,6 +564,7 @@ Partial Class StatusForm
         Me.txtExportFull.Location = New System.Drawing.Point(333, 718)
         Me.txtExportFull.Multiline = True
         Me.txtExportFull.Name = "txtExportFull"
+        Me.txtExportFull.ReadOnly = True
         Me.txtExportFull.Size = New System.Drawing.Size(143, 23)
         Me.txtExportFull.TabIndex = 46
         Me.txtExportFull.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -560,6 +576,7 @@ Partial Class StatusForm
         Me.txtImportEmpty.Location = New System.Drawing.Point(333, 695)
         Me.txtImportEmpty.Multiline = True
         Me.txtImportEmpty.Name = "txtImportEmpty"
+        Me.txtImportEmpty.ReadOnly = True
         Me.txtImportEmpty.Size = New System.Drawing.Size(143, 23)
         Me.txtImportEmpty.TabIndex = 45
         Me.txtImportEmpty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -571,6 +588,7 @@ Partial Class StatusForm
         Me.txtImportFull.Location = New System.Drawing.Point(333, 672)
         Me.txtImportFull.Multiline = True
         Me.txtImportFull.Name = "txtImportFull"
+        Me.txtImportFull.ReadOnly = True
         Me.txtImportFull.Size = New System.Drawing.Size(143, 23)
         Me.txtImportFull.TabIndex = 44
         Me.txtImportFull.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -582,6 +600,7 @@ Partial Class StatusForm
         Me.txtOverstayingTotal.Location = New System.Drawing.Point(333, 649)
         Me.txtOverstayingTotal.Multiline = True
         Me.txtOverstayingTotal.Name = "txtOverstayingTotal"
+        Me.txtOverstayingTotal.ReadOnly = True
         Me.txtOverstayingTotal.Size = New System.Drawing.Size(143, 23)
         Me.txtOverstayingTotal.TabIndex = 43
         Me.txtOverstayingTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -593,6 +612,7 @@ Partial Class StatusForm
         Me.txtOverstayingManila.Location = New System.Drawing.Point(333, 626)
         Me.txtOverstayingManila.Multiline = True
         Me.txtOverstayingManila.Name = "txtOverstayingManila"
+        Me.txtOverstayingManila.ReadOnly = True
         Me.txtOverstayingManila.Size = New System.Drawing.Size(143, 23)
         Me.txtOverstayingManila.TabIndex = 42
         Me.txtOverstayingManila.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -604,6 +624,7 @@ Partial Class StatusForm
         Me.txtYTDTEUOut.Location = New System.Drawing.Point(333, 603)
         Me.txtYTDTEUOut.Multiline = True
         Me.txtYTDTEUOut.Name = "txtYTDTEUOut"
+        Me.txtYTDTEUOut.ReadOnly = True
         Me.txtYTDTEUOut.Size = New System.Drawing.Size(143, 23)
         Me.txtYTDTEUOut.TabIndex = 41
         Me.txtYTDTEUOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -615,6 +636,7 @@ Partial Class StatusForm
         Me.txtYTDTEUIn.Location = New System.Drawing.Point(333, 580)
         Me.txtYTDTEUIn.Multiline = True
         Me.txtYTDTEUIn.Name = "txtYTDTEUIn"
+        Me.txtYTDTEUIn.ReadOnly = True
         Me.txtYTDTEUIn.Size = New System.Drawing.Size(143, 23)
         Me.txtYTDTEUIn.TabIndex = 40
         Me.txtYTDTEUIn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -626,6 +648,7 @@ Partial Class StatusForm
         Me.txtMTDTEUOut.Location = New System.Drawing.Point(333, 557)
         Me.txtMTDTEUOut.Multiline = True
         Me.txtMTDTEUOut.Name = "txtMTDTEUOut"
+        Me.txtMTDTEUOut.ReadOnly = True
         Me.txtMTDTEUOut.Size = New System.Drawing.Size(143, 23)
         Me.txtMTDTEUOut.TabIndex = 39
         Me.txtMTDTEUOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -665,6 +688,7 @@ Partial Class StatusForm
         Me.txtNetBerth.Location = New System.Drawing.Point(333, 350)
         Me.txtNetBerth.Multiline = True
         Me.txtNetBerth.Name = "txtNetBerth"
+        Me.txtNetBerth.ReadOnly = True
         Me.txtNetBerth.Size = New System.Drawing.Size(143, 23)
         Me.txtNetBerth.TabIndex = 57
         Me.txtNetBerth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -676,6 +700,7 @@ Partial Class StatusForm
         Me.txtNetVessel.Location = New System.Drawing.Point(333, 327)
         Me.txtNetVessel.Multiline = True
         Me.txtNetVessel.Name = "txtNetVessel"
+        Me.txtNetVessel.ReadOnly = True
         Me.txtNetVessel.Size = New System.Drawing.Size(143, 23)
         Me.txtNetVessel.TabIndex = 56
         Me.txtNetVessel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -687,6 +712,7 @@ Partial Class StatusForm
         Me.txtNetCrane.Location = New System.Drawing.Point(333, 304)
         Me.txtNetCrane.Multiline = True
         Me.txtNetCrane.Name = "txtNetCrane"
+        Me.txtNetCrane.ReadOnly = True
         Me.txtNetCrane.Size = New System.Drawing.Size(143, 23)
         Me.txtNetCrane.TabIndex = 55
         Me.txtNetCrane.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -731,6 +757,7 @@ Partial Class StatusForm
         Me.txtDailyTEUOut.Location = New System.Drawing.Point(333, 511)
         Me.txtDailyTEUOut.Multiline = True
         Me.txtDailyTEUOut.Name = "txtDailyTEUOut"
+        Me.txtDailyTEUOut.ReadOnly = True
         Me.txtDailyTEUOut.Size = New System.Drawing.Size(143, 23)
         Me.txtDailyTEUOut.TabIndex = 61
         Me.txtDailyTEUOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -742,6 +769,7 @@ Partial Class StatusForm
         Me.txtDailyTEUIn.Location = New System.Drawing.Point(333, 488)
         Me.txtDailyTEUIn.Multiline = True
         Me.txtDailyTEUIn.Name = "txtDailyTEUIn"
+        Me.txtDailyTEUIn.ReadOnly = True
         Me.txtDailyTEUIn.Size = New System.Drawing.Size(143, 23)
         Me.txtDailyTEUIn.TabIndex = 60
         Me.txtDailyTEUIn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -775,6 +803,7 @@ Partial Class StatusForm
         Me.txtExportEmpty.Location = New System.Drawing.Point(333, 741)
         Me.txtExportEmpty.Multiline = True
         Me.txtExportEmpty.Name = "txtExportEmpty"
+        Me.txtExportEmpty.ReadOnly = True
         Me.txtExportEmpty.Size = New System.Drawing.Size(143, 23)
         Me.txtExportEmpty.TabIndex = 63
         Me.txtExportEmpty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -870,6 +899,7 @@ Partial Class StatusForm
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
         Me.Name = "StatusForm"

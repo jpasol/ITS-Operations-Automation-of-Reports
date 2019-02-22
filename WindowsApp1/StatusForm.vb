@@ -40,13 +40,8 @@
     Private OPConnection As New ADODB.Connection
 
     Private Sub CreateTerminalStatus(now As Date)
-        Try
-            OPConnection.Open()
-            terminalStatus = New TSRClass(now, N4Connection, OPConnection)
-            terminalStatus.Save()
-        Catch
-            OPConnection.Close()
-        End Try
+        terminalStatus = New TSRClass(now, N4Connection, OPConnection)
+        terminalStatus.Save()
 
 
         lblTsrDate.Text = now

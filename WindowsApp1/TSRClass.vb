@@ -1,7 +1,6 @@
 Imports Crane_Logs_Report_Creator
 Imports System.Threading.Tasks
 Imports ADODB
-Imports WindowsApp1
 
 Public Class TSRClass
     Implements ITerminalStatusReport
@@ -59,9 +58,9 @@ Public Class TSRClass
         CraneLogReports = New List(Of CLRClass)
         ActiveUnits = New List(Of ActiveUnit)
         GateTransactions = New List(Of GateTransaction)
-        Try
+        'Try
 
-            If Exists() Then
+        If Exists() Then
                 RetrieveTerminalStatusReport()
             Else
                 CraneLogReports = New List(Of CLRClass)
@@ -74,12 +73,13 @@ Public Class TSRClass
                 Calculate()
             End If
 
-        Catch ex As Exception
-            MsgBox($"Error in Generating Terminal Status Report. {vbNewLine}Error Message: {ex.Message} ")
-        End Try
+        'Catch ex As Exception
+        'MsgBox($"Error in Generating Terminal Status Report. {vbNewLine}Error Message: {ex.Message} ")
+        'End Try
     End Sub
 
     Public Sub RetrieveTerminalStatusReport() Implements ITerminalStatusReport.RetrieveTerminalStatusReport
+        OPConnection.Open()
         Dim retrieveTerminalStatus As New ADODB.Command
         retrieveTerminalStatus.ActiveConnection = OPConnection
         retrieveTerminalStatus.CommandText = $"
@@ -116,6 +116,7 @@ SELECT [groundslot]
 FROM [opreports].[dbo].[reports_tsr] WHERE [created] = '{TerminalStatusDate}'
 "
         RetrieveProperties(retrieveTerminalStatus.Execute)
+        OPConnection.Close()
     End Sub
 
     Private Sub RetrieveProperties(execute As Recordset)
@@ -179,6 +180,7 @@ SELECT [id] as Registry
     End Function
 
     Public Sub RetrieveCraneLogReports() Implements ITerminalStatusReport.RetrieveCraneLogReports
+
         Dim CraneLogRegistries As List(Of String) = CreateRegistryList()
         For Each Registry As String In CraneLogRegistries
             Try
@@ -200,7 +202,7 @@ SELECT [id] as Registry
                 End If
 
             Catch ex As Exception
-
+                Throw ex
             End Try
 
         Next
@@ -226,9 +228,11 @@ SELECT [id] as Registry
     End Sub
 
     Private Function activeUnitsRecordset() As ADODB.Recordset
-        Dim activeUnits As New ADODB.Command
-        activeUnits.ActiveConnection = N4Connection
-        activeUnits.CommandText = $"
+        Try
+execute:
+            Dim activeUnits As New ADODB.Command
+            activeUnits.ActiveConnection = N4Connection
+            activeUnits.CommandText = $"
 SELECT unit.[id] as UnitNbr
 	  ,acv.[id] as Registry
 	  ,[length_mm] as Size
@@ -244,8 +248,19 @@ inner join [ref_equipment] req on ueq.eq_gkey = req.gkey
 
 where ufv.transit_state = 'S40_YARD' 
 "
-        Return activeUnits.Execute
 
+            Return activeUnits.Execute
+        Catch ex As Exception
+            If ex.Message = "Query timeout expired" Then
+                Dim result As Integer = MsgBox($"Error in Retrieving Active Units {vbNewLine}{ex.Message}", vbAbortRetryIgnore)
+                Select Case result
+                    Case vbRetry
+                        GoTo execute
+                    Case Else
+                        Exit Function
+                End Select
+            End If
+        End Try
     End Function
 
     Public Sub RetrieveGateTransactions() Implements ITerminalStatusReport.RetrieveGateTransactions
@@ -278,17 +293,50 @@ SELECT [sub_type]
     End Function
 
     Public Sub Calculate() Implements ITerminalStatusReport.Calculate
+
         TotalGroundSlotTEU = My.Settings.TotalGroundSlot
         StaticCapacityTEU = My.Settings.StaticCapacity
         TotalYardCapacityTEU = My.Settings.TotalYardCapacity
 
-        CalculateUsingCraneLogReports()
+        If CraneLogReports.Count > 0 Then
+            CalculateUsingCraneLogReports()
+        Else
+            CopyProductivityofLastTerminalStatusUpdate()
+        End If
+
         CalculateUsingActiveUnits()
         CalculateUsingGateTransactions()
 
     End Sub
 
+    Private Sub CopyProductivityofLastTerminalStatusUpdate()
+        Dim tsrDate As Date = GetLastTSRDate()
+        Dim tempTSR As New TSRClass(tsrDate, N4Connection, OPConnection)
+        With tempTSR
+            Me.MTDAverageGrossCraneProductivity = .MTDAverageGrossCraneProductivity
+            Me.MTDAverageGrossBerthProductivity = .MTDAverageGrossBerthProductivity
+            Me.MTDAverageGrossVesselProductivity = .MTDAverageGrossVesselProductivity
+            Me.MTDAverageNetCraneProductivity = .MTDAverageNetCraneProductivity
+            Me.MTDAverageNetBerthProductivity = .MTDAverageNetBerthProductivity
+            Me.MTDAverageNetVesselProductivity = .MTDAverageNetVesselProductivity
+        End With
+    End Sub
+
+    Private Function GetLastTSRDate() As Date
+        OPConnection.Open()
+        Dim lastTSRDate As New ADODB.Command
+        lastTSRDate.ActiveConnection = OPConnection
+        lastTSRDate.CommandText = $"
+    SELECT TOP 1 [created]
+  FROM [opreports].[dbo].[reports_tsr] ORDER BY CREATED
+"
+        Dim latestTSRDate As Date = lastTSRDate.Execute.Fields(0).Value
+        OPConnection.Close()
+        Return latestTSRDate
+    End Function
+
     Private Sub CalculateUsingGateTransactions()
+
         With GateTransactions.AsEnumerable
             DailyTEUInByTrucks = .Where(Function(gate) gate.StartDate > StartofDay And gate.TransactionType.Chars(0) = "R").Sum(Function(gate) gate.TEU)
             DailyTEUOutByTrucks = .Where(Function(gate) gate.StartDate > StartofDay And gate.TransactionType.Chars(0) = "D").Sum(Function(gate) gate.TEU)
@@ -297,6 +345,7 @@ SELECT [sub_type]
             YTDTEUInByTrucks = .Where(Function(gate) gate.StartDate > StartofYear And gate.TransactionType.Chars(0) = "R").Sum(Function(gate) gate.TEU)
             YTDTEUOutByTrucks = .Where(Function(gate) gate.StartDate > StartofYear And gate.TransactionType.Chars(0) = "D").Sum(Function(gate) gate.TEU)
         End With
+
     End Sub
 
     Private Sub CalculateUsingActiveUnits()
@@ -323,6 +372,7 @@ SELECT [sub_type]
     End Sub
 
     Private Sub CalculateUsingCraneLogReports()
+
         With CraneLogReports.AsEnumerable
             MTDAverageGrossCraneProductivity = .Average(Function(clr) clr.GrossCraneProductivity)
             MTDAverageGrossVesselProductivity = .Average(Function(clr) clr.GrossVesselProdRate)
@@ -331,6 +381,7 @@ SELECT [sub_type]
             MTDAverageNetVesselProductivity = .Average(Function(clr) clr.NetVesselProdRate)
             MTDAverageNetBerthProductivity = .Average(Function(clr) clr.NetBerthProdRate)
         End With
+
     End Sub
 
     Public Sub Save() Implements ITerminalStatusReport.Save
@@ -415,6 +466,7 @@ INSERT INTO [opreports].[dbo].[reports_tsr]
     End Sub
 
     Public Function Exists() As Boolean Implements ITerminalStatusReport.Exists
+        OPConnection.Open()
         Dim existResult As New ADODB.Command
         existResult.ActiveConnection = OPConnection
         existResult.CommandText = $"
@@ -425,11 +477,12 @@ select created from reports_tsr where [created] = '{TerminalStatusDate}')
 then 
 cast(1 as bit)
 else 
-cast(0 as bit) 
+cast(0 as bit)
 end
 "
 
         Dim result As Boolean = existResult.Execute().Fields(0).Value
+        OPConnection.Close
         Return result
     End Function
 End Class

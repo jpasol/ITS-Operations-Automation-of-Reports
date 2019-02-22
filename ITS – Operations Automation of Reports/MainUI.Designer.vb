@@ -55,6 +55,7 @@ Partial Class MainUI
         '
         'cmbReports
         '
+        Me.cmbReports.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbReports.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbReports.FormattingEnabled = True
         Me.cmbReports.Location = New System.Drawing.Point(12, 180)
@@ -111,7 +112,6 @@ Partial Class MainUI
         Me.mskParameter.Size = New System.Drawing.Size(208, 26)
         Me.mskParameter.SkipLiterals = False
         Me.mskParameter.TabIndex = 6
-        Me.mskParameter.TextMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals
         Me.mskParameter.ValidatingType = GetType(Date)
         '
         'cmdGenerate
@@ -155,6 +155,7 @@ Partial Class MainUI
         '
         'cmbMode
         '
+        Me.cmbMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbMode.FormattingEnabled = True
         Me.cmbMode.Items.AddRange(New Object() {"Daily", "Monthly", "Annually"})
@@ -168,6 +169,7 @@ Partial Class MainUI
         Me.AcceptButton = Me.cmdGenerate
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1584, 861)
         Me.Controls.Add(Me.lblMode)
         Me.Controls.Add(Me.cmbMode)

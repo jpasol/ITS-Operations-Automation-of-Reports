@@ -5,20 +5,48 @@ Imports Reports
 Public Class Units
     Implements IReports.IUnits
 
-    Sub New(Registry As String, ByRef Connection As Connection)
+    Sub New(Registry As String, ByRef OPconnection As Connection, ByRef Connection As Connection)
 
-        ' This call is required by the designer.
-        Retrieve(Registry, Connection)
-
+        ' This call is required by the designer..
         strRegistry = Registry
         untConnection = Connection
+        dbConnection = OPconnection
+        If Exists() Then
+            'Do nothing
+        Else
+            Retrieve(Registry, Connection)
+        End If
+
 
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
+
+    Private Function Exists() As Boolean
+        dbConnection.Open()
+        Dim unitsChecker As New ADODB.Command
+        unitsChecker.ActiveConnection = dbConnection
+        unitsChecker.CommandText = $"
+SELECT case 
+
+when exists( 
+select registry from vmr_units where [registry] = '{strRegistry}')
+then 
+cast(1 as bit)
+else 
+cast(0 as bit) 
+end
+"
+        Dim result As Boolean = unitsChecker.Execute.Fields(0).Value
+        dbConnection.Close()
+        Return result
+    End Function
+
     Private strRegistry As String
     Private dsContainers As DataSet
     Private untConnection As Connection
+    Private dbConnection As Connection
+
     Public Enum UnitDetails
         ContNum
         NomLength
@@ -105,6 +133,7 @@ Select unit.[id]
 ,[hazardous]
 ,[imdg_types]
 ,reqt.[id] as 'iso_code'
+,[time_in] as 'time_move'
 
 from 
 [inv_unit] unit
@@ -145,6 +174,7 @@ Select unit.[id]
 ,[hazardous]
 ,[imdg_types]
 ,reqt.[id] as 'iso_code'
+,[time_load] as 'time_move'
 
 from 
 [inv_unit] unit

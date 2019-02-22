@@ -153,6 +153,7 @@
     <Import Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection.vb" />
     <Compile Include="Crane.vb" />
     <Compile Include="CraneDelays.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -184,7 +185,7 @@
   <ItemGroup />
   <ItemGroup>
     <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="crdb_adoplus, Version=14.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86" />
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -275,6 +276,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="CraneDelays.xsc">
       <DependentUpon>CraneDelays.xsd</DependentUpon>
     </None>
