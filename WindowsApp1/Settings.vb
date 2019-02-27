@@ -1,10 +1,15 @@
-﻿Public Class Settings
+﻿Imports System.Collections.Specialized
+
+Public Class Settings
     Private Sub Settings_Load(sender As Object, e As EventArgs) Handles Me.Load
+
         With My.Settings
+
             txtGroundSlot.Text = .TotalGroundSlot
             txtStaticCapacity.Text = .StaticCapacity
             txtTotalYardCapacity.Text = .TotalYardCapacity
             txtInterval.Text = .Interval
+            RichTextBox1.Lines = .Exclude.Cast(Of String).ToArray
         End With
     End Sub
 
@@ -16,8 +21,14 @@
                 .StaticCapacity = txtStaticCapacity.Text
                 .TotalYardCapacity = txtTotalYardCapacity.Text
                 .Interval = txtInterval.Text
+                Dim lines As New StringCollection
+                lines.AddRange(RichTextBox1.Lines.AsEnumerable.ToArray)
+                .Exclude = lines
+                .Save()
             End With
             Me.Dispose()
         End If
     End Sub
+
+
 End Class

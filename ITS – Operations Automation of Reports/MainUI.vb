@@ -9,56 +9,34 @@ Public Class MainUI
         "Vessel Movement Report",
         "Crane Logs Report",
         "Throughput Volume Update",
-        "Terminal Status Report",
-        "Management Report",
-        "Budgeted Volume",
-        "KPI Report for Operation",
-        "Shipping Line TEUs & Monthly Impex Consignees",
-        "Consolidation of Monthly Impex Consignees",
-        "Monthly Revenue / Volume Report per Destination",
-        "Chargeable Marine Unit Rates",
-        "Commercial Report",
-        "Monthly Reefer Comparison",
-        "Crane Movement Report",
-        "Shipping Line Database ",
-        "Service Route Analysis",
-        "Operation Productivity Report"
-        }
+        "Terminal Status Report"}
+    '"Management Report",
+    '"Budgeted Volume",
+    '"KPI Report for Operation",
+    '"Shipping Line TEUs & Monthly Impex Consignees",
+    '"Consolidation of Monthly Impex Consignees",
+    '"Monthly Revenue / Volume Report per Destination",
+    '"Chargeable Marine Unit Rates",
+    '"Commercial Report",
+    '"Monthly Reefer Comparison",
+    '"Crane Movement Report",
+    '"Shipping Line Database ",
+    '"Service Route Analysis",
+    '"Operation Productivity Report"
+    '}
 
     Shared User As String = UCase(System.Environment.UserName.ToString) 'Uppercased for uniformity, opdox though only has one username, only vmr has tagging
     Shared CnnN4 As New ADODB.Connection
     Shared CnnDB As New ADODB.Connection
 
-    Public Sub ConnectDB()
-        With My.Settings
-            CnnN4.ConnectionString = "Provider=SQLOLEDB;
-                        Data Source=" & .N4Server & ";
-                        Initial Catalog=" & .N4Database & ";
-                        User ID=tosadmin;Password=tosadmin;"
-
-            CnnDB.ConnectionString = "Provider=SQLOLEDB;
-                        Data Source=" & .OPServer & ";
-                        Initial Catalog=" & .OPDatabase & ";
-                        User ID=sa_ictsi;Password=Ictsi123;"
-
-            Try
-                CnnN4.Open()
-                CnnDB.Open()
-
-                CnnDB.Close()
-                CnnN4.Close()
-            Catch ex As Exception
-                MsgBox("Cannot Connect to Database" & vbNewLine &
-                       Err.Number & vbNewLine &
-                       Err.Description)
-            End Try
-        End With
-    End Sub
-
     Public Sub Initialize()
         cmbReports.Items.AddRange(arrReports)
         cmbReports.SelectedIndex = 0
-        ConnectDB()
+
+        Dim tempConnections As New Reports.Connections
+        CnnN4 = tempConnections.N4Connection
+        CnnDB = tempConnections.OPConnection
+
     End Sub
 
     Private Sub MainUI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -70,30 +48,32 @@ Public Class MainUI
         cmbMode.ResetText()
         cmbMode.Items.Clear()
         cmbMode.Enabled = False
+        lblParameter.ResetText()
+        mskParameter.Text = ""
+        mskParameter.Mask = ""
         Select Case cmbReports.SelectedIndex
             Case 0, 1
                 lblParameter.Text = "Registry:"
                 mskParameter.Mask = ">&&&0000-00"
+                mskParameter.Text = "AAA0000-00"
             Case 2
                 cmbMode.Enabled = True
                 cmbMode.Items.AddRange({"Berth Window Report",
                                        "Cummulative Volume Report",
                                        "Volume Breakdown",
                                        "All Vessel Throughput Volume",
-                                       "Monthly Throughput Volume"})
-
-                lblParameter.Text = "Shipping Line:"
-                mskParameter.Mask = ">&&&"
+                                       "Monthly Throughput Volume",
+                                       "Monthly Co-Load Throughput Volume",
+                                       "LOA Table",
+                                       "Handling Services"})
             Case 3
                 cmbMode.Enabled = True
                 cmbMode.Items.AddRange({"Daily", "Monthly", "Annually"})
-
-                lblParameter.Text = "Registry:"
-                mskParameter.Mask = ">&&&0000-00"
-
+                lblParameter.Text = "Date:"
             Case Else
                 lblParameter.Text = "Date:"
                 mskParameter.Mask = "00/00/0000"
+                mskParameter.Text = "DD/MM/YYYY"
         End Select
     End Sub
     Private Function FindVMR(strRegistry As String) As Boolean
@@ -132,7 +112,7 @@ Public Class MainUI
                         Dim CummulativeVolume As New CummulativeReport(mskParameter.Text)
                         crvPreview.ReportSource = CummulativeVolume.Report
                     Case "Volume Breakdown"
-                        Dim VolumeBreakdown As New VolumeBreakdown()
+                        Dim VolumeBreakdown As New VolumeBreakdown(mskParameter.Text)
                         crvPreview.ReportSource = VolumeBreakdown
                     Case "All Vessel Throughput Volume"
                         Dim month As Integer = mskParameter.Text.Substring(0, 2)
@@ -144,6 +124,18 @@ Public Class MainUI
                         Dim year As Integer = mskParameter.Text.Substring(3)
                         Dim MonthlyVolume As New MTDMonthlyThroughputVolume(month, year)
                         crvPreview.ReportSource = MonthlyVolume.Report
+                    Case "Monthly Co-Load Throughput Volume"
+                        Dim month As Integer = mskParameter.Text.Substring(0, 2)
+                        Dim year As Integer = mskParameter.Text.Substring(3)
+                        Dim MonthlyCoLoadVolume As New MTDMonthlyCoLoadVolume(month, year)
+                        crvPreview.ReportSource = MonthlyCoLoadVolume.Report
+                    Case "LOA Table"
+                        Dim loa As New LOATable
+                        crvPreview.ReportSource = loa
+                    Case "Handling Services"
+                        Dim year As Integer = mskParameter.Text
+                        Dim handlingServices As New HandlingServices(year)
+                        crvPreview.ReportSource = handlingServices
                 End Select
             Case Else
 
@@ -163,22 +155,45 @@ Public Class MainUI
     End Sub
 
     Private Sub cmbMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMode.SelectedIndexChanged
+        lblParameter.Enabled = True
+        mskParameter.Enabled = True
+
         Select Case lblParameter.Text
             Case "Date:"
 
                 Select Case cmbMode.Text
                     Case "Daily"
                         mskParameter.Mask = "00/00/0000"
+                        mskParameter.Text = "DD/MM/YYYY"
                     Case "Monthly"
                         mskParameter.Mask = "00/0000"
+                        mskParameter.Text = "MM/YYYY"
                     Case "Annually"
                         mskParameter.Mask = "0000"
+                        mskParameter.Text = "YYYY"
                 End Select
         End Select
 
         Select Case cmbMode.Text
-            Case "All Vessel Throughput Volume", "Monthly Throughput Volume"
+            Case "All Vessel Throughput Volume",
+                 "Monthly Throughput Volume",
+                 "Monthly Co-Load Throughput Volume"
+
+                lblParameter.Text = "Date:"
                 mskParameter.Mask = "00/0000"
+                mskParameter.Text = "MM/YYYY"
+
+            Case "LOA Table"
+                lblParameter.ResetText()
+                mskParameter.Mask = ""
+
+                lblParameter.Enabled = False
+                mskParameter.Enabled = False
+
+            Case "Volume Breakdown", "Handling Services"
+                lblParameter.Text = "Year: "
+                mskParameter.Mask = "0000"
+                mskParameter.Text = "YYYY"
         End Select
     End Sub
 

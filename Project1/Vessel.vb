@@ -256,7 +256,7 @@ Public Class Vessel
 		,[labor_on_board]
 		,[labor_off_board]
 		,svce.[id] AS 'Service'
-		,round([loa_cm]/ 100 ,0) as 'LOA' 
+		,cast(round([loa_cm] / 100.0,0) as integer) as 'LOA' 
 		
 
         FROM [apex].[dbo].[vsl_vessel_visit_details] vvd

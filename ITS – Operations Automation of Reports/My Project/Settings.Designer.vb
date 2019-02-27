@@ -53,42 +53,6 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("sbitc-db")>  _
-        Public ReadOnly Property N4Server() As String
-            Get
-                Return CType(Me("N4Server"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("apex")>  _
-        Public ReadOnly Property N4Database() As String
-            Get
-                Return CType(Me("N4Database"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("sbitc-dev")>  _
-        Public ReadOnly Property OPServer() As String
-            Get
-                Return CType(Me("OPServer"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("opreports")>  _
-        Public ReadOnly Property OPDatabase() As String
-            Get
-                Return CType(Me("OPDatabase"),String)
-            End Get
-        End Property
     End Class
 End Namespace
 

@@ -159,15 +159,19 @@ FROM [opreports].[dbo].[reports_tsr] WHERE [created] = '{TerminalStatusDate}'
         N4Connection.Open()
         registryRecordset.ActiveConnection = N4Connection
         registryRecordset.CommandText = $"
-SELECT [id] as Registry
+SELECT acv.[id] as Registry
       ,[phase]
-  FROM [apex].[dbo].[argo_carrier_visit] WHERE ATA > '{StartofMonth}' and carrier_mode = 'VESSEL'
+		,biz.[id] as Owner
+  FROM [apex].[dbo].[argo_carrier_visit] acv
+	inner join [vsl_vessel_visit_details] vvd
+	on acv.cvcvd_gkey = vvd.vvd_gkey
+	inner join [ref_bizunit_scoped] biz
+	on vvd.bizu_gkey = biz.gkey
+WHERE ATA > '{StartofMonth}' and carrier_mode = 'VESSEL' and phase like '%CLOSED'
 "
         With registryRecordset.Execute()
             While Not .EOF
-                If .Fields("phase").Value.Contains("WORKING") Then
-                    'do nothing
-                Else
+                If Not My.Settings.Exclude.Contains(.Fields("Owner").Value) Then
                     tempRegistryList.Add(.Fields("Registry").Value)
                 End If
 

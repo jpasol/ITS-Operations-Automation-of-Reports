@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Settings
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Settings
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.txtTotalYardCapacity = New System.Windows.Forms.TextBox()
         Me.txtStaticCapacity = New System.Windows.Forms.TextBox()
@@ -32,6 +32,8 @@ Partial Class Settings
         Me.txtInterval = New System.Windows.Forms.TextBox()
         Me.lblInterval = New System.Windows.Forms.Label()
         Me.cmdSave = New System.Windows.Forms.Button()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.SuspendLayout()
         '
         'txtTotalYardCapacity
@@ -130,18 +132,41 @@ Partial Class Settings
         '
         'cmdSave
         '
-        Me.cmdSave.Location = New System.Drawing.Point(223, 206)
+        Me.cmdSave.Location = New System.Drawing.Point(223, 245)
         Me.cmdSave.Name = "cmdSave"
         Me.cmdSave.Size = New System.Drawing.Size(75, 23)
         Me.cmdSave.TabIndex = 39
         Me.cmdSave.Text = "Save"
         Me.cmdSave.UseVisualStyleBackColor = True
         '
+        'Label5
+        '
+        Me.Label5.BackColor = System.Drawing.Color.White
+        Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label5.Font = New System.Drawing.Font("Calibri", 12.0!)
+        Me.Label5.Location = New System.Drawing.Point(12, 190)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(177, 49)
+        Me.Label5.TabIndex = 40
+        Me.Label5.Text = "Excluded Lines"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.RichTextBox1.Location = New System.Drawing.Point(195, 190)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(103, 49)
+        Me.RichTextBox1.TabIndex = 41
+        Me.RichTextBox1.Text = "dsa" & Global.Microsoft.VisualBasic.ChrW(10) & "dsa"
+        '
         'Settings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(310, 241)
+        Me.ClientSize = New System.Drawing.Size(310, 280)
+        Me.Controls.Add(Me.RichTextBox1)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.cmdSave)
         Me.Controls.Add(Me.txtInterval)
         Me.Controls.Add(Me.lblInterval)
@@ -175,4 +200,6 @@ Partial Class Settings
     Friend WithEvents txtInterval As TextBox
     Friend WithEvents lblInterval As Label
     Friend WithEvents cmdSave As Button
+    Friend WithEvents Label5 As Label
+    Friend WithEvents RichTextBox1 As RichTextBox
 End Class

@@ -8,11 +8,11 @@
     <Setting Name="N4Database" Type="System.String" Scope="User">
       <Value Profile="(Default)">apex</Value>
     </Setting>
-    <Setting Name="OPServer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">sbitc-dev</Value>
-    </Setting>
     <Setting Name="OPDatabase" Type="System.String" Scope="User">
       <Value Profile="(Default)">opreports</Value>
+    </Setting>
+    <Setting Name="OPServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sbitc-dev</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -79,18 +79,6 @@ Partial Friend NotInheritable Class Settings
     
     <Global.System.Configuration.UserScopedSettingAttribute(),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Configuration.DefaultSettingValueAttribute("sbitc-dev")>  _
-    Public Property OPServer() As String
-        Get
-            Return CType(Me("OPServer"),String)
-        End Get
-        Set
-            Me("OPServer") = value
-        End Set
-    End Property
-    
-    <Global.System.Configuration.UserScopedSettingAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Configuration.DefaultSettingValueAttribute("opreports")>  _
     Public Property OPDatabase() As String
         Get
@@ -98,6 +86,18 @@ Partial Friend NotInheritable Class Settings
         End Get
         Set
             Me("OPDatabase") = value
+        End Set
+    End Property
+    
+    <Global.System.Configuration.UserScopedSettingAttribute(),  _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.Configuration.DefaultSettingValueAttribute("sbitc-dev")>  _
+    Public Property OPServer() As String
+        Get
+            Return CType(Me("OPServer"),String)
+        End Get
+        Set
+            Me("OPServer") = value
         End Set
     End Property
 End Class
