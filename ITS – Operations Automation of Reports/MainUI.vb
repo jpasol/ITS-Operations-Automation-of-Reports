@@ -54,8 +54,7 @@ Public Class MainUI
         Select Case cmbReports.SelectedIndex
             Case 0, 1
                 lblParameter.Text = "Registry:"
-                mskParameter.Mask = ">&&&0000-00"
-                mskParameter.Text = "AAA0000-00"
+                mskParameter.Mask = ">LLL0000-00"
             Case 2
                 cmbMode.Enabled = True
                 cmbMode.Items.AddRange({"Berth Window Report",
@@ -73,7 +72,6 @@ Public Class MainUI
             Case Else
                 lblParameter.Text = "Date:"
                 mskParameter.Mask = "00/00/0000"
-                mskParameter.Text = "DD/MM/YYYY"
         End Select
     End Sub
     Private Function FindVMR(strRegistry As String) As Boolean
@@ -155,45 +153,44 @@ Public Class MainUI
     End Sub
 
     Private Sub cmbMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMode.SelectedIndexChanged
+        lblParameter.ResetText()
+        mskParameter.Mask = ""
+        mskParameter.Text = ""
         lblParameter.Enabled = True
         mskParameter.Enabled = True
 
-        Select Case lblParameter.Text
-            Case "Date:"
-
-                Select Case cmbMode.Text
-                    Case "Daily"
-                        mskParameter.Mask = "00/00/0000"
-                        mskParameter.Text = "DD/MM/YYYY"
-                    Case "Monthly"
-                        mskParameter.Mask = "00/0000"
-                        mskParameter.Text = "MM/YYYY"
-                    Case "Annually"
-                        mskParameter.Mask = "0000"
-                        mskParameter.Text = "YYYY"
-                End Select
-        End Select
 
         Select Case cmbMode.Text
+            Case "Daily"
+                lblParameter.Text = "Date: (MM/DD/YYYY)"
+                mskParameter.Mask = "00/00/0000"
+
+            Case "Monthly"
+                lblParameter.Text = "Date: (MM/YYYY)"
+                mskParameter.Mask = "00/0000"
+
+            Case "Annually"
+                lblParameter.Text = "Date: (YYYY)"
+                mskParameter.Mask = "0000"
+
+            Case "Berth Window Report", "Cummulative Volume Report"
+                lblParameter.Text = "Shipping Line:"
+                mskParameter.Mask = ">LLL"
+
             Case "All Vessel Throughput Volume",
                  "Monthly Throughput Volume",
                  "Monthly Co-Load Throughput Volume"
 
-                lblParameter.Text = "Date:"
+                lblParameter.Text = "Date: (MM/YYYY)"
                 mskParameter.Mask = "00/0000"
-                mskParameter.Text = "MM/YYYY"
 
             Case "LOA Table"
-                lblParameter.ResetText()
-                mskParameter.Mask = ""
-
                 lblParameter.Enabled = False
                 mskParameter.Enabled = False
 
             Case "Volume Breakdown", "Handling Services"
-                lblParameter.Text = "Year: "
+                lblParameter.Text = "Year: (YYYY)"
                 mskParameter.Mask = "0000"
-                mskParameter.Text = "YYYY"
         End Select
     End Sub
 

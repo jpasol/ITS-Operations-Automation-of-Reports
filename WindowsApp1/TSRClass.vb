@@ -49,11 +49,11 @@ Public Class TSRClass
     Public ReadOnly Property GateTransactions As List(Of GateTransaction) Implements ITerminalStatusReport.GateTransactions
 
 
-    Public Sub New(TerminalStatusDate As Date, ByRef N4Connection As ADODB.Connection, ByRef OPConnection As ADODB.Connection)
-
+    Public Sub New(TerminalStatusDate As Date)
+        Dim tempConnections As New Reports.Connections
         Me.TerminalStatusDate = TerminalStatusDate
-        Me.N4Connection = N4Connection
-        Me.OPConnection = OPConnection
+        Me.N4Connection = tempConnections.N4Connection
+        Me.OPConnection = tempConnections.OPConnection
 
         CraneLogReports = New List(Of CLRClass)
         ActiveUnits = New List(Of ActiveUnit)
@@ -61,17 +61,17 @@ Public Class TSRClass
         'Try
 
         If Exists() Then
-                RetrieveTerminalStatusReport()
-            Else
-                CraneLogReports = New List(Of CLRClass)
-                ActiveUnits = New List(Of ActiveUnit)
-                GateTransactions = New List(Of GateTransaction)
+            RetrieveTerminalStatusReport()
+        Else
+            CraneLogReports = New List(Of CLRClass)
+            ActiveUnits = New List(Of ActiveUnit)
+            GateTransactions = New List(Of GateTransaction)
 
-                RetrieveGateTransactions()
-                RetrieveActiveUnits()
-                RetrieveCraneLogReports()
-                Calculate()
-            End If
+            RetrieveGateTransactions()
+            RetrieveActiveUnits()
+            RetrieveCraneLogReports()
+            Calculate()
+        End If
 
         'Catch ex As Exception
         'MsgBox($"Error in Generating Terminal Status Report. {vbNewLine}Error Message: {ex.Message} ")
@@ -200,6 +200,7 @@ WHERE ATA > '{StartofMonth}' and carrier_mode = 'VESSEL' and phase like '%CLOSED
                         tempCLR.Save()
                         OPConnection.CommitTrans()
                     Catch ex As Exception
+                        MsgBox($"Error in Saving: {Registry}{vbNewLine}{ex.Message}")
                         OPConnection.RollbackTrans()
                     End Try
                     OPConnection.Close()
@@ -250,19 +251,13 @@ inner join [argo_carrier_visit] acv on ufv.[actual_ib_cv] = acv.gkey
 inner join [inv_unit_equip] ueq on unit.gkey = ueq.unit_gkey
 inner join [ref_equipment] req on ueq.eq_gkey = req.gkey
 
-where ufv.transit_state = 'S40_YARD' 
+where ufv.transit_state = 'S40_YARD' and [time_in] < '{TerminalStatusDate}'
 "
 
             Return activeUnits.Execute
         Catch ex As Exception
             If ex.Message = "Query timeout expired" Then
-                Dim result As Integer = MsgBox($"Error in Retrieving Active Units {vbNewLine}{ex.Message}", vbAbortRetryIgnore)
-                Select Case result
-                    Case vbRetry
-                        GoTo execute
-                    Case Else
-                        Exit Function
-                End Select
+                GoTo execute
             End If
         End Try
     End Function
@@ -284,16 +279,24 @@ where ufv.transit_state = 'S40_YARD'
     End Sub
 
     Private Function gateTransactionRecordset() As ADODB.Recordset
-        Dim gateTransactions As New ADODB.Command
-        gateTransactions.ActiveConnection = N4Connection
-        gateTransactions.CommandText = $"
+        Try
+execute:
+
+            Dim gateTransactions As New ADODB.Command
+            gateTransactions.ActiveConnection = N4Connection
+            gateTransactions.CommandText = $"
 SELECT [sub_type]
 	  ,[ctr_id]
       ,[eqo_eq_length]
       ,[created]
-  FROM [apex].[dbo].[road_truck_transactions] where created > '{StartofYear}' and ([status] in ('OK','COMPLETE'))
+  FROM [apex].[dbo].[road_truck_transactions] where created > '{StartofYear}' and created < '{TerminalStatusDate}' and ([status] in ('OK','COMPLETE'))
 "
-        Return gateTransactions.Execute
+            Return gateTransactions.Execute()
+        Catch ex As Exception
+            If ex.Message = "Query timeout expired" Then
+                GoTo execute
+            End If
+        End Try
     End Function
 
     Public Sub Calculate() Implements ITerminalStatusReport.Calculate
@@ -315,7 +318,7 @@ SELECT [sub_type]
 
     Private Sub CopyProductivityofLastTerminalStatusUpdate()
         Dim tsrDate As Date = GetLastTSRDate()
-        Dim tempTSR As New TSRClass(tsrDate, N4Connection, OPConnection)
+        Dim tempTSR As New TSRClass(tsrDate)
         With tempTSR
             Me.MTDAverageGrossCraneProductivity = .MTDAverageGrossCraneProductivity
             Me.MTDAverageGrossBerthProductivity = .MTDAverageGrossBerthProductivity

@@ -5,6 +5,7 @@
         ' This call is required by the designer.
         InitializeComponent()
         ConnectToDatabases()
+
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
@@ -40,7 +41,7 @@
     Private OPConnection As New ADODB.Connection
 
     Private Sub CreateTerminalStatus(now As Date)
-        terminalStatus = New TSRClass(now, N4Connection, OPConnection)
+        terminalStatus = New TSRClass(now)
         terminalStatus.Save()
 
 

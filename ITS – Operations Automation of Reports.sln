@@ -21,6 +21,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Terminal Status Report", ".
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Throughput Volume Update", "..\Throughput-Volume-Update\Throughput Volume Update.vbproj", "{D3669981-7212-4FF2-9E98-B93D2DE8BCF4}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Automated Terminal Status Report", "Automated Terminal Status Report\Automated Terminal Status Report.vdproj", "{AA451E9A-4086-4247-8AD8-92D3626FE8C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug 64|Any CPU = Debug 64|Any CPU
@@ -253,6 +255,18 @@ Global
 		{D3669981-7212-4FF2-9E98-B93D2DE8BCF4}.Release|x64.Build.0 = Release|Any CPU
 		{D3669981-7212-4FF2-9E98-B93D2DE8BCF4}.Release|x86.ActiveCfg = Release|Any CPU
 		{D3669981-7212-4FF2-9E98-B93D2DE8BCF4}.Release|x86.Build.0 = Release|Any CPU
+		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Debug 64|Any CPU.ActiveCfg = Debug
+		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Debug 64|x64.ActiveCfg = Debug
+		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Debug 64|x86.ActiveCfg = Debug
+		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Debug|Any CPU.ActiveCfg = Debug
+		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Debug|x64.ActiveCfg = Debug
+		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Debug|x86.ActiveCfg = Debug
+		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Release 64|Any CPU.ActiveCfg = Release
+		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Release 64|x64.ActiveCfg = Release
+		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Release 64|x86.ActiveCfg = Release
+		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Release|Any CPU.ActiveCfg = Release
+		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Release|x64.ActiveCfg = Release
+		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
