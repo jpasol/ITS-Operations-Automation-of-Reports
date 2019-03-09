@@ -13,7 +13,7 @@ Public Class TSRClass
     Private ReadOnly StartofDay As DateTime = New DateTime(year, month, day)
     Private ReadOnly StartofMonth As DateTime = New DateTime(year, month, 1)
     Private ReadOnly StartofYear As DateTime = New DateTime(year, 1, 1)
-
+    Public CraneLogCount As Integer
     Public ReadOnly Property TerminalStatusDate As Date Implements ITerminalStatusReport.TerminalStatusDate
     Public Property TotalGroundSlotTEU As Integer Implements ITerminalStatusReport.TotalGroundSlotTEU
     Public Property StaticCapacityTEU As Integer Implements ITerminalStatusReport.StaticCapacityTEU
@@ -113,6 +113,7 @@ SELECT [groundslot]
     ,[yard_total]
     ,[yard_utilization]
     ,[created]
+    ,[cranelogsreports_count]
 FROM [opreports].[dbo].[reports_tsr] WHERE [created] = '{TerminalStatusDate}'
 "
         RetrieveProperties(retrieveTerminalStatus.Execute)
@@ -150,15 +151,18 @@ FROM [opreports].[dbo].[reports_tsr] WHERE [created] = '{TerminalStatusDate}'
             StorageEmptyTEU = .Fields("storageempty").Value
             TotalInYardTEU = .Fields("yard_total").Value
             YardUtilization = .Fields("yard_utilization").Value
+            CraneLogCount = .Fields("cranelogsreports_count").Value
         End With
     End Sub
 
     Private Function CreateRegistryList() As List(Of String)
-        Dim tempRegistryList As New List(Of String)
-        Dim registryRecordset As New ADODB.Command
-        N4Connection.Open()
-        registryRecordset.ActiveConnection = N4Connection
-        registryRecordset.CommandText = $"
+        Try
+execute:
+            Dim tempRegistryList As New List(Of String)
+            Dim registryRecordset As New ADODB.Command
+            N4Connection.Open()
+            registryRecordset.ActiveConnection = N4Connection
+            registryRecordset.CommandText = $"
 SELECT acv.[id] as Registry
       ,[phase]
 		,biz.[id] as Owner
@@ -169,18 +173,24 @@ SELECT acv.[id] as Registry
 	on vvd.bizu_gkey = biz.gkey
 WHERE ATA > '{StartofMonth}' and carrier_mode = 'VESSEL' and phase like '%CLOSED'
 "
-        With registryRecordset.Execute()
-            While Not .EOF
-                If Not My.Settings.Exclude.Contains(.Fields("Owner").Value) Then
-                    tempRegistryList.Add(.Fields("Registry").Value)
-                End If
+            With registryRecordset.Execute()
+                While Not .EOF
+                    If Not My.Settings.Exclude.Contains(.Fields("Owner").Value) Then
+                        tempRegistryList.Add(.Fields("Registry").Value)
+                    End If
 
 
-                .MoveNext()
-            End While
-        End With
-        N4Connection.Close()
-        Return tempRegistryList
+                    .MoveNext()
+                End While
+            End With
+
+            N4Connection.Close()
+            Return tempRegistryList
+        Catch ex As Exception
+            If ex.Message = "Query timeout expired" Then
+                GoTo execute
+            End If
+        End Try
     End Function
 
     Public Sub RetrieveCraneLogReports() Implements ITerminalStatusReport.RetrieveCraneLogReports
@@ -358,10 +368,10 @@ SELECT [sub_type]
     Private Sub CalculateUsingActiveUnits()
         With ActiveUnits.AsEnumerable
             AverageImportDwellTime = .Where(Function(unit) unit.Dwell(TerminalStatusDate) < 90).Average(Function(unit) unit.Dwell(TerminalStatusDate))
-            MTDImportDwellTime = .Where(Function(unit) unit.TimeIn > StartofMonth And unit.Category = "IMPRT").Average(Function(unit) unit.Dwell(TerminalStatusDate))
-            MTDExportDwellTime = .Where(Function(unit) unit.TimeIn > StartofMonth And unit.Category = "EXPRT").Average(Function(unit) unit.Dwell(TerminalStatusDate))
-            YTDImportDwellTime = .Where(Function(unit) unit.TimeIn > StartofYear And unit.Category = "IMPRT").Average(Function(unit) unit.Dwell(TerminalStatusDate))
-            YTDExportDwellTime = .Where(Function(unit) unit.TimeIn > StartofYear And unit.Category = "EXPRT").Average(Function(unit) unit.Dwell(TerminalStatusDate))
+            MTDImportDwellTime = .Where(Function(unit) unit.TimeIn > StartofMonth And unit.Category = "IMPRT").DefaultIfEmpty.Average(Function(unit) unit.Dwell(TerminalStatusDate))
+            MTDExportDwellTime = .Where(Function(unit) unit.TimeIn > StartofMonth And unit.Category = "EXPRT").DefaultIfEmpty.Average(Function(unit) unit.Dwell(TerminalStatusDate))
+            YTDImportDwellTime = .Where(Function(unit) unit.TimeIn > StartofYear And unit.Category = "IMPRT").DefaultIfEmpty.Average(Function(unit) unit.Dwell(TerminalStatusDate))
+            YTDExportDwellTime = .Where(Function(unit) unit.TimeIn > StartofYear And unit.Category = "EXPRT").DefaultIfEmpty.Average(Function(unit) unit.Dwell(TerminalStatusDate))
 
             OverstayingManilaCargo = .Where(Function(unit) unit.Registry = "SBITCTEST3" Or
                                                 unit.Registry = "SBITCTEST5" Or
@@ -429,7 +439,8 @@ INSERT INTO [opreports].[dbo].[reports_tsr]
            ,[storageempty]
            ,[yard_total]
            ,[yard_utilization]
-           ,[created])
+           ,[created]
+           ,[cranelogsreports_count])
      VALUES
            ({TotalGroundSlotTEU}
            ,{StaticCapacityTEU}
@@ -461,6 +472,7 @@ INSERT INTO [opreports].[dbo].[reports_tsr]
            ,{TotalInYardTEU}
            ,{YardUtilization}
            ,'{TerminalStatusDate}'
+           ,{CraneLogReports.Count}
            )
 "
             saveCommand.Execute()

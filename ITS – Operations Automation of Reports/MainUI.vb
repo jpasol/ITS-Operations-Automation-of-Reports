@@ -2,6 +2,7 @@
 Imports Crane_Logs_Report_Creator
 Imports Terminal_Status_Report
 Imports Throughput_Volume_Update
+Imports Management_Report
 
 Public Class MainUI
 
@@ -9,8 +10,8 @@ Public Class MainUI
         "Vessel Movement Report",
         "Crane Logs Report",
         "Throughput Volume Update",
-        "Terminal Status Report"}
-    '"Management Report",
+        "Terminal Status Report",
+        "Management Report"}
     '"Budgeted Volume",
     '"KPI Report for Operation",
     '"Shipping Line TEUs & Monthly Impex Consignees",
@@ -69,6 +70,10 @@ Public Class MainUI
                 cmbMode.Enabled = True
                 cmbMode.Items.AddRange({"Daily", "Monthly", "Annually"})
                 lblParameter.Text = "Date:"
+            Case 4
+                cmbMode.Enabled = True
+                lblParameter.Text = "Date: (MM/YYYY)"
+                mskParameter.Mask = "00/0000"
             Case Else
                 lblParameter.Text = "Date:"
                 mskParameter.Mask = "00/00/0000"
@@ -82,10 +87,10 @@ Public Class MainUI
         Select Case cmbReports.Text
                 Case "Vessel Movement Report"
                     Dim createVMR As New VMRForm(mskParameter.Text, CnnN4, CnnDB, User)
-                    createVMR.ShowDialog()
-                Case "Crane Logs Report"
+                createVMR.Show()
+            Case "Crane Logs Report"
                     Dim createCLR As New CLRForm(mskParameter.Text, CnnN4, CnnDB, User)
-                createCLR.ShowDialog()
+                createCLR.Show()
             Case "Terminal Status Report"
                 Select Case cmbMode.Text
                     Case "Daily"
@@ -135,9 +140,14 @@ Public Class MainUI
                         Dim handlingServices As New HandlingServices(year)
                         crvPreview.ReportSource = handlingServices
                 End Select
+            Case "Management Report"
+                Dim month As Integer = mskParameter.Text.Substring(0, 2)
+                Dim year As Integer = mskParameter.Text.Substring(3)
+                Dim managementReport As New ManagementReport(month, year)
+                crvPreview.ReportSource = managementReport
             Case Else
 
-            End Select
+        End Select
         'Catch ex As Exception
         '    MsgBox("Error in Displaying Report." & vbNewLine &
         '               "Error Description: " & ex.Message)

@@ -13,6 +13,9 @@ Public Class Crane
         Me.CraneName = Crane
         adoConnection = Connection
 
+        InitializeContainerTypeRows()
+
+
         If Existing Then
             'Do Nothing 
         Else
@@ -20,9 +23,73 @@ Public Class Crane
         End If
 
 
+
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
+
+    Private Sub InitializeContainerTypeRows()
+        With Moves.Container
+            Dim containerTypes As String() = {"DSCH", "LOAD", "SHFT", "SHOB"}
+            Dim freightKinds As String() = {"FCL", "MTY"}
+            For Each type As String In containerTypes
+                For Each freight As String In freightKinds
+                    If type <> "DSCH" Then
+                        .AddContainerRow(container:=type,
+                                move_kind:=type,
+                                actual_ob:=Registry,
+                                actual_ib:=Nothing,
+                                freight_kind:=freight,
+                                category:=Nothing,
+                                cntsze20:=0,
+                                cntsze40:=0,
+                                cntsze45:=0)
+                    End If
+
+                    If type <> "LOAD" Then
+                        .AddContainerRow(container:=type,
+                                move_kind:=type,
+                                actual_ob:=Nothing,
+                                actual_ib:=Registry,
+                                freight_kind:=freight,
+                                category:=Nothing,
+                                cntsze20:=0,
+                                cntsze40:=0,
+                                cntsze45:=0)
+                    End If
+                Next
+
+            Next
+            AddTranshipmentRow(Moves.Container, freightKinds)
+        End With
+    End Sub
+
+    Private Sub AddTranshipmentRow(container As CraneMoves.ContainerDataTable, freightKinds() As String)
+        With container
+            For Each freight As String In freightKinds
+                .AddContainerRow(container:="TRSHP",
+                                move_kind:=Nothing,
+                                actual_ob:=Registry,
+                                actual_ib:=Nothing,
+                                freight_kind:=freight,
+                                category:="TRSHP",
+                                cntsze20:=0,
+                                cntsze40:=0,
+                                cntsze45:=0)
+
+                .AddContainerRow(container:="TRSHP",
+                                move_kind:=Nothing,
+                                actual_ob:=Nothing,
+                                actual_ib:=Registry,
+                                freight_kind:=freight,
+                                category:=Nothing,
+                                cntsze20:=0,
+                                cntsze40:=0,
+                                cntsze45:=0)
+            Next
+        End With
+    End Sub
+
     Private adoConnection As ADODB.Connection
     Public ReadOnly Property CraneName As String Implements ICrane.CraneName
     Public ReadOnly Property Registry As String Implements ICrane.Registry
@@ -135,16 +202,16 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry "
             Dim count40 As Object = CountMoves(outbound, freight, 40)
             Dim count45 As Object = CountMoves(outbound, freight, 45)
 
-            If (count20 + count40 + count45) > 0 Then
-                Moves.Container.Rows.Add("LOAD",
-                                     Registry,
-                                     Nothing,
-                                     freight,
-                                     Nothing,
-                                     count20,
-                                     count40,
-                                     count45)
-            End If
+
+            With Moves.Container.AsEnumerable.Where(Function(row) row("freight_kind").ToString = freight And
+                                                        row("actual_ob").ToString = Registry And
+                                                        row("container").ToString = "LOAD").FirstOrDefault
+                If (count20 + count40 + count45) > 0 Then
+                    .Item("cntsze20") = count20
+                    .Item("cntsze40") = count40
+                    .Item("cntsze45") = count45
+                End If
+            End With
         Next
     End Sub
 
@@ -219,16 +286,15 @@ where che_qc = @GC and ufv.actual_ib_cv = @Registry"
             Dim count40 As Object = CountMoves(inbound, freight, 40)
             Dim count45 As Object = CountMoves(inbound, freight, 45)
 
-            If (count20 + count40 + count45) > 0 Then
-                Moves.Container.Rows.Add("DSCH",
-                                     Nothing,
-                                     Registry,
-                                     freight,
-                                     Nothing,
-                                     count20,
-                                     count40,
-                                     count45)
-            End If
+            With Moves.Container.AsEnumerable.Where(Function(row) row("freight_kind") = freight And
+                                                        row("actual_ib") = Registry And
+                                                        row("container") = "DSCH").FirstOrDefault
+                If (count20 + count40 + count45) > 0 Then
+                    .Item("cntsze20") = count20
+                    .Item("cntsze40") = count40
+                    .Item("cntsze45") = count45
+                End If
+            End With
         Next
     End Sub
     Public Function TotalInboundMoves(datatable As CraneMoves.InboundDataTable) As Double

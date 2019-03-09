@@ -15,6 +15,7 @@
         <xs:element name="Container" msprop:Generator_TableClassName="ContainerDataTable" msprop:Generator_TableVarName="tableContainer" msprop:Generator_TablePropName="Container" msprop:Generator_RowDeletingName="ContainerRowDeleting" msprop:Generator_RowChangingName="ContainerRowChanging" msprop:Generator_RowEvHandlerName="ContainerRowChangeEventHandler" msprop:Generator_RowDeletedName="ContainerRowDeleted" msprop:Generator_UserTableName="Container" msprop:Generator_RowChangedName="ContainerRowChanged" msprop:Generator_RowEvArgName="ContainerRowChangeEvent" msprop:Generator_RowClassName="ContainerRow">
           <xs:complexType>
             <xs:sequence>
+              <xs:element name="container" msprop:Generator_ColumnVarNameInTable="columncontainer" msprop:Generator_ColumnPropNameInRow="container" msprop:Generator_ColumnPropNameInTable="containerColumn" msprop:Generator_UserColumnName="container" type="xs:string" minOccurs="0" />
               <xs:element name="move_kind" msprop:Generator_ColumnVarNameInTable="columnmove_kind" msprop:Generator_ColumnPropNameInRow="move_kind" msprop:Generator_ColumnPropNameInTable="move_kindColumn" msprop:Generator_UserColumnName="move_kind" type="xs:string" minOccurs="0" />
               <xs:element name="actual_ob" msdata:Caption="DataColumn1" msprop:Generator_ColumnVarNameInTable="columnactual_ob" msprop:Generator_ColumnPropNameInRow="actual_ob" msprop:Generator_ColumnPropNameInTable="actual_obColumn" msprop:Generator_UserColumnName="actual_ob" type="xs:string" minOccurs="0" />
               <xs:element name="actual_ib" msprop:Generator_ColumnVarNameInTable="columnactual_ib" msprop:Generator_ColumnPropNameInRow="actual_ib" msprop:Generator_ColumnPropNameInTable="actual_ibColumn" msprop:Generator_UserColumnName="actual_ib" type="xs:string" minOccurs="0" />
@@ -54,6 +55,28 @@
         </xs:element>
         <xs:element name="Outbound" msprop:Generator_TableClassName="OutboundDataTable" msprop:Generator_TableVarName="tableOutbound" msprop:Generator_RowChangedName="OutboundRowChanged" msprop:Generator_TablePropName="Outbound" msprop:Generator_RowDeletingName="OutboundRowDeleting" msprop:Generator_RowChangingName="OutboundRowChanging" msprop:Generator_RowEvHandlerName="OutboundRowChangeEventHandler" msprop:Generator_RowDeletedName="OutboundRowDeleted" msprop:Generator_RowClassName="OutboundRow" msprop:Generator_UserTableName="Outbound" msprop:Generator_RowEvArgName="OutboundRowChangeEvent">
           <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Hatchcover1" msprop:Generator_TableClassName="Hatchcover1DataTable" msprop:Generator_TableVarName="tableHatchcover1" msprop:Generator_TablePropName="Hatchcover1" msprop:Generator_RowDeletingName="Hatchcover1RowDeleting" msprop:Generator_RowChangingName="Hatchcover1RowChanging" msprop:Generator_RowEvHandlerName="Hatchcover1RowChangeEventHandler" msprop:Generator_RowDeletedName="Hatchcover1RowDeleted" msprop:Generator_UserTableName="Hatchcover1" msprop:Generator_RowChangedName="Hatchcover1RowChanged" msprop:Generator_RowEvArgName="Hatchcover1RowChangeEvent" msprop:Generator_RowClassName="Hatchcover1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="actual_ob" msdata:Caption="DataColumn1" msprop:Generator_ColumnVarNameInTable="columnactual_ob" msprop:Generator_ColumnPropNameInRow="actual_ob" msprop:Generator_ColumnPropNameInTable="actual_obColumn" msprop:Generator_UserColumnName="actual_ob" type="xs:string" minOccurs="0" />
+              <xs:element name="actual_ib" msprop:Generator_ColumnVarNameInTable="columnactual_ib" msprop:Generator_ColumnPropNameInRow="actual_ib" msprop:Generator_ColumnPropNameInTable="actual_ibColumn" msprop:Generator_UserColumnName="actual_ib" type="xs:string" minOccurs="0" />
+              <xs:element name="baynum" msprop:Generator_ColumnVarNameInTable="columnbaynum" msprop:Generator_ColumnPropNameInRow="baynum" msprop:nullValue="_throw" msprop:Generator_ColumnPropNameInTable="baynumColumn" msprop:Generator_UserColumnName="baynum" type="xs:long" default="0" minOccurs="0" />
+              <xs:element name="cvrsze20" msprop:Generator_ColumnVarNameInTable="columncvrsze20" msprop:Generator_ColumnPropNameInRow="cvrsze20" msprop:nullValue="_throw" msprop:Generator_ColumnPropNameInTable="cvrsze20Column" msprop:Generator_UserColumnName="cvrsze20" type="xs:long" default="0" minOccurs="0" />
+              <xs:element name="cvrsze40" msprop:Generator_ColumnVarNameInTable="columncvrsze40" msprop:Generator_ColumnPropNameInRow="cvrsze40" msprop:nullValue="_throw" msprop:Generator_ColumnPropNameInTable="cvrsze40Column" msprop:Generator_UserColumnName="cvrsze40" type="xs:long" default="0" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Gearbox1" msprop:Generator_TableClassName="Gearbox1DataTable" msprop:Generator_TableVarName="tableGearbox1" msprop:Generator_TablePropName="Gearbox1" msprop:Generator_RowDeletingName="Gearbox1RowDeleting" msprop:Generator_RowChangingName="Gearbox1RowChanging" msprop:Generator_RowEvHandlerName="Gearbox1RowChangeEventHandler" msprop:Generator_RowDeletedName="Gearbox1RowDeleted" msprop:Generator_UserTableName="Gearbox1" msprop:Generator_RowChangedName="Gearbox1RowChanged" msprop:Generator_RowEvArgName="Gearbox1RowChangeEvent" msprop:Generator_RowClassName="Gearbox1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="actual_ob" msdata:Caption="DataColumn1" msprop:Generator_ColumnVarNameInTable="columnactual_ob" msprop:Generator_ColumnPropNameInRow="actual_ob" msprop:Generator_ColumnPropNameInTable="actual_obColumn" msprop:Generator_UserColumnName="actual_ob" type="xs:string" minOccurs="0" />
+              <xs:element name="actual_ib" msprop:Generator_ColumnVarNameInTable="columnactual_ib" msprop:Generator_ColumnPropNameInRow="actual_ib" msprop:Generator_ColumnPropNameInTable="actual_ibColumn" msprop:Generator_UserColumnName="actual_ib" type="xs:string" minOccurs="0" />
+              <xs:element name="baynum" msprop:Generator_ColumnVarNameInTable="columnbaynum" msprop:Generator_ColumnPropNameInRow="baynum" msprop:nullValue="_throw" msprop:Generator_ColumnPropNameInTable="baynumColumn" msprop:Generator_UserColumnName="baynum" type="xs:long" default="0" minOccurs="0" />
+              <xs:element name="gbxsze20" msprop:Generator_ColumnVarNameInTable="columngbxsze20" msprop:Generator_ColumnPropNameInRow="gbxsze20" msprop:nullValue="_throw" msprop:Generator_ColumnPropNameInTable="gbxsze20Column" msprop:Generator_UserColumnName="gbxsze20" type="xs:long" default="0" minOccurs="0" />
+              <xs:element name="gbxsze40" msprop:Generator_ColumnVarNameInTable="columngbxsze40" msprop:Generator_ColumnPropNameInRow="gbxsze40" msprop:nullValue="_throw" msprop:Generator_ColumnPropNameInTable="gbxsze40Column" msprop:Generator_UserColumnName="gbxsze40" type="xs:long" default="0" minOccurs="0" />
+            </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:choice>

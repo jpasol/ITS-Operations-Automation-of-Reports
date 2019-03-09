@@ -23,6 +23,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Throughput Volume Update", 
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Automated Terminal Status Report", "Automated Terminal Status Report\Automated Terminal Status Report.vdproj", "{AA451E9A-4086-4247-8AD8-92D3626FE8C0}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Management Report", "..\ManagementReport\Management Report.vbproj", "{D49397C7-BC74-4359-B390-9CDA6ACEF741}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug 64|Any CPU = Debug 64|Any CPU
@@ -267,6 +269,30 @@ Global
 		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Release|Any CPU.ActiveCfg = Release
 		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Release|x64.ActiveCfg = Release
 		{AA451E9A-4086-4247-8AD8-92D3626FE8C0}.Release|x86.ActiveCfg = Release
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Debug 64|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Debug 64|Any CPU.Build.0 = Debug|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Debug 64|x64.ActiveCfg = Debug|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Debug 64|x64.Build.0 = Debug|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Debug 64|x86.ActiveCfg = Debug|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Debug 64|x86.Build.0 = Debug|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Debug|x64.Build.0 = Debug|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Debug|x86.Build.0 = Debug|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Release 64|Any CPU.ActiveCfg = Release|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Release 64|Any CPU.Build.0 = Release|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Release 64|x64.ActiveCfg = Release|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Release 64|x64.Build.0 = Release|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Release 64|x86.ActiveCfg = Release|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Release 64|x86.Build.0 = Release|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Release|x64.ActiveCfg = Release|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Release|x64.Build.0 = Release|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Release|x86.ActiveCfg = Release|Any CPU
+		{D49397C7-BC74-4359-B390-9CDA6ACEF741}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -277,6 +277,10 @@
       <Project>{422c491a-19de-47cc-8f27-cb945c1b5733}</Project>
       <Name>Crane Logs Report Creator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ManagementReport\Management Report.vbproj">
+      <Project>{d49397c7-bc74-4359-b390-9cda6acef741}</Project>
+      <Name>Management Report</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Terminal-Status-Report\Terminal Status Report.vbproj">
       <Project>{92f5220f-51ba-4be6-ae3b-3259305544ae}</Project>
       <Name>Terminal Status Report</Name>

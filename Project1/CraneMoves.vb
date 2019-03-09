@@ -1,10 +1,20 @@
-﻿Imports System.Linq
+﻿Imports System.Data
+Imports System.Linq
 Imports Reports
 Imports Reports.ReportFunctions
 
 Partial Class CraneMoves
-    Partial Public Class InboundDataTable
+    Partial Public Class Hatchcover1DataTable
 
+        Private Sub Hatchcover1DataTable_TableNewRow(sender As Object, e As DataTableNewRowEventArgs) Handles Me.TableNewRow
+            e.Row("actual_ob") = "Registry" 'Convert nalang pagkasave
+        End Sub
+    End Class
+
+    Partial Public Class Gearbox1DataTable
+        Private Sub Gearbox1DataTable_TableNewRow(sender As Object, e As DataTableNewRowEventArgs) Handles Me.TableNewRow
+            e.Row("actual_ob") = "Registry" 'Convert nalang pagkasave
+        End Sub
     End Class
 
     Partial Public Class GearboxDataTable
@@ -18,6 +28,10 @@ Partial Class CraneMoves
                 Return boxes
             End Get
         End Property
+
+        Private Sub GearboxDataTable_TableNewRow(sender As Object, e As DataTableNewRowEventArgs) Handles Me.TableNewRow
+            e.Row("actual_ib") = "Registry" 'Convert nalang pagkasave
+        End Sub
     End Class
 
     Partial Public Class HatchcoverDataTable
@@ -31,6 +45,10 @@ Partial Class CraneMoves
                 Return boxes
             End Get
         End Property
+
+        Private Sub HatchcoverDataTable_TableNewRow(sender As Object, e As DataTableNewRowEventArgs) Handles Me.TableNewRow
+            e.Row("actual_ib") = "Registry" 'Convert nalang pagkasave
+        End Sub
     End Class
 
     Partial Public Class ContainerDataTable
@@ -68,6 +86,7 @@ Partial Class CraneMoves
                 Return boxes
             End Get
         End Property
+
     End Class
 
     Public Function TotalMoves() As Double
