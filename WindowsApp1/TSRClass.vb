@@ -224,27 +224,25 @@ WHERE ATA > '{StartofMonth}' and carrier_mode = 'VESSEL' and phase like '%CLOSED
     End Sub
 
     Public Sub RetrieveActiveUnits() Implements ITerminalStatusReport.RetrieveActiveUnits
-        N4Connection.Open()
-        With activeUnitsRecordset()
-            While Not .EOF
-                Dim UnitNumber As String = .Fields("UnitNbr").Value
-                Dim Registry As String = .Fields("Registry").Value
-                Dim SizeMM As Double = .Fields("Size").Value
-                Dim Category As String = .Fields("Category").Value
-                Dim Freight As String = .Fields("Freight").Value
-                Dim TimeIn As Date = CDate(.Fields("TimeIn").Value)
+        For Each row As DataRow In activeUnitsRecordset().Rows
+            Dim UnitNumber As String = row("UnitNbr").ToString
+            Dim Registry As String = row("Registry").ToString
+            Dim SizeMM As Double = row("Size").ToString
+            Dim Category As String = row("Category").ToString
+            Dim Freight As String = row("Freight").ToString
+            Dim TimeIn As Date = CDate(row("TimeIn").ToString)
 
 
-                Me.ActiveUnits.Add(New ActiveUnit(UnitNumber, Registry, SizeMM, Category, Freight, TimeIn))
-                .MoveNext()
-            End While
-        End With
-        N4Connection.Close()
+            Me.ActiveUnits.Add(New ActiveUnit(UnitNumber, Registry, SizeMM, Category, Freight, TimeIn))
+        Next
     End Sub
 
-    Private Function activeUnitsRecordset() As ADODB.Recordset
+    Private Function activeUnitsRecordset() As DataTable
+        N4Connection.Open()
+
         Try
 execute:
+            
             Dim activeUnits As New ADODB.Command
             activeUnits.ActiveConnection = N4Connection
             activeUnits.CommandText = $"
@@ -264,31 +262,34 @@ inner join [ref_equipment] req on ueq.eq_gkey = req.gkey
 where ufv.transit_state = 'S40_YARD' and [time_in] < '{TerminalStatusDate}'
 "
 
-            Return activeUnits.Execute
+            activeUnitsRecordset = New DataTable
+            Dim tempAdapter As New OleDb.OleDbDataAdapter
+            tempAdapter.Fill(activeUnitsRecordset, activeUnits.Execute(Options:=ExecuteOptionEnum.adAsyncFetchNonBlocking))
+
         Catch ex As Exception
             If ex.Message = "Query timeout expired" Then
                 GoTo execute
             End If
         End Try
+
+        N4Connection.Close()
+
     End Function
 
     Public Sub RetrieveGateTransactions() Implements ITerminalStatusReport.RetrieveGateTransactions
-        N4Connection.Open()
-        With gateTransactionRecordset()
-            While Not .EOF
-                Dim ContainerNumber As String = .Fields("ctr_id").Value
-                Dim NOMContainerSize As String = .Fields("eqo_eq_length").Value
-                Dim TransactionType As String = .Fields("sub_type").Value
-                Dim StartDate As String = .Fields("created").Value
 
-                GateTransactions.Add(New GateTransaction(ContainerNumber, NOMContainerSize, TransactionType, StartDate))
-                .MoveNext()
-            End While
-        End With
-        N4Connection.Close()
+        For Each row As DataRow In gateTransactionRecordset().Rows
+            Dim ContainerNumber As String = row("ctr_id").ToString
+            Dim NOMContainerSize As String = row("eqo_eq_length").ToString
+            Dim TransactionType As String = row("sub_type").ToString
+            Dim StartDate As String = row("created").ToString
+
+            GateTransactions.Add(New GateTransaction(ContainerNumber, NOMContainerSize, TransactionType, StartDate))
+        Next
     End Sub
 
-    Private Function gateTransactionRecordset() As ADODB.Recordset
+    Private Function gateTransactionRecordset() As DataTable
+        N4Connection.Open()
         Try
 execute:
 
@@ -301,12 +302,18 @@ SELECT [sub_type]
       ,[created]
   FROM [apex].[dbo].[road_truck_transactions] where created > '{StartofYear}' and created < '{TerminalStatusDate}' and ([status] in ('OK','COMPLETE'))
 "
-            Return gateTransactions.Execute()
+            gateTransactionRecordset = New DataTable
+            Dim tempAdapter As New OleDb.OleDbDataAdapter
+            tempAdapter.Fill(gateTransactionRecordset, gateTransactions.Execute(Options:=ExecuteOptionEnum.adAsyncFetchNonBlocking))
+
         Catch ex As Exception
             If ex.Message = "Query timeout expired" Then
                 GoTo execute
             End If
         End Try
+
+        N4Connection.Close()
+
     End Function
 
     Public Sub Calculate() Implements ITerminalStatusReport.Calculate

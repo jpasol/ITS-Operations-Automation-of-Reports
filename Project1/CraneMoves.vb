@@ -4,17 +4,38 @@ Imports Reports
 Imports Reports.ReportFunctions
 
 Partial Class CraneMoves
+
     Partial Public Class Hatchcover1DataTable
 
         Private Sub Hatchcover1DataTable_TableNewRow(sender As Object, e As DataTableNewRowEventArgs) Handles Me.TableNewRow
             e.Row("actual_ob") = "Registry" 'Convert nalang pagkasave
         End Sub
+
+        Friend ReadOnly Property TotalMoves(v As Integer) As Integer
+            Get
+                Dim boxes As Double = 0
+                For Each row In Me.Rows
+                    boxes += row($"cvrsze{v}").ToString
+                Next
+                Return boxes
+            End Get
+        End Property
     End Class
 
     Partial Public Class Gearbox1DataTable
         Private Sub Gearbox1DataTable_TableNewRow(sender As Object, e As DataTableNewRowEventArgs) Handles Me.TableNewRow
             e.Row("actual_ob") = "Registry" 'Convert nalang pagkasave
         End Sub
+
+        Friend ReadOnly Property TotalMoves(v As Integer) As Integer
+            Get
+                Dim boxes As Double = 0
+                For Each row In Me.Rows
+                    boxes += row($"gbxsze{v}").ToString
+                Next
+                Return boxes
+            End Get
+        End Property
     End Class
 
     Partial Public Class GearboxDataTable
@@ -92,7 +113,9 @@ Partial Class CraneMoves
     Public Function TotalMoves() As Double
         Return Container.TotalMoves(20) + Container.TotalMoves(40) + Container.TotalMoves(45) +
             Hatchcover.TotalMoves(20) + Hatchcover.TotalMoves(40) +
-            Gearbox.TotalMoves(20) + Gearbox.TotalMoves(40)
+            Hatchcover1.TotalMoves(20) + Hatchcover1.TotalMoves(40) +
+            Gearbox.TotalMoves(20) + Gearbox.TotalMoves(40) +
+            Gearbox1.TotalMoves(20) + Gearbox1.TotalMoves(40)
 
     End Function
 

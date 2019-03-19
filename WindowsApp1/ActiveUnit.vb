@@ -28,7 +28,7 @@ Public Class ActiveUnit
 
     Public ReadOnly Property TEU As Double Implements IActiveUnit.TEU
         Get
-            Return Format(Size / 20, "0.0")
+            Return Format(Size / 20, "0.00")
         End Get
     End Property
 

@@ -123,4 +123,19 @@
                 Return "NonDeductable"
         End Select
     End Function
+
+    Public Shared Function TranslateISO(v As String) As String
+        Select Case v
+            Case "Dry"
+                Return "Dry"
+            Case "Rfr"
+                Return "Reefer"
+            Case "FRk"
+                Return "Flat/Rack"
+            Case "Tnk"
+                Return "Tank Tainer"
+            Case "Opn"
+                Return "Open Top"
+        End Select
+    End Function
 End Class
