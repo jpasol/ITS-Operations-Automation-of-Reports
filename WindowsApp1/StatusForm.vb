@@ -4,41 +4,41 @@
 
         ' This call is required by the designer.
         InitializeComponent()
-        ConnectToDatabases()
+        'ConnectToDatabases()
 
         ' Add any initialization after the InitializeComponent() call.
 
     End Sub
 
-    Private Sub ConnectToDatabases()
-        With My.Settings
-            N4Connection.ConnectionString = "Provider=SQLOLEDB;
-                        Data Source=" & .N4Server & ";
-                        Initial Catalog=" & .N4Database & ";
-                        User ID=tosadmin;Password=tosadmin;"
+    'Private Sub ConnectToDatabases()
+    '    With My.Settings
+    '        N4Connection.ConnectionString = "Provider=SQLOLEDB;
+    '                    Data Source=" & .N4Server & ";
+    '                    Initial Catalog=" & .N4Database & ";
+    '                    User ID=tosadmin;Password=tosadmin;"
 
-            OPConnection.ConnectionString = "Provider=SQLOLEDB;
-                        Data Source=" & .OPServer & ";
-                        Initial Catalog=" & .OPDatabase & ";
-                        User ID=sa_ictsi;Password=Ictsi123;"
+    '        OPConnection.ConnectionString = "Provider=SQLOLEDB;
+    '                    Data Source=" & .OPServer & ";
+    '                    Initial Catalog=" & .OPDatabase & ";
+    '                    User ID=sa_ictsi;Password=Ictsi123;"
 
-            Try
-                N4Connection.Open()
-                OPConnection.Open()
+    '        Try
+    '            N4Connection.Open()
+    '            OPConnection.Open()
 
-                N4Connection.Close()
-                OPConnection.Close()
-            Catch ex As Exception
-                MsgBox("Cannot Connect to Database" & vbNewLine &
-                       Err.Number & vbNewLine &
-                       Err.Description)
-            End Try
-        End With
-    End Sub
+    '            N4Connection.Close()
+    '            OPConnection.Close()
+    '        Catch ex As Exception
+    '            MsgBox("Cannot Connect to Database" & vbNewLine &
+    '                   Err.Number & vbNewLine &
+    '                   Err.Description)
+    '        End Try
+    '    End With
+    'End Sub
 
     Private terminalStatus As TSRClass
-    Private N4Connection As New ADODB.Connection
-    Private OPConnection As New ADODB.Connection
+    'Private N4Connection As New ADODB.Connection
+    'Private OPConnection As New ADODB.Connection
 
     Private Sub CreateTerminalStatus(now As Date)
         terminalStatus = New TSRClass(now)
@@ -110,6 +110,7 @@
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
         If (Date.Now.Minute Mod My.Settings.Interval) = 0 Then
             Timer1.Stop()
             CreateTerminalStatus(Date.Now)

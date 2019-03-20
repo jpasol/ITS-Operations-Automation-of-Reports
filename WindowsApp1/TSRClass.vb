@@ -175,9 +175,9 @@ WHERE ATA > '{StartofMonth}' and carrier_mode = 'VESSEL' and phase like '%CLOSED
 "
             With registryRecordset.Execute()
                 While Not .EOF
-                    If Not My.Settings.Exclude.Contains(.Fields("Owner").Value) Then
-                        tempRegistryList.Add(.Fields("Registry").Value)
-                    End If
+                    'If Not My.Settings.Exclude.Contains(.Fields("Owner").Value) Then
+                    tempRegistryList.Add(.Fields("Registry").Value)
+                    'End If 'Move to Crane Logs Report Generation 03192019
 
 
                     .MoveNext()
@@ -198,6 +198,7 @@ WHERE ATA > '{StartofMonth}' and carrier_mode = 'VESSEL' and phase like '%CLOSED
         Dim CraneLogRegistries As List(Of String) = CreateRegistryList()
         For Each Registry As String In CraneLogRegistries
             Try
+
                 Dim tempCLR As New CLRClass(Registry, N4Connection, OPConnection)
                 CraneLogReports.Add(tempCLR)
 
@@ -209,9 +210,11 @@ WHERE ATA > '{StartofMonth}' and carrier_mode = 'VESSEL' and phase like '%CLOSED
                         OPConnection.BeginTrans()
                         tempCLR.Save()
                         OPConnection.CommitTrans()
+
                     Catch ex As Exception
-                        MsgBox($"Error in Saving: {Registry}{vbNewLine}{ex.Message}")
+                        'MsgBox($"Error in Saving: {Registry}{vbNewLine}{ex.Message}")
                         OPConnection.RollbackTrans()
+                        CraneLogReports.Remove(tempCLR)
                     End Try
                     OPConnection.Close()
                 End If

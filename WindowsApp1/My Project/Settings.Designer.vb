@@ -56,54 +56,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("sbitc-db")>  _
-        Public Property N4Server() As String
-            Get
-                Return CType(Me("N4Server"),String)
-            End Get
-            Set
-                Me("N4Server") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("apex")>  _
-        Public Property N4Database() As String
-            Get
-                Return CType(Me("N4Database"),String)
-            End Get
-            Set
-                Me("N4Database") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("sbitc-dev")>  _
-        Public Property OPServer() As String
-            Get
-                Return CType(Me("OPServer"),String)
-            End Get
-            Set
-                Me("OPServer") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("opreports")>  _
-        Public Property OPDatabase() As String
-            Get
-                Return CType(Me("OPDatabase"),String)
-            End Get
-            Set
-                Me("OPDatabase") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("5640")>  _
         Public Property TotalGroundSlot() As Integer
             Get
