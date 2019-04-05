@@ -204,7 +204,6 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry "
 
 
             With Moves.Container.AsEnumerable.Where(Function(row) row("freight_kind").ToString = freight And
-                                                        row("actual_ob").ToString = Registry And
                                                         row("container").ToString = "LOAD").FirstOrDefault
                 If (count20 + count40 + count45) > 0 Then
                     .Item("cntsze20") = count20
@@ -287,7 +286,6 @@ where che_qc = @GC and ufv.actual_ib_cv = @Registry"
             Dim count45 As Object = CountMoves(inbound, freight, 45)
 
             With Moves.Container.AsEnumerable.Where(Function(row) row("freight_kind") = freight And
-                                                        row("actual_ib") = Registry And
                                                         row("container") = "DSCH").FirstOrDefault
                 If (count20 + count40 + count45) > 0 Then
                     .Item("cntsze20") = count20

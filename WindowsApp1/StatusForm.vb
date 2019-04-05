@@ -76,7 +76,7 @@
             txtStorageEmpty.Text = Format(.StorageEmptyTEU, "0")
             txtYardTotal.Text = Format(.TotalInYardTEU, "0")
             txtYardUtilization.Text = Format(.YardUtilization, "0") & "%"
-
+            txtYardECD.Text = Format(.YardUtilizationECD, "0") & "%"
 
         End With
 

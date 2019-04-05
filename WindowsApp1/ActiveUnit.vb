@@ -4,13 +4,14 @@ Imports Reports
 Public Class ActiveUnit
     Implements IActiveUnit
 
-    Public Sub New(unitNumber As String, registry As String, sizeMM As Double, category As String, freight As String, timeIn As Date)
+    Public Sub New(unitNumber As String, registry As String, sizeMM As Double, category As String, freight As String, timeIn As Date, group As String)
         Me.UnitNumber = unitNumber
         Me.Registry = registry
         Me.sizeMM = sizeMM
         Me.Category = category
         Me.Freight = freight
         Me.TimeIn = timeIn
+        Me.Group = group
     End Sub
 
     Private ReadOnly sizeMM As Double
@@ -20,6 +21,8 @@ Public Class ActiveUnit
     Public ReadOnly Property Category As String Implements IActiveUnit.Category
     Public ReadOnly Property Freight As String Implements IActiveUnit.Freight
     Public ReadOnly Property TimeIn As Date Implements IActiveUnit.TimeIn
+    Public ReadOnly Property Group As String Implements IActiveUnit.Group
+
     Public ReadOnly Property Size As Integer Implements IActiveUnit.Size
         Get
             Return Math.Round(sizeMM / 304.8, 0)

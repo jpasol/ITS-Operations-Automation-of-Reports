@@ -5,16 +5,17 @@ Imports Reports
 Public Class Units
     Implements IReports.IUnits
 
-    Sub New(Registry As String, ByRef OPconnection As Connection, ByRef Connection As Connection)
+    Sub New(Registry As String)
 
         ' This call is required by the designer..
         strRegistry = Registry
-        untConnection = Connection
-        dbConnection = OPconnection
+        Dim connections As New Reports.Connections
+        untConnection = connections.N4Connection
+        dbConnection = connections.OPConnection
         If Exists() Then
             'Do nothing
         Else
-            Retrieve(Registry, Connection)
+            Retrieve(Registry)
         End If
 
 
@@ -107,7 +108,7 @@ end
         Next
     End Sub
 
-    Public Sub Retrieve(Vessel As String, Connection As ADODB.Connection) Implements IReports.IUnits.Retrieve
+    Public Sub Retrieve(Vessel As String) Implements IReports.IUnits.Retrieve
         Dim strSQl(1) As String '0 = Inbound | 1 = Outbound
         Dim datAdapt As New OleDb.OleDbDataAdapter
         Dim rsUnits As New ADODB.Recordset
@@ -201,14 +202,14 @@ on unit.gkey = ufv.unit_gkey
 where [actual_ob_cv] = @Registry and category <> 'THRGH'"
 
         For count As Integer = 0 To 1
-            Connection.Open()
+            untConnection.Open()
 
-            rsUnits.Open(strSQl(count), Connection)
+            rsUnits.Open(strSQl(count), untConnection)
             datAdapt.Fill(dsContainers.Tables(count), rsUnits)
             tagCtrTyp(dsContainers.Tables(count))
             rsUnits.Close()
 
-            Connection.Close()
+            untConnection.Close()
         Next
 
 

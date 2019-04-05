@@ -41,7 +41,7 @@
         ReadOnly Property Registry As String
         ReadOnly Property Containers As Data.DataSet
         ReadOnly Property Connection As ADODB.Connection
-        Sub Retrieve(Vessel As String, Connection As ADODB.Connection)
+        Sub Retrieve(Vessel As String)
         Function Count(Containers As Data.DataTable, Condition As String) As Double
     End Interface
     Public Interface IVessel
@@ -60,18 +60,18 @@
         ReadOnly Property ETD As DateTime
         ReadOnly Property StartWork As DateTime
         ReadOnly Property EndWork As DateTime
-        ReadOnly Property FirstContainerDischarged As DateTime
-        ReadOnly Property LastContainerDischarged As DateTime
-        ReadOnly Property FirstContainerLoaded As DateTime
-        ReadOnly Property LastContainerLoaded As DateTime
+        ReadOnly Property FirstContainerDischarged As DateTime?
+        ReadOnly Property LastContainerDischarged As DateTime?
+        ReadOnly Property FirstContainerLoaded As DateTime?
+        ReadOnly Property LastContainerLoaded As DateTime?
         ReadOnly Property LineOperator() As String
         ReadOnly Property Owner As String
         ReadOnly Property Phase As String
         ReadOnly Property LaborOnBoard As Date
-        ReadOnly Property LaborOffBoard As Date
+        ReadOnly Property LaborOffBoard As Date?
         ReadOnly Property Units As Reports.Units
         ReadOnly Property Connection As ADODB.Connection
-        Sub Retrieve(Registry As String, Connection As ADODB.Connection)
+        Sub Retrieve(Registry As String)
         Function TEU(Optional Condition As String = "") As Double
         Function Boxes(Optional Condition As String = "") As Long
     End Interface

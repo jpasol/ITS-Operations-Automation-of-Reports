@@ -48,7 +48,6 @@ Partial Class StatusForm
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.txtGroundSlot = New System.Windows.Forms.TextBox()
         Me.txtStaticCapacity = New System.Windows.Forms.TextBox()
@@ -62,7 +61,6 @@ Partial Class StatusForm
         Me.txtYTDExport = New System.Windows.Forms.TextBox()
         Me.txtMTDExport = New System.Windows.Forms.TextBox()
         Me.txtYTDImport = New System.Windows.Forms.TextBox()
-        Me.txtYardUtilization = New System.Windows.Forms.TextBox()
         Me.txtYardTotal = New System.Windows.Forms.TextBox()
         Me.txtStorageEmpty = New System.Windows.Forms.TextBox()
         Me.txtExportFull = New System.Windows.Forms.TextBox()
@@ -90,6 +88,10 @@ Partial Class StatusForm
         Me.Label31 = New System.Windows.Forms.Label()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.txtYardECD = New System.Windows.Forms.TextBox()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.txtYardUtilization = New System.Windows.Forms.TextBox()
+        Me.Label23 = New System.Windows.Forms.Label()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -355,17 +357,6 @@ Partial Class StatusForm
         Me.Label22.TabIndex = 18
         Me.Label22.Text = "YTD TEU OUT by Trucks"
         '
-        'Label23
-        '
-        Me.Label23.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label23.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.Location = New System.Drawing.Point(12, 810)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(315, 23)
-        Me.Label23.TabIndex = 26
-        Me.Label23.Text = "YARD UTILIZATION"
-        '
         'Label24
         '
         Me.Label24.BackColor = System.Drawing.Color.White
@@ -521,18 +512,6 @@ Partial Class StatusForm
         Me.txtYTDImport.TabIndex = 35
         Me.txtYTDImport.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'txtYardUtilization
-        '
-        Me.txtYardUtilization.BackColor = System.Drawing.Color.White
-        Me.txtYardUtilization.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.txtYardUtilization.Location = New System.Drawing.Point(333, 810)
-        Me.txtYardUtilization.Multiline = True
-        Me.txtYardUtilization.Name = "txtYardUtilization"
-        Me.txtYardUtilization.ReadOnly = True
-        Me.txtYardUtilization.Size = New System.Drawing.Size(143, 23)
-        Me.txtYardUtilization.TabIndex = 49
-        Me.txtYardUtilization.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'txtYardTotal
         '
         Me.txtYardTotal.BackColor = System.Drawing.Color.White
@@ -664,6 +643,7 @@ Partial Class StatusForm
         '
         'PictureBox1
         '
+        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.No
         Me.PictureBox1.Image = Global.AutomatedTerminalStatusReport.My.Resources.Resources.download
         Me.PictureBox1.Location = New System.Drawing.Point(12, 27)
         Me.PictureBox1.Name = "PictureBox1"
@@ -831,11 +811,61 @@ Partial Class StatusForm
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
+        'txtYardECD
+        '
+        Me.txtYardECD.BackColor = System.Drawing.Color.White
+        Me.txtYardECD.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.txtYardECD.Location = New System.Drawing.Point(333, 833)
+        Me.txtYardECD.Multiline = True
+        Me.txtYardECD.Name = "txtYardECD"
+        Me.txtYardECD.ReadOnly = True
+        Me.txtYardECD.Size = New System.Drawing.Size(143, 23)
+        Me.txtYardECD.TabIndex = 65
+        Me.txtYardECD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label25
+        '
+        Me.Label25.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.Label25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label25.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label25.Location = New System.Drawing.Point(12, 833)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(315, 23)
+        Me.Label25.TabIndex = 64
+        Me.Label25.Text = "YARD UTILIZATION (ECD)"
+        '
+        'txtYardUtilization
+        '
+        Me.txtYardUtilization.BackColor = System.Drawing.Color.White
+        Me.txtYardUtilization.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.txtYardUtilization.Location = New System.Drawing.Point(333, 810)
+        Me.txtYardUtilization.Multiline = True
+        Me.txtYardUtilization.Name = "txtYardUtilization"
+        Me.txtYardUtilization.ReadOnly = True
+        Me.txtYardUtilization.Size = New System.Drawing.Size(143, 23)
+        Me.txtYardUtilization.TabIndex = 67
+        Me.txtYardUtilization.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label23
+        '
+        Me.Label23.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label23.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.Location = New System.Drawing.Point(12, 810)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(315, 23)
+        Me.Label23.TabIndex = 66
+        Me.Label23.Text = "YARD UTILIZATION"
+        '
         'StatusForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(488, 854)
+        Me.ClientSize = New System.Drawing.Size(488, 874)
+        Me.Controls.Add(Me.txtYardUtilization)
+        Me.Controls.Add(Me.Label23)
+        Me.Controls.Add(Me.txtYardECD)
+        Me.Controls.Add(Me.Label25)
         Me.Controls.Add(Me.txtExportEmpty)
         Me.Controls.Add(Me.Label31)
         Me.Controls.Add(Me.txtDailyTEUOut)
@@ -850,7 +880,6 @@ Partial Class StatusForm
         Me.Controls.Add(Me.Label28)
         Me.Controls.Add(Me.lblTsrDate)
         Me.Controls.Add(Me.cmdRefresh)
-        Me.Controls.Add(Me.txtYardUtilization)
         Me.Controls.Add(Me.txtYardTotal)
         Me.Controls.Add(Me.txtStorageEmpty)
         Me.Controls.Add(Me.txtExportFull)
@@ -873,7 +902,6 @@ Partial Class StatusForm
         Me.Controls.Add(Me.txtTotalYardCapacity)
         Me.Controls.Add(Me.txtStaticCapacity)
         Me.Controls.Add(Me.txtGroundSlot)
-        Me.Controls.Add(Me.Label23)
         Me.Controls.Add(Me.Label24)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label17)
@@ -940,7 +968,6 @@ Partial Class StatusForm
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents cmdRefresh As Button
-    Friend WithEvents txtYardUtilization As TextBox
     Friend WithEvents txtYardTotal As TextBox
     Friend WithEvents txtStorageEmpty As TextBox
     Friend WithEvents txtExportFull As TextBox
@@ -963,7 +990,6 @@ Partial Class StatusForm
     Friend WithEvents txtTotalYardCapacity As TextBox
     Friend WithEvents txtStaticCapacity As TextBox
     Friend WithEvents txtGroundSlot As TextBox
-    Friend WithEvents Label23 As Label
     Friend WithEvents Label24 As Label
     Friend WithEvents lblTsrDate As Label
     Friend WithEvents txtNetBerth As TextBox
@@ -980,4 +1006,8 @@ Partial Class StatusForm
     Friend WithEvents Label31 As Label
     Friend WithEvents NotifyIcon1 As NotifyIcon
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents txtYardUtilization As TextBox
+    Friend WithEvents Label23 As Label
+    Friend WithEvents txtYardECD As TextBox
+    Friend WithEvents Label25 As Label
 End Class

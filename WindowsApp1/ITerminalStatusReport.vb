@@ -32,7 +32,8 @@
     ReadOnly Property CraneLogReports As List(Of Crane_Logs_Report_Creator.CLRClass)
     ReadOnly Property ActiveUnits As List(Of ActiveUnit)
     ReadOnly Property GateTransactions As List(Of GateTransaction)
-
+    Property YardUtilizationECD As Double
+    Property TotalInYardECDTEU As Double
     Function Exists() As Boolean 'Check for Existing
 
     Sub RetrieveTerminalStatusReport() 'Retrieve TSR if existing

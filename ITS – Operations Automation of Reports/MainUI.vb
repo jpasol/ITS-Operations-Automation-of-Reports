@@ -55,7 +55,8 @@ Public Class MainUI
         Select Case cmbReports.SelectedIndex
             Case 0, 1
                 lblParameter.Text = "Registry:"
-                mskParameter.Mask = ">LLL0000-00"
+                mskParameter.Mask = ">CCCCCCCCCCC"
+
             Case 2
                 cmbMode.Enabled = True
                 cmbMode.Items.AddRange({"Berth Window Report",
@@ -83,78 +84,78 @@ Public Class MainUI
         'Find VMR
     End Function
     Private Sub cmdGenerate_Click(sender As Object, e As EventArgs) Handles cmdGenerate.Click
-        'Try
-        Select Case cmbReports.Text
+        Try
+            Select Case cmbReports.Text
                 Case "Vessel Movement Report"
                     Dim createVMR As New VMRForm(mskParameter.Text, CnnN4, CnnDB, User)
-                createVMR.Show()
-            Case "Crane Logs Report"
+                    createVMR.Show()
+                Case "Crane Logs Report"
                     Dim createCLR As New CLRForm(mskParameter.Text, CnnN4, CnnDB, User)
-                createCLR.Show()
-            Case "Terminal Status Report"
-                Select Case cmbMode.Text
-                    Case "Daily"
-                        Dim createDailyTSR As New DailyTerminalStatusReport(mskParameter.Text, CnnDB)
-                        createDailyTSR.FormatReport()
-                        crvPreview.ReportSource = createDailyTSR.Report
-                    Case "Monthly"
-                        Dim createMonthlyTSR As New MonthlyTerminalStatusReport(mskParameter.Text, CnnDB)
-                        createMonthlyTSR.formatreport()
-                        crvPreview.ReportSource = createMonthlyTSR.Report
-                    Case "Annually"
-                        Dim createYearlyTsr As New YearlyTerminalStatusReport(mskParameter.Text, CnnDB)
-                        createYearlyTsr.formatreport()
-                        crvPreview.ReportSource = createYearlyTsr.Report
-                End Select
-            Case "Throughput Volume Update"
-                Select Case cmbMode.Text
-                    Case "Berth Window Report"
-                        Dim berthWindow As New BerthWindowReport(mskParameter.Text)
-                        crvPreview.ReportSource = berthWindow.Report
-                    Case "Cummulative Volume Report"
-                        Dim CummulativeVolume As New CummulativeReport(mskParameter.Text)
-                        crvPreview.ReportSource = CummulativeVolume.Report
-                    Case "Volume Breakdown"
-                        Dim VolumeBreakdown As New VolumeBreakdown(mskParameter.Text)
-                        crvPreview.ReportSource = VolumeBreakdown
-                    Case "All Vessel Throughput Volume"
-                        Dim month As Integer = mskParameter.Text.Substring(0, 2)
-                        Dim year As Integer = mskParameter.Text.Substring(3)
-                        Dim AllVesselVolume As New AllVesselThroughputVolume(month, year)
-                        crvPreview.ReportSource = AllVesselVolume.Report
-                    Case "Monthly Throughput Volume"
-                        Dim month As Integer = mskParameter.Text.Substring(0, 2)
-                        Dim year As Integer = mskParameter.Text.Substring(3)
-                        Dim MonthlyVolume As New MTDMonthlyThroughputVolume(month, year)
-                        crvPreview.ReportSource = MonthlyVolume.Report
-                    Case "Monthly Co-Load Throughput Volume"
-                        Dim month As Integer = mskParameter.Text.Substring(0, 2)
-                        Dim year As Integer = mskParameter.Text.Substring(3)
-                        Dim MonthlyCoLoadVolume As New MTDMonthlyCoLoadVolume(month, year)
-                        crvPreview.ReportSource = MonthlyCoLoadVolume.Report
-                    Case "LOA Table"
-                        Dim loa As New LOATable
-                        crvPreview.ReportSource = loa
-                    Case "Handling Services"
-                        Dim year As Integer = mskParameter.Text
-                        Dim handlingServices As New HandlingServices(year)
-                        crvPreview.ReportSource = handlingServices
-                End Select
-            Case "Management Report"
-                Dim month As Integer = mskParameter.Text.Substring(0, 2)
-                Dim year As Integer = mskParameter.Text.Substring(3)
-                Dim managementReport As New ManagementReport(month, year)
-                crvPreview.ReportSource = managementReport
-            Case Else
+                    createCLR.Show()
+                Case "Terminal Status Report"
+                    Select Case cmbMode.Text
+                        Case "Daily"
+                            Dim createDailyTSR As New DailyTerminalStatusReport(mskParameter.Text, CnnDB)
+                            createDailyTSR.FormatReport()
+                            crvPreview.ReportSource = createDailyTSR.Report
+                        Case "Monthly"
+                            Dim createMonthlyTSR As New MonthlyTerminalStatusReport(mskParameter.Text, CnnDB)
+                            createMonthlyTSR.formatreport()
+                            crvPreview.ReportSource = createMonthlyTSR.Report
+                        Case "Annually"
+                            Dim createYearlyTsr As New YearlyTerminalStatusReport(mskParameter.Text, CnnDB)
+                            createYearlyTsr.formatreport()
+                            crvPreview.ReportSource = createYearlyTsr.Report
+                    End Select
+                Case "Throughput Volume Update"
+                    Select Case cmbMode.Text
+                        Case "Berth Window Report"
+                            Dim berthWindow As New BerthWindowReport(mskParameter.Text)
+                            crvPreview.ReportSource = berthWindow.Report
+                        Case "Cummulative Volume Report"
+                            Dim CummulativeVolume As New CummulativeReport(mskParameter.Text)
+                            crvPreview.ReportSource = CummulativeVolume.Report
+                        Case "Volume Breakdown"
+                            Dim VolumeBreakdown As New VolumeBreakdown(mskParameter.Text)
+                            crvPreview.ReportSource = VolumeBreakdown
+                        Case "All Vessel Throughput Volume"
+                            Dim month As Integer = mskParameter.Text.Substring(0, 2)
+                            Dim year As Integer = mskParameter.Text.Substring(3)
+                            Dim AllVesselVolume As New AllVesselThroughputVolume(month, year)
+                            crvPreview.ReportSource = AllVesselVolume.Report
+                        Case "Monthly Throughput Volume"
+                            Dim month As Integer = mskParameter.Text.Substring(0, 2)
+                            Dim year As Integer = mskParameter.Text.Substring(3)
+                            Dim MonthlyVolume As New MTDMonthlyThroughputVolume(month, year)
+                            crvPreview.ReportSource = MonthlyVolume.Report
+                        Case "Monthly Co-Load Throughput Volume"
+                            Dim month As Integer = mskParameter.Text.Substring(0, 2)
+                            Dim year As Integer = mskParameter.Text.Substring(3)
+                            Dim MonthlyCoLoadVolume As New MTDMonthlyCoLoadVolume(month, year)
+                            crvPreview.ReportSource = MonthlyCoLoadVolume.Report
+                        Case "LOA Table"
+                            Dim loa As New LOATable
+                            crvPreview.ReportSource = loa
+                        Case "Handling Services"
+                            Dim year As Integer = mskParameter.Text
+                            Dim handlingServices As New HandlingServices(year)
+                            crvPreview.ReportSource = handlingServices
+                    End Select
+                Case "Management Report"
+                    Dim month As Integer = mskParameter.Text.Substring(0, 2)
+                    Dim year As Integer = mskParameter.Text.Substring(3)
+                    Dim managementReport As New ManagementReport(month, year)
+                    crvPreview.ReportSource = managementReport
+                Case Else
 
-        End Select
-        'Catch ex As Exception
-        '    MsgBox("Error in Displaying Report." & vbNewLine &
-        '               "Error Description: " & ex.Message)
+            End Select
+        Catch ex As Exception
+            MsgBox("Error in Displaying Report." & vbNewLine &
+                           "Error Description: " & ex.Message)
 
-        '    If CnnDB.State = ConnectionState.Open Then CnnDB.Close()
-        '    If CnnN4.State = ConnectionState.Open Then CnnN4.Close()
-        'End Try
+            '    If CnnDB.State = ConnectionState.Open Then CnnDB.Close()
+            '    If CnnN4.State = ConnectionState.Open Then CnnN4.Close()
+        End Try
 
     End Sub
 

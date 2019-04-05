@@ -7,5 +7,5 @@
     ReadOnly Property TimeIn As Date
     ReadOnly Property TEU As Double 'Convert na para di na mahirapan
     ReadOnly Property Dwell(EndDate As Date) As Double 'add parameter para magkaroon ng comparison
-
+    ReadOnly Property Group As String
 End Interface

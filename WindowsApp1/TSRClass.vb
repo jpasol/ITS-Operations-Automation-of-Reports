@@ -43,7 +43,9 @@ Public Class TSRClass
     Public Property ExportEmptyTEU As Double Implements ITerminalStatusReport.ExportEmptyTEU
     Public Property StorageEmptyTEU As Double Implements ITerminalStatusReport.StorageEmptyTEU
     Public Property TotalInYardTEU As Double Implements ITerminalStatusReport.TotalInYardTEU
+    Public Property TotalInYardECDTEU As Double Implements ITerminalStatusReport.TotalInYardECDTEU
     Public Property YardUtilization As Double Implements ITerminalStatusReport.YardUtilization
+    Public Property YardUtilizationECD As Double Implements ITerminalStatusReport.YardUtilizationECD
     Public ReadOnly Property CraneLogReports As List(Of CLRClass) Implements ITerminalStatusReport.CraneLogReports
     Public ReadOnly Property ActiveUnits As List(Of ActiveUnit) Implements ITerminalStatusReport.ActiveUnits
     Public ReadOnly Property GateTransactions As List(Of GateTransaction) Implements ITerminalStatusReport.GateTransactions
@@ -54,6 +56,7 @@ Public Class TSRClass
         Me.TerminalStatusDate = TerminalStatusDate
         Me.N4Connection = tempConnections.N4Connection
         Me.OPConnection = tempConnections.OPConnection
+
 
         CraneLogReports = New List(Of CLRClass)
         ActiveUnits = New List(Of ActiveUnit)
@@ -199,24 +202,20 @@ WHERE ATA > '{StartofMonth}' and carrier_mode = 'VESSEL' and phase like '%CLOSED
         For Each Registry As String In CraneLogRegistries
             Try
 
-                Dim tempCLR As New CLRClass(Registry, N4Connection, OPConnection)
+                Dim tempCLR As New CLRClass(Registry)
                 CraneLogReports.Add(tempCLR)
 
                 If tempCLR.Exists Then
                     'do nothing
                 Else
                     Try
-                        OPConnection.Open()
-                        OPConnection.BeginTrans()
                         tempCLR.Save()
-                        OPConnection.CommitTrans()
-
                     Catch ex As Exception
-                        'MsgBox($"Error in Saving: {Registry}{vbNewLine}{ex.Message}")
-                        OPConnection.RollbackTrans()
-                        CraneLogReports.Remove(tempCLR)
+                        If ex.Message.Contains("Sequence contains no elements") Then
+                            'MsgBox($"Error in Saving: {Registry}{vbNewLine}{ex.Message}")
+                            CraneLogReports.Remove(tempCLR)
+                        End If
                     End Try
-                    OPConnection.Close()
                 End If
 
             Catch ex As Exception
@@ -234,9 +233,9 @@ WHERE ATA > '{StartofMonth}' and carrier_mode = 'VESSEL' and phase like '%CLOSED
             Dim Category As String = row("Category").ToString
             Dim Freight As String = row("Freight").ToString
             Dim TimeIn As Date = CDate(row("TimeIn").ToString)
+            Dim Group As String = (row("Group").ToString)
 
-
-            Me.ActiveUnits.Add(New ActiveUnit(UnitNumber, Registry, SizeMM, Category, Freight, TimeIn))
+            Me.ActiveUnits.Add(New ActiveUnit(UnitNumber, Registry, SizeMM, Category, Freight, TimeIn, Group))
         Next
     End Sub
 
@@ -255,12 +254,14 @@ SELECT unit.[id] as UnitNbr
       ,[category] as Category
       ,[freight_kind] as Freight
 	  ,[time_in] as TimeIn
+	  ,grp.[id] as 'Group'
 
   FROM [apex].[dbo].[inv_unit] unit
 inner join [inv_unit_fcy_visit] ufv on unit.active_ufv = ufv.gkey
 inner join [argo_carrier_visit] acv on ufv.[actual_ib_cv] = acv.gkey
 inner join [inv_unit_equip] ueq on unit.gkey = ueq.unit_gkey
 inner join [ref_equipment] req on ueq.eq_gkey = req.gkey
+full outer join [ref_groups] grp on unit.group_gkey = grp.gkey
 
 where ufv.transit_state = 'S40_YARD' and [time_in] < '{TerminalStatusDate}'
 "
@@ -392,9 +393,11 @@ SELECT [sub_type]
             ExportFullTEU = .Where(Function(unit) unit.Category = "EXPRT" And unit.Freight = "FCL").Sum(Function(unit) unit.TEU)
             ExportEmptyTEU = .Where(Function(unit) unit.Category = "EXPRT" And unit.Freight = "MTY").Sum(Function(unit) unit.TEU)
             StorageEmptyTEU = .Where(Function(unit) unit.Category = "STRGE" And unit.Freight = "MTY").Sum(Function(unit) unit.TEU)
-            TotalInYardTEU = .Sum(Function(unit) unit.TEU)
+            TotalInYardTEU = .Where(Function(unit) unit.Group <> "ECD").Sum(Function(unit) unit.TEU)
+            TotalInYardECDTEU = .Where(Function(unit) unit.Group = "ECD").Sum(Function(unit) unit.TEU)
 
             YardUtilization = (TotalInYardTEU / StaticCapacityTEU) * 100
+            YardUtilizationECD = (TotalInYardECDTEU / 3000) * 100
         End With
     End Sub
 
@@ -449,6 +452,7 @@ INSERT INTO [opreports].[dbo].[reports_tsr]
            ,[storageempty]
            ,[yard_total]
            ,[yard_utilization]
+           ,[yard_utilization_ecd]
            ,[created]
            ,[cranelogsreports_count])
      VALUES
@@ -481,6 +485,7 @@ INSERT INTO [opreports].[dbo].[reports_tsr]
            ,{StorageEmptyTEU}
            ,{TotalInYardTEU}
            ,{YardUtilization}
+           ,{YardUtilizationECD}
            ,'{TerminalStatusDate}'
            ,{CraneLogReports.Count}
            )

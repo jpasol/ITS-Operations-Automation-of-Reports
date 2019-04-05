@@ -4,20 +4,40 @@ Imports Reports
 Public Class Vessel
     Implements IReports.IVessel
 
-    Sub New(Registry As String, OPConnection As Connection, Connection As Connection, Optional WithoutUnits As Boolean = False)
-        On Error Resume Next
-        Retrieve(Registry, Connection)
+    Sub New(Registry As String, Optional WithoutUnits As Boolean = False)
+
+        Dim connections As New Connections
+        OPConnection = connections.OPConnection
+        N4Connection = connections.N4Connection
+
+        Retrieve(Registry)
         If WithoutUnits = False Then
-            vslUnits = New Units(Registry, OPConnection, Connection)
-            If Not IsNothing(vslUnits.Containers) Then
-                Me.FirstContainerDischarged = GetFirstContainerDischarge()
-                Me.FirstContainerLoaded = GetFirstContainerLoaded()
-                Me.LastContainerLoaded = GetLastContainerLoaded()
-            End If
+            vslUnits = New Units(Registry)
         End If
 
-            strRegistry = Registry
-        vslConnection = Connection
+        strRegistry = Registry
+        On Error Resume Next
+
+        Me.Name = dtVessel.Rows(0)(Vessel.Name).ToString
+        Me.Registry = dtVessel.Rows(0)(Vessel.Registry).ToString
+        Me.InboundVoyage = dtVessel.Rows(0)(Vessel.IBVoyage).ToString
+        Me.OutboundVoyage = dtVessel.Rows(0)(Vessel.OBVoyage).ToString
+        Me.BerthWindow = dtVessel.Rows(0)(Vessel.Berth).ToString
+        Me.ATA = dtVessel.Rows(0)(Vessel.ATA).ToString
+        Me.ATD = dtVessel.Rows(0)(Vessel.ATD).ToString
+        Me.ETA = dtVessel.Rows(0)(Vessel.ETA).ToString
+        Me.Owner = dtVessel.Rows(0)(Vessel.LineOP)
+        Me.Units = vslUnits
+        Me.Connection = N4Connection
+        Me.LastContainerDischarged = dtVessel.Rows(0)(Vessel.LastContrDisch).ToString()
+        Me.FirstContainerDischarged = GetFirstContainerDischarge()
+        Me.FirstContainerLoaded = GetFirstContainerLoaded()
+        Me.LastContainerLoaded = GetLastContainerLoaded()
+        Me.Phase = dtVessel.Rows(0)(Vessel.Phase).ToString()
+        Me.LaborOnBoard = dtVessel.Rows(0)(Vessel.LaborOnBoard).ToString()
+        Me.LaborOffBoard = dtVessel.Rows(0)(Vessel.LaborOffBoard).ToString()
+        Me.Service = dtVessel.Rows(0)(Vessel.Service).ToString()
+        Me.LOA = dtVessel.Rows(0)(Vessel.LOA).ToString()
 
     End Sub
 
@@ -50,9 +70,9 @@ Public Class Vessel
             Return Date.Parse(.Item(0)("time_move").ToString)
         End With
     End Function
-
+    Private OPConnection As ADODB.Connection
+    Private N4Connection As ADODB.Connection
     Private strRegistry As String
-    Private vslConnection As Connection
     Private dtVessel As DataTable
     Private dtContainers As DataTable
     Private vslUnits As Units
@@ -77,132 +97,28 @@ Public Class Vessel
         LOA
     End Enum
     Public ReadOnly Property Name As String Implements IReports.IVessel.Name
-        Get
-            Name = dtVessel.Rows(0)(Vessel.Name).ToString
-        End Get
-    End Property
-
     Public ReadOnly Property Registry As String Implements IReports.IVessel.Registry
-        Get
-            Registry = dtVessel.Rows(0)(Vessel.Registry).ToString
-        End Get
-    End Property
-
     Public ReadOnly Property InboundVoyage As String Implements IReports.IVessel.InboundVoyage
-        Get
-            InboundVoyage = dtVessel.Rows(0)(Vessel.IBVoyage).ToString
-        End Get
-    End Property
-
     Public ReadOnly Property OutboundVoyage As String Implements IReports.IVessel.OutboundVoyage
-        Get
-            OutboundVoyage = dtVessel.Rows(0)(Vessel.OBVoyage).ToString
-        End Get
-    End Property
-
     Public ReadOnly Property BerthWindow As String Implements IReports.IVessel.BerthWindow
-        Get
-            BerthWindow = dtVessel.Rows(0)(Vessel.Berth).ToString
-        End Get
-    End Property
-
     Public ReadOnly Property ATA As Date Implements IReports.IVessel.ATA
-        Get
-            ATA = dtVessel.Rows(0)(Vessel.ATA).ToString
-        End Get
-    End Property
-
     Public ReadOnly Property ATD As Date Implements IReports.IVessel.ATD
-        Get
-            ATD = dtVessel.Rows(0)(Vessel.ATD).ToString
-        End Get
-    End Property
-
     Public ReadOnly Property ETA As Date Implements IReports.IVessel.ETA
-        Get
-            ETA = dtVessel.Rows(0)(Vessel.ETA).ToString
-        End Get
-    End Property
-
     Public ReadOnly Property ETD As Date Implements IReports.IVessel.ETD
-        Get
-            Throw New NotImplementedException()
-        End Get
-    End Property
-
     Public ReadOnly Property StartWork As Date Implements IReports.IVessel.StartWork
-        Get
-            StartWork = dtVessel.Rows(0)(Vessel.StartWork).ToString()
-        End Get
-    End Property
-
     Public ReadOnly Property EndWork As Date Implements IReports.IVessel.EndWork
-        Get
-            EndWork = dtVessel.Rows(0)(Vessel.EndWork).ToString()
-        End Get
-    End Property
-
-    Public ReadOnly Property FirstContainerDischarged As Date Implements IReports.IVessel.FirstContainerDischarged
-
-    Public ReadOnly Property LastContainerDischarged As Date Implements IReports.IVessel.LastContainerDischarged
-        Get
-            Try
-                LastContainerDischarged = dtVessel.Rows(0)(Vessel.LastContrDisch).ToString()
-            Catch
-            End Try
-        End Get
-    End Property
-
-    Public ReadOnly Property FirstContainerLoaded As Date Implements IReports.IVessel.FirstContainerLoaded
-    Public ReadOnly Property LastContainerLoaded As Date Implements IReports.IVessel.LastContainerLoaded
-
+    Public ReadOnly Property FirstContainerDischarged As Date? Implements IReports.IVessel.FirstContainerDischarged
+    Public ReadOnly Property LastContainerDischarged As Date? Implements IReports.IVessel.LastContainerDischarged
+    Public ReadOnly Property FirstContainerLoaded As Date? Implements IReports.IVessel.FirstContainerLoaded
+    Public ReadOnly Property LastContainerLoaded As Date? Implements IReports.IVessel.LastContainerLoaded
     Public ReadOnly Property LineOperators() As String Implements IReports.IVessel.LineOperator
-        Get
-            Throw New NotImplementedException()
-        End Get
-    End Property
-
     Public ReadOnly Property Owner As String Implements IReports.IVessel.Owner
-        Get
-            Owner = dtVessel.Rows(0)(Vessel.LineOP)
-        End Get
-    End Property
-
     Public ReadOnly Property Units As Units Implements IReports.IVessel.Units
-        Get
-            Units = vslUnits
-        End Get
-    End Property
-
     Public ReadOnly Property Connection As Connection Implements IReports.IVessel.Connection
-        Get
-            Connection = vslConnection
-        End Get
-    End Property
-
     Public ReadOnly Property Phase As String Implements IVessel.Phase
-        Get
-            Return dtVessel.Rows(0)(Vessel.Phase).ToString()
-        End Get
-    End Property
-
     Public ReadOnly Property LaborOnBoard As Date Implements IVessel.LaborOnBoard
-        Get
-            Return dtVessel.Rows(0)(Vessel.LaborOnBoard).ToString()
-        End Get
-    End Property
-
-    Public ReadOnly Property LaborOffBoard As Date Implements IVessel.LaborOffBoard
-        Get
-            Return dtVessel.Rows(0)(Vessel.LaborOffBoard).ToString()
-        End Get
-    End Property
-
+    Public ReadOnly Property LaborOffBoard As Date? Implements IVessel.LaborOffBoard
     Public ReadOnly Property Service As String Implements IVessel.Service
-        Get
-            Return dtVessel.Rows(0)(Vessel.Service).ToString()
-        End Get
-    End Property
 
     Public ReadOnly Property SLGangRequest As Date Implements IVessel.SLGangRequest
         Get
@@ -220,15 +136,11 @@ Public Class Vessel
             Return SLGangRequest
         End Get
     End Property
-
     Public ReadOnly Property LOA As Integer Implements IVessel.LOA
-        Get
-            Return dtVessel.Rows(0)(Vessel.LOA).ToString()
-        End Get
-    End Property
 
-    Public Sub Retrieve(Registry As String, Connection As ADODB.Connection) Implements IReports.IVessel.Retrieve
-        Dim rsContainers As New ADODB.Recordset
+    Public Sub Retrieve(Registry As String) Implements IReports.IVessel.Retrieve
+        N4Connection.Open()
+        Dim rsContainers As New ADODB.Command
         Dim DataAdapter As New OleDb.OleDbDataAdapter
         Dim strSQLVessel As String
 
@@ -238,7 +150,7 @@ Public Class Vessel
         $"Declare @Registry numeric(18,0)
 
         select @Registry = gkey
-        from argo_carrier_visit where id = '{Registry}'
+        from [argo_carrier_visit] where id = '{Registry}'
 
         select 'MV '+ vsl.name as 'Vessel Name'
         ,biz.[id] as 'Line Operator'
@@ -281,13 +193,11 @@ Public Class Vessel
 
         where acv.gkey = @Registry"
 
-        Connection.Open()
+        rsContainers.CommandText = strSQLVessel
+        rsContainers.ActiveConnection = N4Connection
 
-        rsContainers.Open(strSQLVessel, Connection)
-        DataAdapter.Fill(dtVessel, rsContainers)
-        rsContainers.Close()
-
-        Connection.Close()
+        DataAdapter.Fill(dtVessel, rsContainers.Execute)
+        N4Connection.Close()
     End Sub
 
     Public Function TEU(Optional Condition As String = "") As Double Implements IReports.IVessel.TEU
