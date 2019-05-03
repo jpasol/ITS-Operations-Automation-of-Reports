@@ -3,17 +3,19 @@ Imports Crane_Logs_Report_Creator
 Imports Terminal_Status_Report
 Imports Throughput_Volume_Update
 Imports Management_Report
+Imports Budgeted_Volume_Creator
+Imports KPI_for_Operations
 
 Public Class MainUI
 
     Private arrReports() = New String() {
-        "Vessel Movement Report",
         "Crane Logs Report",
+        "Vessel Movement Report",
         "Throughput Volume Update",
         "Terminal Status Report",
-        "Management Report"}
-    '"Budgeted Volume",
-    '"KPI Report for Operation",
+        "Management Report",
+        "KPI Report for Operation",
+        "Budgeted Volume"}
     '"Shipping Line TEUs & Monthly Impex Consignees",
     '"Consolidation of Monthly Impex Consignees",
     '"Monthly Revenue / Volume Report per Destination",
@@ -75,6 +77,7 @@ Public Class MainUI
                 cmbMode.Enabled = True
                 lblParameter.Text = "Date: (MM/YYYY)"
                 mskParameter.Mask = "00/0000"
+
             Case Else
                 lblParameter.Text = "Date:"
                 mskParameter.Mask = "00/00/0000"
@@ -95,15 +98,15 @@ Public Class MainUI
                 Case "Terminal Status Report"
                     Select Case cmbMode.Text
                         Case "Daily"
-                            Dim createDailyTSR As New DailyTerminalStatusReport(mskParameter.Text, CnnDB)
+                            Dim createDailyTSR As New DailyTerminalStatusReport(mskParameter.Text)
                             createDailyTSR.FormatReport()
                             crvPreview.ReportSource = createDailyTSR.Report
                         Case "Monthly"
-                            Dim createMonthlyTSR As New MonthlyTerminalStatusReport(mskParameter.Text, CnnDB)
+                            Dim createMonthlyTSR As New MonthlyTerminalStatusReport(mskParameter.Text)
                             createMonthlyTSR.formatreport()
                             crvPreview.ReportSource = createMonthlyTSR.Report
                         Case "Annually"
-                            Dim createYearlyTsr As New YearlyTerminalStatusReport(mskParameter.Text, CnnDB)
+                            Dim createYearlyTsr As New YearlyTerminalStatusReport(mskParameter.Text)
                             createYearlyTsr.formatreport()
                             crvPreview.ReportSource = createYearlyTsr.Report
                     End Select
@@ -146,6 +149,16 @@ Public Class MainUI
                     Dim year As Integer = mskParameter.Text.Substring(3)
                     Dim managementReport As New ManagementReport(month, year)
                     crvPreview.ReportSource = managementReport
+                Case "KPI Report for Operation"
+                    Dim month As Integer = mskParameter.Text.Substring(0, 2)
+                    Dim day As Integer = mskParameter.Text.Substring(3, 2)
+                    Dim year As Integer = mskParameter.Text.Substring(6)
+                    Dim managementReport As New KPI_for_Operations.KPI_for_Operations(day, month, year)
+                    crvPreview.ReportSource = managementReport
+
+                Case "Budgeted Volume"
+                    Dim frmBudget As New Budgeted_Volume_Creator.BudgetForm
+                    frmBudget.ShowDialog()
                 Case Else
 
             End Select

@@ -9,6 +9,7 @@
     Property MTDAverageNetCraneProductivity As Double
     Property MTDAverageNetBerthProductivity As Double
     Property MTDAverageNetVesselProductivity As Double
+    Property CraneDensity As Double
     Property AverageImportDwellTime As Double
     Property MTDImportDwellTime As Double
     Property YTDImportDwellTime As Double

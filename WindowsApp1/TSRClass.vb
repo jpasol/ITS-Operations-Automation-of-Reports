@@ -24,6 +24,7 @@ Public Class TSRClass
     Public Property MTDAverageNetCraneProductivity As Double Implements ITerminalStatusReport.MTDAverageNetCraneProductivity
     Public Property MTDAverageNetBerthProductivity As Double Implements ITerminalStatusReport.MTDAverageNetBerthProductivity
     Public Property MTDAverageNetVesselProductivity As Double Implements ITerminalStatusReport.MTDAverageNetVesselProductivity
+    Public Property CraneDensity As Double Implements ITerminalStatusReport.CraneDensity
     Public Property AverageImportDwellTime As Double Implements ITerminalStatusReport.AverageImportDwellTime
     Public Property MTDImportDwellTime As Double Implements ITerminalStatusReport.MTDImportDwellTime
     Public Property YTDImportDwellTime As Double Implements ITerminalStatusReport.YTDImportDwellTime
@@ -117,6 +118,7 @@ SELECT [groundslot]
     ,[yard_utilization]
     ,[created]
     ,[cranelogsreports_count]
+    ,[cranedensity]
 FROM [opreports].[dbo].[reports_tsr] WHERE [created] = '{TerminalStatusDate}'
 "
         RetrieveProperties(retrieveTerminalStatus.Execute)
@@ -155,6 +157,7 @@ FROM [opreports].[dbo].[reports_tsr] WHERE [created] = '{TerminalStatusDate}'
             TotalInYardTEU = .Fields("yard_total").Value
             YardUtilization = .Fields("yard_utilization").Value
             CraneLogCount = .Fields("cranelogsreports_count").Value
+            CraneDensity = .Fields("cranedensity").Value
         End With
     End Sub
 
@@ -209,7 +212,7 @@ WHERE ATA > '{StartofMonth}' and carrier_mode = 'VESSEL' and phase like '%CLOSED
                     'do nothing
                 Else
                     Try
-                        tempCLR.Save()
+                        tempCLR.SaveReport()
                     Catch ex As Exception
                         If ex.Message.Contains("Sequence contains no elements") Then
                             'MsgBox($"Error in Saving: {Registry}{vbNewLine}{ex.Message}")
@@ -368,31 +371,30 @@ SELECT [sub_type]
         With GateTransactions.AsEnumerable
             DailyTEUInByTrucks = .Where(Function(gate) gate.StartDate > StartofDay And gate.TransactionType.Chars(0) = "R").Sum(Function(gate) gate.TEU)
             DailyTEUOutByTrucks = .Where(Function(gate) gate.StartDate > StartofDay And gate.TransactionType.Chars(0) = "D").Sum(Function(gate) gate.TEU)
-            MTDTEUInByTrucks = .Where(Function(gate) gate.StartDate > StartofMonth And gate.TransactionType.Chars(0) = "R").Sum(Function(gate) gate.TEU)
-            MTDTEUOutByTrucks = .Where(Function(gate) gate.StartDate > StartofMonth And gate.TransactionType.Chars(0) = "D").Sum(Function(gate) gate.TEU)
-            YTDTEUInByTrucks = .Where(Function(gate) gate.StartDate > StartofYear And gate.TransactionType.Chars(0) = "R").Sum(Function(gate) gate.TEU)
-            YTDTEUOutByTrucks = .Where(Function(gate) gate.StartDate > StartofYear And gate.TransactionType.Chars(0) = "D").Sum(Function(gate) gate.TEU)
+            MTDTEUInByTrucks = .Where(Function(gate) gate.StartDate > StartofMonth And gate.StartDate < StartofDay And gate.TransactionType.Chars(0) = "R").Sum(Function(gate) gate.TEU)
+            MTDTEUOutByTrucks = .Where(Function(gate) gate.StartDate > StartofMonth And gate.StartDate < StartofDay And gate.TransactionType.Chars(0) = "D").Sum(Function(gate) gate.TEU)
+            YTDTEUInByTrucks = .Where(Function(gate) gate.StartDate > StartofYear And gate.StartDate < StartofDay And gate.TransactionType.Chars(0) = "R").Sum(Function(gate) gate.TEU)
+            YTDTEUOutByTrucks = .Where(Function(gate) gate.StartDate > StartofYear And gate.StartDate < StartofDay And gate.TransactionType.Chars(0) = "D").Sum(Function(gate) gate.TEU)
         End With
 
     End Sub
 
     Private Sub CalculateUsingActiveUnits()
         With ActiveUnits.AsEnumerable
-            AverageImportDwellTime = .Where(Function(unit) unit.Dwell(TerminalStatusDate) < 90).Average(Function(unit) unit.Dwell(TerminalStatusDate))
-            MTDImportDwellTime = .Where(Function(unit) unit.TimeIn > StartofMonth And unit.Category = "IMPRT").DefaultIfEmpty.Average(Function(unit) unit.Dwell(TerminalStatusDate))
-            MTDExportDwellTime = .Where(Function(unit) unit.TimeIn > StartofMonth And unit.Category = "EXPRT").DefaultIfEmpty.Average(Function(unit) unit.Dwell(TerminalStatusDate))
-            YTDImportDwellTime = .Where(Function(unit) unit.TimeIn > StartofYear And unit.Category = "IMPRT").DefaultIfEmpty.Average(Function(unit) unit.Dwell(TerminalStatusDate))
-            YTDExportDwellTime = .Where(Function(unit) unit.TimeIn > StartofYear And unit.Category = "EXPRT").DefaultIfEmpty.Average(Function(unit) unit.Dwell(TerminalStatusDate))
+            AverageImportDwellTime = .Where(Function(unit) unit.Dwell(TerminalStatusDate) <= 70 And unit.Freight <> "MTY").Average(Function(unit) unit.Dwell(TerminalStatusDate))
+            MTDImportDwellTime = .Where(Function(unit) unit.TimeIn > StartofMonth And unit.Category = "IMPRT" And unit.Freight <> "MTY").DefaultIfEmpty.Average(Function(unit) unit.Dwell(TerminalStatusDate))
+            MTDExportDwellTime = .Where(Function(unit) unit.TimeIn > StartofMonth And unit.Category = "EXPRT" And unit.Freight <> "MTY").DefaultIfEmpty.Average(Function(unit) unit.Dwell(TerminalStatusDate))
+            YTDImportDwellTime = .Where(Function(unit) unit.TimeIn > StartofYear And unit.Category = "IMPRT" And unit.Freight <> "MTY").DefaultIfEmpty.Average(Function(unit) unit.Dwell(TerminalStatusDate))
+            YTDExportDwellTime = .Where(Function(unit) unit.TimeIn > StartofYear And unit.Category = "EXPRT" And unit.Freight <> "MTY").DefaultIfEmpty.Average(Function(unit) unit.Dwell(TerminalStatusDate))
 
-            OverstayingManilaCargo = .Where(Function(unit) unit.Registry = "SBITCTEST3" Or
-                                                unit.Registry = "SBITCTEST5" Or
-                                                unit.Registry = "SUB0005-14").Sum(Function(unit) unit.TEU)
+            OverstayingManilaCargo = .Where(Function(unit) unit.Registry.Contains("SBITC") Or
+                                                unit.Registry.Contains("SUB")).Sum(Function(unit) unit.TEU)
             TotalOverstayingCargo = .Where(Function(unit) unit.Category = "IMPRT" And unit.Freight = "FCL" And unit.Dwell(TerminalStatusDate) >= 30).Sum(Function(unit) unit.TEU)
-            ImportFullTEU = .Where(Function(unit) unit.Category = "IMPRT" And unit.Freight = "FCL").Sum(Function(unit) unit.TEU)
-            ImportEmptyTEU = .Where(Function(unit) unit.Category = "IMPRT" And unit.Freight = "MTY").Sum(Function(unit) unit.TEU)
-            ExportFullTEU = .Where(Function(unit) unit.Category = "EXPRT" And unit.Freight = "FCL").Sum(Function(unit) unit.TEU)
-            ExportEmptyTEU = .Where(Function(unit) unit.Category = "EXPRT" And unit.Freight = "MTY").Sum(Function(unit) unit.TEU)
-            StorageEmptyTEU = .Where(Function(unit) unit.Category = "STRGE" And unit.Freight = "MTY").Sum(Function(unit) unit.TEU)
+            ImportFullTEU = .Where(Function(unit) unit.Category = "IMPRT" And unit.Freight = "FCL" And unit.Group <> "ECD").Sum(Function(unit) unit.TEU)
+            ImportEmptyTEU = .Where(Function(unit) unit.Category = "IMPRT" And unit.Freight = "MTY" And unit.Group <> "ECD").Sum(Function(unit) unit.TEU)
+            ExportFullTEU = .Where(Function(unit) unit.Category = "EXPRT" And unit.Freight = "FCL" And unit.Group <> "ECD").Sum(Function(unit) unit.TEU)
+            ExportEmptyTEU = .Where(Function(unit) unit.Category = "EXPRT" And unit.Freight = "MTY" And unit.Group <> "ECD").Sum(Function(unit) unit.TEU)
+            StorageEmptyTEU = .Where(Function(unit) unit.Category = "STRGE" And unit.Freight = "MTY" And unit.Group <> "ECD").Sum(Function(unit) unit.TEU)
             TotalInYardTEU = .Where(Function(unit) unit.Group <> "ECD").Sum(Function(unit) unit.TEU)
             TotalInYardECDTEU = .Where(Function(unit) unit.Group = "ECD").Sum(Function(unit) unit.TEU)
 
@@ -410,6 +412,7 @@ SELECT [sub_type]
             MTDAverageNetCraneProductivity = .Average(Function(clr) clr.NetCraneProductivity)
             MTDAverageNetVesselProductivity = .Average(Function(clr) clr.NetVesselProdRate)
             MTDAverageNetBerthProductivity = .Average(Function(clr) clr.NetBerthProdRate)
+            CraneDensity = .Average(Function(clr) clr.CraneDensity)
         End With
 
     End Sub
@@ -454,7 +457,8 @@ INSERT INTO [opreports].[dbo].[reports_tsr]
            ,[yard_utilization]
            ,[yard_utilization_ecd]
            ,[created]
-           ,[cranelogsreports_count])
+           ,[cranelogsreports_count]
+           ,[cranedensity])
      VALUES
            ({TotalGroundSlotTEU}
            ,{StaticCapacityTEU}
@@ -488,6 +492,7 @@ INSERT INTO [opreports].[dbo].[reports_tsr]
            ,{YardUtilizationECD}
            ,'{TerminalStatusDate}'
            ,{CraneLogReports.Count}
+           ,{CraneDensity}
            )
 "
             saveCommand.Execute()

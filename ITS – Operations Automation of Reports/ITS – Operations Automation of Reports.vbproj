@@ -273,9 +273,17 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Budgeted Volume Creator\Budgeted Volume Creator\Budgeted Volume Creator.vbproj">
+      <Project>{01249bcb-5c20-45f3-bb88-b8bddb9a75e9}</Project>
+      <Name>Budgeted Volume Creator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Crane Logs Report Creator\Crane Logs Report Creator\Crane Logs Report Creator.vbproj">
       <Project>{422c491a-19de-47cc-8f27-cb945c1b5733}</Project>
       <Name>Crane Logs Report Creator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KPI for Operations\KPI for Operations.vbproj">
+      <Project>{3b82bbd6-11dc-486a-8e04-e68cfcfb7dee}</Project>
+      <Name>KPI for Operations</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ManagementReport\Management Report.vbproj">
       <Project>{d49397c7-bc74-4359-b390-9cda6acef741}</Project>

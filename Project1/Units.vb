@@ -91,7 +91,7 @@ end
 
         dtContr.Columns.Add(colCtrTyp)
         For Each row As DataRow In dtContr.Rows
-            If row("requires_power") = True Then
+            If row("rfr_type") <> "NON_RFR" Then
                 row("ctrTyp") = "Rfr"
             Else
                 Select Case row("iso_group").ToString.Substring(0, 1)
@@ -135,6 +135,7 @@ Select unit.[id]
 ,[imdg_types]
 ,reqt.[id] as 'iso_code'
 ,[time_in] as 'time_move'
+,reqt.[rfr_type]
 
 from 
 [inv_unit] unit
@@ -176,6 +177,7 @@ Select unit.[id]
 ,[imdg_types]
 ,reqt.[id] as 'iso_code'
 ,[time_load] as 'time_move'
+,reqt.[rfr_type]
 
 from 
 [inv_unit] unit

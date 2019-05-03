@@ -158,7 +158,7 @@ SELECT DISTINCT unit.gkey
       ,[short_name]
       ,[length_mm]
       ,[time_load] as 'time_move'
-	  ,svnt.[id] as 'event'
+	  ,[restow_typ] as 'restow'
 
   FROM [apex].[dbo].[inv_unit] unit
 inner join
@@ -171,19 +171,9 @@ inner join
 [inv_unit_equip] ueq on ueq.unit_gkey = unit.gkey
 inner join
 [ref_equipment] eqp on ueq.eq_gkey = eqp.gkey
-left join
-( SELECT [gkey]
-      ,[event_type_gkey]
-      ,[applied_to_class]
-      ,[applied_to_gkey]
-      ,[applied_to_natural_key]
-  FROM [apex].[dbo].[srv_event] where event_type_gkey = 141 ) evnt on evnt.[applied_to_gkey] = unit.gkey
-left join 
-[srv_event_types] svnt on evnt.event_type_gkey = svnt.gkey
 
 
-
-where che_qc = @GC and ufv.actual_ob_cv = @Registry "
+where che_qc = @GC and ufv.actual_ob_cv = @Registry and move_kind = 'LOAD'"
 
         rsMoves.Open(strOutbound, adoConnection, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic, CommandTypeEnum.adCmdText)
         dataAdapter.Fill(Moves.Tables("Outbound"), rsMoves)
@@ -191,6 +181,29 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry "
 
 
         CountOutboundMoves(Moves.Outbound)
+        CountOutboundShifting(Moves.Outbound)
+    End Sub
+
+    Private Sub CountOutboundShifting(outbound As CraneMoves.OutboundDataTable)
+        Dim freightkinds As String() = {"FCL", "MTY"}
+
+        For Each freight In freightkinds
+
+            Dim count20 As Object = CountShiftingMoves(outbound, freight, 20)
+            Dim count40 As Object = CountShiftingMoves(outbound, freight, 40)
+            Dim count45 As Object = CountShiftingMoves(outbound, freight, 45)
+
+
+            With Moves.Container.AsEnumerable.Where(Function(row) row("freight_kind").ToString = freight And
+                                                        row("container").ToString = "SHFT" And
+                                                        row("actual_ob") IsNot DBNull.Value).FirstOrDefault
+                If (count20 + count40 + count45) > 0 Then
+                    .Item("cntsze20") = count20
+                    .Item("cntsze40") = count40
+                    .Item("cntsze45") = count45
+                End If
+            End With
+        Next
     End Sub
 
     Private Sub CountOutboundMoves(outbound As CraneMoves.OutboundDataTable)
@@ -214,10 +227,21 @@ where che_qc = @GC and ufv.actual_ob_cv = @Registry "
         Next
     End Sub
 
+    Private Function CountShiftingMoves(outbound As DataTable, freight As String, v As Integer) As Object
+        Return (From units In outbound.AsEnumerable
+                Where units("freight_kind") = freight And
+                                    units("category") = "THRGH" And
+                                     Math.Round(units("length_mm") / 304.8, 0) = v And
+                                     units("restow") = "RESTOW"
+                Select units).Count
+    End Function
+
     Private Function CountMoves(outbound As DataTable, freight As String, v As Integer) As Object
         Return (From units In outbound.AsEnumerable
                 Where units("freight_kind") = freight And
-                                     Math.Round(units("length_mm") / 304.8, 0) = v
+                                    units("category") <> "THRGH" And
+                                     Math.Round(units("length_mm") / 304.8, 0) = v And
+                                     units("restow") <> "RESTOW"
                 Select units).Count
     End Function
 
@@ -242,7 +266,7 @@ SELECT DISTINCT unit.gkey
       ,[short_name]
       ,[length_mm]
       ,[time_in] as 'time_move'
-	  ,svnt.[id] as 'event'
+	  ,[restow_typ] as 'restow'
 
 
   FROM [apex].[dbo].[inv_unit] unit
@@ -256,24 +280,38 @@ inner join
 [inv_unit_equip] ueq on ueq.unit_gkey = unit.gkey
 inner join
 [ref_equipment] eqp on ueq.eq_gkey = eqp.gkey 
-left join
-( SELECT [gkey]
-      ,[event_type_gkey]
-      ,[applied_to_class]
-      ,[applied_to_gkey]
-      ,[applied_to_natural_key]
-  FROM [apex].[dbo].[srv_event] where event_type_gkey = 141 ) evnt on evnt.[applied_to_gkey] = unit.gkey
-left join 
-[srv_event_types] svnt on evnt.event_type_gkey = svnt.gkey
 
 
-where che_qc = @GC and ufv.actual_ib_cv = @Registry"
+where che_qc = @GC and ufv.actual_ib_cv = @Registry and move_kind = 'DSCH'"
 
         rsMoves.Open(strInbound, adoConnection, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic, CommandTypeEnum.adCmdText)
         dataAdapter.Fill(Moves.Tables("Inbound"), rsMoves)
         rsMoves.Close()
 
         CountInboundMoves(Moves.Inbound)
+        CountInboundShiftingMoves(Moves.Inbound)
+    End Sub
+
+    Private Sub CountInboundShiftingMoves(inbound As DataTable)
+        Dim freightkinds As String() = {"FCL", "MTY"}
+
+        For Each freight In freightkinds
+
+            Dim count20 As Object = CountShiftingMoves(inbound, freight, 20)
+            Dim count40 As Object = CountShiftingMoves(inbound, freight, 40)
+            Dim count45 As Object = CountShiftingMoves(inbound, freight, 45)
+
+
+            With Moves.Container.AsEnumerable.Where(Function(row) row("freight_kind").ToString = freight And
+                                                        row("container").ToString = "SHFT" And
+                                                        row("actual_ib") IsNot DBNull.Value).FirstOrDefault
+                If (count20 + count40 + count45) > 0 Then
+                    .Item("cntsze20") = count20
+                    .Item("cntsze40") = count40
+                    .Item("cntsze45") = count45
+                End If
+            End With
+        Next
     End Sub
 
     Private Sub CountInboundMoves(inbound As CraneMoves.InboundDataTable)

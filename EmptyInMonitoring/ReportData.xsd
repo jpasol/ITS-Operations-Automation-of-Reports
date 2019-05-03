@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReportData" targetNamespace="http://tempuri.org/ReportData.xsd" xmlns:mstns="http://tempuri.org/ReportData.xsd" xmlns="http://tempuri.org/ReportData.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReportData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReportData" msprop:Generator_UserDSName="ReportData">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ChargeableUnits" msprop:Generator_TableClassName="ChargeableUnitsDataTable" msprop:Generator_TableVarName="tableChargeableUnits" msprop:Generator_TablePropName="ChargeableUnits" msprop:Generator_RowDeletingName="ChargeableUnitsRowDeleting" msprop:Generator_RowChangingName="ChargeableUnitsRowChanging" msprop:Generator_RowEvHandlerName="ChargeableUnitsRowChangeEventHandler" msprop:Generator_RowDeletedName="ChargeableUnitsRowDeleted" msprop:Generator_UserTableName="ChargeableUnits" msprop:Generator_RowChangedName="ChargeableUnitsRowChanged" msprop:Generator_RowEvArgName="ChargeableUnitsRowChangeEvent" msprop:Generator_RowClassName="ChargeableUnitsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ContainerNumber" msprop:Generator_ColumnVarNameInTable="columnContainerNumber" msprop:Generator_ColumnPropNameInRow="ContainerNumber" msprop:Generator_ColumnPropNameInTable="ContainerNumberColumn" msprop:Generator_UserColumnName="ContainerNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="FreightKind" msprop:Generator_ColumnVarNameInTable="columnFreightKind" msprop:Generator_ColumnPropNameInRow="FreightKind" msprop:Generator_ColumnPropNameInTable="FreightKindColumn" msprop:Generator_UserColumnName="FreightKind" type="xs:string" minOccurs="0" />
+              <xs:element name="LineOperator" msprop:Generator_ColumnVarNameInTable="columnLineOperator" msprop:Generator_ColumnPropNameInRow="LineOperator" msprop:Generator_ColumnPropNameInTable="LineOperatorColumn" msprop:Generator_UserColumnName="LineOperator" type="xs:string" minOccurs="0" />
+              <xs:element name="Group" msprop:Generator_ColumnVarNameInTable="columnGroup" msprop:Generator_ColumnPropNameInRow="Group" msprop:Generator_ColumnPropNameInTable="GroupColumn" msprop:Generator_UserColumnName="Group" type="xs:string" minOccurs="0" />
+              <xs:element name="Length" msprop:Generator_ColumnVarNameInTable="columnLength" msprop:Generator_ColumnPropNameInRow="Length" msprop:Generator_ColumnPropNameInTable="LengthColumn" msprop:Generator_UserColumnName="Length" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ReportData" msprop:Generator_TableClassName="ReportDataDataTable" msprop:Generator_TableVarName="tableReportData" msprop:Generator_TablePropName="_ReportData" msprop:Generator_RowDeletingName="ReportDataRowDeleting" msprop:Generator_RowChangingName="ReportDataRowChanging" msprop:Generator_RowEvHandlerName="ReportDataRowChangeEventHandler" msprop:Generator_RowDeletedName="ReportDataRowDeleted" msprop:Generator_UserTableName="ReportData" msprop:Generator_RowChangedName="ReportDataRowChanged" msprop:Generator_RowEvArgName="ReportDataRowChangeEvent" msprop:Generator_RowClassName="ReportDataRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LineOperator" msprop:Generator_ColumnVarNameInTable="columnLineOperator" msprop:Generator_ColumnPropNameInRow="LineOperator" msprop:Generator_ColumnPropNameInTable="LineOperatorColumn" msprop:Generator_UserColumnName="LineOperator" type="xs:string" minOccurs="0" />
+              <xs:element name="Allocation" msprop:Generator_ColumnVarNameInTable="columnAllocation" msprop:Generator_ColumnPropNameInRow="Allocation" msprop:Generator_ColumnPropNameInTable="AllocationColumn" msprop:Generator_UserColumnName="Allocation" type="xs:double" minOccurs="0" />
+              <xs:element name="Inventory" msprop:Generator_ColumnVarNameInTable="columnInventory" msprop:Generator_ColumnPropNameInRow="Inventory" msprop:Generator_ColumnPropNameInTable="InventoryColumn" msprop:Generator_UserColumnName="Inventory" type="xs:double" minOccurs="0" />
+              <xs:element name="Remaining" msprop:Generator_ColumnVarNameInTable="columnRemaining" msprop:Generator_ColumnPropNameInRow="Remaining" msprop:Generator_ColumnPropNameInTable="RemainingColumn" msprop:Generator_UserColumnName="Remaining" type="xs:double" minOccurs="0" />
+              <xs:element name="Day1" msprop:Generator_ColumnVarNameInTable="columnDay1" msprop:Generator_ColumnPropNameInRow="Day1" msprop:Generator_ColumnPropNameInTable="Day1Column" msprop:Generator_UserColumnName="Day1" type="xs:double" minOccurs="0" />
+              <xs:element name="Day2" msprop:Generator_ColumnVarNameInTable="columnDay2" msprop:Generator_ColumnPropNameInRow="Day2" msprop:Generator_ColumnPropNameInTable="Day2Column" msprop:Generator_UserColumnName="Day2" type="xs:double" minOccurs="0" />
+              <xs:element name="Day3" msprop:Generator_ColumnVarNameInTable="columnDay3" msprop:Generator_ColumnPropNameInRow="Day3" msprop:Generator_ColumnPropNameInTable="Day3Column" msprop:Generator_UserColumnName="Day3" type="xs:double" minOccurs="0" />
+              <xs:element name="Day4" msprop:Generator_ColumnVarNameInTable="columnDay4" msprop:Generator_ColumnPropNameInRow="Day4" msprop:Generator_ColumnPropNameInTable="Day4Column" msprop:Generator_UserColumnName="Day4" type="xs:double" minOccurs="0" />
+              <xs:element name="Day5" msprop:Generator_ColumnVarNameInTable="columnDay5" msprop:Generator_ColumnPropNameInRow="Day5" msprop:Generator_ColumnPropNameInTable="Day5Column" msprop:Generator_UserColumnName="Day5" type="xs:double" minOccurs="0" />
+              <xs:element name="Day6" msprop:Generator_ColumnVarNameInTable="columnDay6" msprop:Generator_ColumnPropNameInRow="Day6" msprop:Generator_ColumnPropNameInTable="Day6Column" msprop:Generator_UserColumnName="Day6" type="xs:double" minOccurs="0" />
+              <xs:element name="Day7" msprop:Generator_ColumnVarNameInTable="columnDay7" msprop:Generator_ColumnPropNameInRow="Day7" msprop:Generator_ColumnPropNameInTable="Day7Column" msprop:Generator_UserColumnName="Day7" type="xs:double" minOccurs="0" />
+              <xs:element name="Group" msprop:Generator_ColumnVarNameInTable="columnGroup" msprop:Generator_ColumnPropNameInRow="Group" msprop:Generator_ColumnPropNameInTable="GroupColumn" msprop:Generator_UserColumnName="Group" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
