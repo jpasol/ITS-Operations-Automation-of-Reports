@@ -120,6 +120,21 @@ Public Class Vessel
     Public ReadOnly Property LaborOffBoard As Date? Implements IVessel.LaborOffBoard
     Public ReadOnly Property Service As String Implements IVessel.Service
 
+    Public ReadOnly Property WindowState As String Implements IVessel.WindowState
+        Get
+            With dtVessel.Rows(0)
+                Select Case True
+                    Case .Item("notes").ToString.Contains("ON")
+                        Return "ON"
+                    Case .Item("notes").ToString.Contains("OFF")
+                        Return "OFF"
+                    Case Else
+                        Return ""
+                End Select
+            End With
+        End Get
+    End Property
+
     Public ReadOnly Property SLGangRequest As Date Implements IVessel.SLGangRequest
         Get
             Dim tempETA As Date = ETA
@@ -169,7 +184,7 @@ Public Class Vessel
 		,[labor_off_board]
 		,svce.[id] AS 'Service'
 		,cast(round([loa_cm] / 100.0,0) as integer) as 'LOA' 
-		
+		,vvd.[notes]
 
         FROM [apex].[dbo].[vsl_vessel_visit_details] vvd
         inner join 

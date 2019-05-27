@@ -71,6 +71,8 @@
         ReadOnly Property LaborOffBoard As Date?
         ReadOnly Property Units As Reports.Units
         ReadOnly Property Connection As ADODB.Connection
+        ReadOnly Property WindowState As String
+
         Sub Retrieve(Registry As String)
         Function TEU(Optional Condition As String = "") As Double
         Function Boxes(Optional Condition As String = "") As Long
