@@ -185,20 +185,13 @@
     <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
   <ItemGroup>
@@ -291,10 +284,6 @@
     <ProjectReference Include="..\..\Terminal-Status-Report\Terminal Status Report.vbproj">
       <Project>{92f5220f-51ba-4be6-ae3b-3259305544ae}</Project>
       <Name>Terminal Status Report</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Throughput-Volume-Update\Throughput Volume Update.vbproj">
-      <Project>{d3669981-7212-4ff2-9e98-b93d2de8bcf4}</Project>
-      <Name>Throughput Volume Update</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Vessel-Movement-Report-Creator\Vessel Movement Report Creator.vbproj">
       <Project>{2c9a0224-82e5-4759-8230-b09eb8cfdfb6}</Project>

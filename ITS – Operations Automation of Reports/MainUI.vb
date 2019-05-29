@@ -10,11 +10,11 @@ Public Class MainUI
 
     Private arrReports() = New String() {
         "Crane Logs Report",
-        "Vessel Movement Report",
-        "Terminal Status Report",
-        "Management Report",
-        "KPI Report for Operation",
-        "Budgeted Volume"}
+        "Vessel Movement Report"}
+    '"Terminal Status Report",
+    '"Management Report",
+    '"KPI Report for Operation",
+    '"Budgeted Volume"
     '"Throughput Volume Update",
     '"Shipping Line TEUs & Monthly Impex Consignees",
     '"Consolidation of Monthly Impex Consignees",

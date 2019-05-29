@@ -108,6 +108,46 @@ Partial Class CraneMoves
             End Get
         End Property
 
+        Public ReadOnly Property TotalUnits(v As Integer, Optional freight As String = "", Optional bound As String = "") As Integer
+            Get
+                Dim boxes As Double = 0
+                Dim wherecol As Collections.Generic.IEnumerable(Of System.Data.DataRow)
+
+                With Me.AsEnumerable
+                    If freight = "" And bound = "" Then
+                        wherecol = Me.AsEnumerable
+                    ElseIf freight <> "" And bound = "" Then
+                        Select Case bound
+                            Case "Discharge"
+                                wherecol = .Where(Function(row) ParseDBNulltoString(row("actual_ib")) <> "" And
+                                                      row("container") <> "SHFT")
+                            Case "Loading"
+                                wherecol = .Where(Function(row) ParseDBNulltoString(row("actual_ob")) <> "" And
+                                                      row("container") <> "SHFT")
+                        End Select
+                        'wherecol = .Where(Function(row) row("move_kind") = bound)
+                    ElseIf freight = "" And bound <> "" Then
+                        wherecol = .Where(Function(row) row("freight_kind") = freight)
+                    Else
+                        Select Case bound
+                            Case "Discharge"
+                                wherecol = .Where(Function(row) ParseDBNulltoString(row("actual_ib")) <> "" And
+                                                      row("freight_kind") = freight And
+                                                      row("container") <> "SHFT")
+                            Case "Loading"
+                                wherecol = .Where(Function(row) ParseDBNulltoString(row("actual_ob")) <> "" And
+                                                      row("freight_kind") = freight And
+                                                      row("container") <> "SHFT")
+                        End Select
+                        'wherecol = .Where(Function(row) row("move_kind") = bound And row("freight_kind") = freight)
+                    End If
+                End With
+
+                boxes = wherecol.Sum(Function(row) row($"cntsze{v}"))
+                Return boxes
+            End Get
+        End Property
+
     End Class
 
     Public Function TotalMoves() As Double
