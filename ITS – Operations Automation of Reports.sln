@@ -15,13 +15,13 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Reports Interface", "Projec
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ITS Automation of OPDocs Reports Installer", "Setup1\Setup1.vdproj", "{73F94B6C-7B17-4813-B8A4-0F9959BA7DBF}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Automated Terminal Status", "WindowsApp1\Automated Terminal Status.vbproj", "{EC826867-4BA3-4BA8-A8EE-9BA6FC81E984}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Automated Terminal Status", "..\Terminal-Status-Report\WindowsApp1\Automated Terminal Status.vbproj", "{EC826867-4BA3-4BA8-A8EE-9BA6FC81E984}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Terminal Status Report", "..\Terminal-Status-Report\Terminal Status Report.vbproj", "{92F5220F-51BA-4BE6-AE3B-3259305544AE}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Throughput Volume Update", "..\Throughput-Volume-Update\Throughput Volume Update.vbproj", "{D3669981-7212-4FF2-9E98-B93D2DE8BCF4}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Automated Terminal Status Report", "Automated Terminal Status Report\Automated Terminal Status Report.vdproj", "{AA451E9A-4086-4247-8AD8-92D3626FE8C0}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Automated Terminal Status Report", "..\Terminal-Status-Report\Automated Terminal Status Report\Automated Terminal Status Report.vdproj", "{AA451E9A-4086-4247-8AD8-92D3626FE8C0}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Management Report", "..\ManagementReport\Management Report.vbproj", "{D49397C7-BC74-4359-B390-9CDA6ACEF741}"
 EndProject
@@ -36,6 +36,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Throughput Volume Database", "..\Throughput Volume Database\Throughput Volume Database.csproj", "{37E575E6-DAF8-4C89-B15F-4AD0960BA5A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Throughput Volume Database Controls", "..\Throughput Volume Database\Throughput Volume Database Controls\Throughput Volume Database Controls.csproj", "{B56CDF4E-E15B-4026-A392-67667E86ACB7}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Terminal Status Report Extractor", "..\Terminal-Status-Report\Terminal Status Report Extractor\Terminal Status Report Extractor.vbproj", "{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crane Logs Report Creator Controls", "..\Crane Logs Report Creator\Crane Logs Report Creator Controls\Crane Logs Report Creator Controls.csproj", "{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -449,6 +453,54 @@ Global
 		{B56CDF4E-E15B-4026-A392-67667E86ACB7}.Release|x64.Build.0 = Release|Any CPU
 		{B56CDF4E-E15B-4026-A392-67667E86ACB7}.Release|x86.ActiveCfg = Release|Any CPU
 		{B56CDF4E-E15B-4026-A392-67667E86ACB7}.Release|x86.Build.0 = Release|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Debug 64|Any CPU.ActiveCfg = Debug|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Debug 64|Any CPU.Build.0 = Debug|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Debug 64|x64.ActiveCfg = Debug|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Debug 64|x64.Build.0 = Debug|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Debug 64|x86.ActiveCfg = Debug|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Debug 64|x86.Build.0 = Debug|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Debug|x64.Build.0 = Debug|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Debug|x86.Build.0 = Debug|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Release 64|Any CPU.ActiveCfg = Release|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Release 64|Any CPU.Build.0 = Release|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Release 64|x64.ActiveCfg = Release|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Release 64|x64.Build.0 = Release|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Release 64|x86.ActiveCfg = Release|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Release 64|x86.Build.0 = Release|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Release|x64.ActiveCfg = Release|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Release|x64.Build.0 = Release|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Release|x86.ActiveCfg = Release|Any CPU
+		{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}.Release|x86.Build.0 = Release|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Debug 64|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Debug 64|Any CPU.Build.0 = Debug|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Debug 64|x64.ActiveCfg = Debug|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Debug 64|x64.Build.0 = Debug|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Debug 64|x86.ActiveCfg = Debug|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Debug 64|x86.Build.0 = Debug|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Debug|x64.Build.0 = Debug|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Debug|x86.Build.0 = Debug|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release 64|Any CPU.ActiveCfg = Release|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release 64|Any CPU.Build.0 = Release|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release 64|x64.ActiveCfg = Release|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release 64|x64.Build.0 = Release|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release 64|x86.ActiveCfg = Release|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release 64|x86.Build.0 = Release|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release|x64.ActiveCfg = Release|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release|x64.Build.0 = Release|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release|x86.ActiveCfg = Release|Any CPU
+		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -16,7 +16,24 @@
         Delaykind
         Registry
     End Enum
+    Shared Function GetFullName(ShippingLine As String) As String
+        Dim tempConnections As Connections = New Connections()
+        Dim N4Connection As ADODB.Connection = tempConnections.N4Connection
 
+        N4Connection.Open()
+        Dim FullNameRetriever As ADODB.Command = New ADODB.Command
+        FullNameRetriever.ActiveConnection = N4Connection
+        FullNameRetriever.CommandText = $"
+SELECT NAME FROM REF_BIZUNIT_SCOPED WHERE ID = '{ShippingLine}'
+"
+        Try
+            Return FullNameRetriever.Execute.Fields(0).Value
+
+        Catch ex As Exception
+            Return "N/A"
+        End Try
+
+    End Function
     Shared Function GetMilTime(strLDate As String) As String
         Dim dteDate As DateTime
         Try
