@@ -5,17 +5,19 @@ Imports Throughput_Volume_Update
 Imports Management_Report
 Imports Budgeted_Volume_Creator
 Imports KPI_for_Operations
+Imports ThroughputVolumeDatabase
 
 Public Class MainUI
 
     Private arrReports() = New String() {
         "Crane Logs Report",
-        "Vessel Movement Report"}
+        "Vessel Movement Report",
+        "Throughput Volume Update"}
     '"Terminal Status Report",
     '"Management Report",
     '"KPI Report for Operation",
     '"Budgeted Volume"
-    '"Throughput Volume Update",
+
     '"Shipping Line TEUs & Monthly Impex Consignees",
     '"Consolidation of Monthly Impex Consignees",
     '"Monthly Revenue / Volume Report per Destination",
@@ -110,7 +112,9 @@ Public Class MainUI
                             createYearlyTsr.formatreport()
                             crvPreview.ReportSource = createYearlyTsr.Report
                     End Select
-                'Case "Throughput Volume Update"
+                Case "Throughput Volume Update"
+                    Dim throughputControl As New ThroughputVolumeDatabase.Form_Main
+                    throughputControl.Show()
                 '    Select Case cmbMode.Text
                 '        Case "Berth Window Report"
                 '            Dim berthWindow As New BerthWindowReport(mskParameter.Text)

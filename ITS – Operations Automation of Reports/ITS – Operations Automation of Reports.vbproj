@@ -285,6 +285,10 @@
       <Project>{92f5220f-51ba-4be6-ae3b-3259305544ae}</Project>
       <Name>Terminal Status Report</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Throughput Volume Database\Throughput Volume Database.csproj">
+      <Project>{37e575e6-daf8-4c89-b15f-4ad0960ba5a2}</Project>
+      <Name>Throughput Volume Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Vessel-Movement-Report-Creator\Vessel Movement Report Creator.vbproj">
       <Project>{2c9a0224-82e5-4759-8230-b09eb8cfdfb6}</Project>
       <Name>Vessel Movement Report Creator</Name>

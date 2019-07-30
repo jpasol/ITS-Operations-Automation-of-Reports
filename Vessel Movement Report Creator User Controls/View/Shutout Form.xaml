@@ -1,0 +1,61 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Vessel_Movement_Report_Creator_User_Controls.ViewModel"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:cmd="http://www.galasoft.ch/mvvmlight" 
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+            x:Class="Vessel_Movement_Report_Creator_User_Controls.Shutout_Form"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:ViewModelLocator x:Key="Locator"/>
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30,30,30,30">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="16*" />
+            <RowDefinition Height="29*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+
+
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0" Grid.Column="0" >
+                <Label x:Name="lblLine" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Line"/>
+                <TextBox x:Name="txtLine"  Height="{Binding ActualHeight, ElementName=lblLine}" HorizontalAlignment="Stretch"  Text="{Binding SelectedItem.Line,ElementName=dgShutout}" IsReadOnly="True"/>
+            </DockPanel>
+            <DockPanel Grid.Row="1" Grid.Column="0" >
+                <Label x:Name="lblContainer" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Container Number"/>
+                <TextBox x:Name="txtContainer" Height="{Binding ActualHeight, ElementName=lblContainer}" Margin="{Binding Margin,ElementName=txtContainer}" Text="{Binding SelectedItem.ContainerNumber,ElementName=dgShutout}" IsReadOnly="True"  HorizontalAlignment="Stretch"/>
+            </DockPanel>
+            <DockPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" >
+                <Label x:Name="lblReason" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Reason for Shutout" DockPanel.Dock="Top"/>
+                <TextBox x:Name="txtReason" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" TextWrapping="Wrap" Text="{Binding SelectedItem.Reason,ElementName=dgShutout, Mode=TwoWay}"/>
+
+
+            </DockPanel>
+        </Grid>
+
+        <DataGrid x:Name="dgShutout" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AutoGenerateColumns="False" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="0" DataContext="{StaticResource ResourceKey=Locator}" ItemsSource="{Binding Main.ShutoutContainers}" SelectedItem="{Binding Main.SelectedContainer}">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="colContainer" Binding="{Binding ContainerNumber, Mode=OneWay}" Header="Container Number" />
+                <DataGridTextColumn x:Name="colLine" Binding="{Binding Line,Mode=OneWay}" Header="Line"/>
+                <DataGridTextColumn x:Name="colReason" Binding="{Binding Reason,Mode=TwoWay}" Header="Reason for Shutout"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

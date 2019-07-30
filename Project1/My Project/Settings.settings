@@ -14,5 +14,11 @@
     <Setting Name="OPServer" Type="System.String" Scope="User">
       <Value Profile="(Default)">sbitc-dev</Value>
     </Setting>
+    <Setting Name="BLServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sbitc-dev</Value>
+    </Setting>
+    <Setting Name="BLDatabase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sbitcbilling</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

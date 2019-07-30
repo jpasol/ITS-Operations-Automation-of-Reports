@@ -136,6 +136,8 @@ Select unit.[id]
 ,reqt.[id] as 'iso_code'
 ,[time_in] as 'time_move'
 ,reqt.[rfr_type]
+,ufv.transit_state
+,unit.[remark]
 
 from 
 [inv_unit] unit
@@ -178,6 +180,8 @@ Select unit.[id]
 ,reqt.[id] as 'iso_code'
 ,[time_load] as 'time_move'
 ,reqt.[rfr_type]
+,ufv.transit_state
+,unit.[remark]
 
 from 
 [inv_unit] unit
@@ -201,7 +205,7 @@ inner join
 on unit.gkey = ufv.unit_gkey
 
 
-where [actual_ob_cv] = @Registry and category <> 'THRGH'"
+where [actual_ob_cv] = @Registry and category <> 'THRGH'" 'and ufv.transit_state like '%DEPARTED%'"
 
         For count As Integer = 0 To 1
             untConnection.Open()

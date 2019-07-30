@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ITS – Operations Automation of Reports", "ITS – Operations Automation of Reports\ITS – Operations Automation of Reports.vbproj", "{275803AA-5823-4127-8488-F8B00A0AFFD1}"
 EndProject
@@ -40,6 +40,8 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Terminal Status Report Extractor", "..\Terminal-Status-Report\Terminal Status Report Extractor\Terminal Status Report Extractor.vbproj", "{8623DF76-F9F2-4EC3-A867-1BA1E5214FCB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crane Logs Report Creator Controls", "..\Crane Logs Report Creator\Crane Logs Report Creator Controls\Crane Logs Report Creator Controls.csproj", "{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vessel Movement Report Creator User Controls", "Vessel Movement Report Creator User Controls\Vessel Movement Report Creator User Controls.csproj", "{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -501,6 +503,30 @@ Global
 		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release|x64.Build.0 = Release|Any CPU
 		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release|x86.ActiveCfg = Release|Any CPU
 		{6DDDB34B-BCD6-43D7-B11F-06A064C9710C}.Release|x86.Build.0 = Release|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Debug 64|Any CPU.ActiveCfg = Debug|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Debug 64|Any CPU.Build.0 = Debug|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Debug 64|x64.ActiveCfg = Debug|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Debug 64|x64.Build.0 = Debug|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Debug 64|x86.ActiveCfg = Debug|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Debug 64|x86.Build.0 = Debug|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Debug|x64.Build.0 = Debug|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Debug|x86.Build.0 = Debug|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Release 64|Any CPU.ActiveCfg = Release|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Release 64|Any CPU.Build.0 = Release|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Release 64|x64.ActiveCfg = Release|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Release 64|x64.Build.0 = Release|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Release 64|x86.ActiveCfg = Release|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Release 64|x86.Build.0 = Release|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Release|x64.ActiveCfg = Release|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Release|x64.Build.0 = Release|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Release|x86.ActiveCfg = Release|Any CPU
+		{160A4AE4-6F0D-47C8-8E22-17F02E46BB5C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

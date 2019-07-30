@@ -14,6 +14,8 @@ Public Class Connections
             Dim n4Database As String = .Settings.Get("N4Database").Value.ValueXml.InnerText
             Dim opServer As String = .Settings.Get("OPServer").Value.ValueXml.InnerText
             Dim opDatabase As String = .Settings.Get("OPDatabase").Value.ValueXml.InnerText
+            Dim blServer As String = .Settings.Get("BLServer").Value.ValueXml.InnerText
+            Dim blDatabase As String = .Settings.Get("BLDatabase").Value.ValueXml.InnerText
 
 
 
@@ -26,10 +28,16 @@ Public Class Connections
                         Data Source={opServer};
                         Initial Catalog={opDatabase};
                         User ID=sa_ictsi;Password=Ictsi123;"
+
+            BLConnection.ConnectionString = $"Provider=SQLOLEDB;
+                        Data Source={blServer};
+                        Initial Catalog={blDatabase};
+                        User ID=sa_ictsi;Password=Ictsi123;"
         End With
     End Sub
 
     Public N4Connection As New ADODB.Connection
     Public OPConnection As New ADODB.Connection
+    Public BLConnection As New ADODB.Connection
 
 End Class
